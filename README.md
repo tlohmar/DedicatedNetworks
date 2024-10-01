@@ -32,7 +32,5 @@ The repository has no (pre)releases yet, work in progress is within the main bra
     * [Registration / Join]() !! Update this link with your meeting registration/join link
     * Minutes: Access [meeting minutes]() !! update this link to your wiki page using the "Share" link
 * Mailing List
-    <!-- Note: the $sub-project-mailinglistname$ is either already existing or will be created by the CAMARA Admin Team  -->
-  !! Mailing list to be created:
     * Subscribe / Unsubscribe to the mailing list of this Sub Project <https://lists.camaraproject.org/g/sp-dedicated-networks>.
     * A message to the community of this Sub Project can be sent using <sp-dedicated-networks§@lists.camaraproject.org>.
