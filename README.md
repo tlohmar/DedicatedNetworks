@@ -19,7 +19,7 @@ Repository to describe, develop, document, and test the service APIs for Dedicat
     * during a specific time duration (e.g. one hour) and
     * at specific locations (e.g. the area of a festival)
   * A dedicated network may be ensured by an SLA.
-  * API consumers is be able to handle access to this dedicated network for devices.
+  * API consumers are able to manage access to this dedicated network for specific devices.
 * Describe, develop, document, and test the APIs
 * Started: October 2024
 
