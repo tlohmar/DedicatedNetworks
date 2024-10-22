@@ -12,8 +12,14 @@ Repository to describe, develop, document, and test the service APIs for Dedicat
 ## Scope
 
 * Service APIs for DedicatedNetworks (see [APIBacklog.md](https://github.com/camaraproject/APIBacklog/blob/main/documentation/APIbacklog.md))
-* The API provides the customer with the ability to:  
-  * TDB: §Short API scope description§ 
+* The API provides the customer with the ability to:
+  * request/modify/delete a (logical) dedicated network for API consumers. 
+  * A dedicated network offers
+    * specific connectivity performance (e.g. speed/ latency) 
+    * during a specific time duration (e.g. one hour) and
+    * at specific locations (e.g. the area of a festival)
+  * A dedicated network may be ensured by an SLA.
+  * API consumers is be able to handle access to this dedicated network for devices.
 * Describe, develop, document, and test the APIs
 * Started: October 2024
 
@@ -28,9 +34,9 @@ The repository has no (pre)releases yet, work in progress is within the main bra
 
 ## Contributing
 * Meetings are held virtually <!-- for new API families request a meeting link from the LF admin team or replace the information with the existing meeting information (of the API family) -->
-    * Schedule: !! TBD
+    * Schedule: bi-weekly, Mondays, 10 PM CET/CEST (09:00 UTC, 08:00 UTC during European DST). For date/time of the next meeting, see previous meeting minutes
     * [Registration / Join]() !! Update this link with your meeting registration/join link
-    * Minutes: Access [meeting minutes]() !! update this link to your wiki page using the "Share" link
+    * Minutes: Access [meeting minutes](https://lf-camaraproject.atlassian.net/wiki/x/XIArAQ) 
 * Mailing List
     * Subscribe / Unsubscribe to the mailing list of this Sub Project <https://lists.camaraproject.org/g/sp-dedicated-networks>.
     * A message to the community of this Sub Project can be sent using <sp-dedicated-networks§@lists.camaraproject.org>.
