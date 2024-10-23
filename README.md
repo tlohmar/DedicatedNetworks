@@ -34,7 +34,7 @@ The repository has no (pre)releases yet, work in progress is within the main bra
 
 ## Contributing
 * Meetings are held virtually <!-- for new API families request a meeting link from the LF admin team or replace the information with the existing meeting information (of the API family) -->
-    * Schedule: bi-weekly, Mondays, 10 AM CET (09:00 UTC, 08:00 UTC during European DST). For date/time of the next meeting, see previous meeting minutes
+    * Schedule: bi-weekly, Mondays, 10 AM CET (09:00 UTC). For date/time of the next meeting, see previous meeting minutes
     * [Registration / Join]() !! Update this link with your meeting registration/join link
     * Minutes: Access [meeting minutes](https://lf-camaraproject.atlassian.net/wiki/x/XIArAQ) 
 * Mailing List
