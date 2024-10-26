@@ -35,8 +35,8 @@ The repository has no (pre)releases yet, work in progress is within the main bra
 ## Contributing
 * Meetings are held virtually <!-- for new API families request a meeting link from the LF admin team or replace the information with the existing meeting information (of the API family) -->
     * Schedule: bi-weekly, Mondays, 10 AM CET (09:00 UTC). For date/time of the next meeting, see previous meeting minutes
-    * [Registration / Join]() !! Update this link with your meeting registration/join link
-    * Minutes: Access [meeting minutes](https://lf-camaraproject.atlassian.net/wiki/x/XIArAQ) 
+    * [Registration / Join](https://zoom-lfx.platform.linuxfoundation.org/meeting/94505909302?password=67b9a175-154f-4fe1-986d-0b825227a95b)
+    * Minutes: Access [meeting minutes](https://lf-camaraproject.atlassian.net/l/cp/S3hQ1AFG) 
 * Mailing List
     * Subscribe / Unsubscribe to the mailing list of this Sub Project <https://lists.camaraproject.org/g/sp-dedicated-networks>.
     * A message to the community of this Sub Project can be sent using <sp-dedicated-networks§@lists.camaraproject.org>.
