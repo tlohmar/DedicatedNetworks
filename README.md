@@ -39,4 +39,4 @@ The repository has no (pre)releases yet, work in progress is within the main bra
     * Minutes: Access [meeting minutes](https://lf-camaraproject.atlassian.net/l/cp/S3hQ1AFG) 
 * Mailing List
     * Subscribe / Unsubscribe to the mailing list of this Sub Project <https://lists.camaraproject.org/g/sp-dedicated-networks>.
-    * A message to the community of this Sub Project can be sent using <sp-dedicated-networks§@lists.camaraproject.org>.
+    * A message to the community of this Sub Project can be sent using sp-dedicated-networks@lists.camaraproject.org.
