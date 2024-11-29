@@ -1,5 +1,9 @@
 # Usage Scenarios of the Dedicated Networks API
 
+## Introduction
+
+The API was motivated by a number of use cases and usage scenarios during the API presentation ([pdf](https://github.com/camaraproject/APIBacklog/blob/main/documentation/SupportingDocuments/DedicatedNetworks%C2%A0API%C2%A0Introduction.pdf)). A short description is provided in the following.
+
 ## Media Production
 
 A Media Producer needs a stable connectivity performance for a camera crew with two or more cameras for capturing the live video footage of a press briefing event. Although multiple cameras are actively used during the production, only a single live video stream is produced. The different cameras are positioned to capture different aspects of the press briefing, for example, one camera is capturing all speakers (pan view) and another camera is capturing individual speakers (head and shoulder). The program director selects the camera (called “Live Camera”), which is feeding the outgoing live video stream. For the selection, the video stream of each camera is shown at a production gallery to the production director.
