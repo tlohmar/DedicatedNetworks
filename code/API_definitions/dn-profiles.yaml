@@ -12,7 +12,7 @@ servers:
 paths:
   /profiles:
     get:
-      tags: 
+      tags:
         - Profiles
       summary: Read dedicated network profiles
       operationId: readNetworkProfiles
@@ -41,7 +41,7 @@ paths:
           $ref: "#/components/responses/Generic503"
   /profiles/{profileId}:
     get:
-      tags: 
+      tags:
         - Profiles
       summary: Read a dedicated network profile
       operationId: readNetworkProfile
@@ -58,7 +58,7 @@ paths:
           content:
             application/json:
               schema:
-                  $ref: '#/components/schemas/NetworkProfile'
+                $ref: '#/components/schemas/NetworkProfile'
         '400':
           $ref: "#/components/responses/Generic400"
         "401":
@@ -70,7 +70,7 @@ paths:
         "500":
           $ref: "#/components/responses/Generic500"
         "503":
-          $ref: "#/components/responses/Generic503"  
+          $ref: "#/components/responses/Generic503"
 
 components:
 
@@ -109,7 +109,7 @@ components:
             type: string
           minItems: 1
         defaultQosProfile:
-          description: default Qos Profiles of a device access. 
+          description: default Qos Profiles of a device access.
           type: string
       required:
         - id

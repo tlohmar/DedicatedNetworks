@@ -210,7 +210,6 @@ components:
       type: object
       properties:
         profileId:
-          description: Profile id for the dedicated network
           $ref: 'dn-profiles.yaml#/components/schemas/NetworkProfileId'
         serviceTime:
           $ref: '#/components/schemas/ServiceTime'
