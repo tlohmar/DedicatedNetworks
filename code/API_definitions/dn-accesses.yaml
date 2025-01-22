@@ -16,7 +16,7 @@ paths:
 
   /accesses:
     get:
-      tags: 
+      tags:
         - Accesses
       summary: Get a list of device accesses to dedicated networks, optionally filtered for a given device and/or for a given dedicated network
       operationId: listNetworkAccesses
@@ -25,7 +25,7 @@ paths:
           in: query
           description: Dedicated network id
           schema:
-             $ref: 'dn-networks.yaml#/components/schemas/NetworkId'
+            $ref: 'dn-networks.yaml#/components/schemas/NetworkId'
         - $ref: "#/components/parameters/x-device"
         - $ref: "#/components/parameters/x-correlator"
       responses:
@@ -35,7 +35,7 @@ paths:
             application/json:
               schema:
                 type: array
-                items: 
+                items:
                   $ref: '#/components/schemas/NetworkAccessInfo'
         "400":
           $ref: "#/components/responses/Generic400"
@@ -50,7 +50,7 @@ paths:
         "503":
           $ref: "#/components/responses/Generic503"
     post:
-      tags: 
+      tags:
         - Accesses
       summary: Create a device access to a dedicated network with given configuration
       operationId: createNetworkAccess
@@ -87,7 +87,7 @@ paths:
 
   /accesses/{accessId}:
     get:
-      tags: 
+      tags:
         - Accesses
       summary: Get a device access to the dedicated network and its configuration
       operationId: readNetworkAccess
@@ -119,7 +119,7 @@ paths:
           $ref: "#/components/responses/Generic503"
 
     delete:
-      tags: 
+      tags:
         - Accesses
       summary: Delete a device access to the dedicated network
       operationId: deleteNetworkAccess
@@ -170,13 +170,13 @@ components:
         type: string
 
     x-device:
-      description: | 
+      description: |
         Device object represented in a header.
         It is serialized according to RFC 8941 as a structured field value where
         the Device object is a dictionary, with the following additonal provisions:
           - property names are changed to lower case to comply with the RFC
           - serializing property values must comply with the RFC depending on the type, and in particular:
-            - if the property value is a string which contains only ASCII characters, the string can be serialized as String, 
+            - if the property value is a string which contains only ASCII characters, the string can be serialized as String,
               as per section 3.3.3 of the RFC
             - if the property value is a string and contains non-ASCII characters, the string must be serialized as Byte Sequence using UTF-8 encoding,
               as per section 3.3.5 of the RFC
@@ -204,12 +204,12 @@ components:
         qosProfiles:
           description: (Optional) List of supported QOS profiles usable for the device. When absent, all QosProfiles of the Network are supported. Only a subset of the QOS profiles of the network is allowed
           type: array
-          items: 
+          items:
             type: string
           minItems: 1
         defaultQosProfile:
           description: (Optional) The default QOS profile of a device access. When absent, the defaultQosProfile of the Network is used
-          type: string          
+          type: string
       required:
         - networkId
         - device
