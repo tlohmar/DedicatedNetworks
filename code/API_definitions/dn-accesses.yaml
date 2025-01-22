@@ -196,10 +196,8 @@ components:
       type: object
       properties:
         networkId:
-          description: Reference to the dedicated network
           $ref: "dn-networks.yaml#/components/schemas/NetworkId"
         device:
-          description: Reference to the subscription of the device
           $ref: "#/components/schemas/Device"
         qosProfiles:
           description: (Optional) List of supported QOS profiles usable for the device. When absent, all QosProfiles of the Network are supported. Only a subset of the QOS profiles of the network is allowed
@@ -227,7 +225,6 @@ components:
         - type: object
           properties:
             id:
-              description: Access ID in UUID format
               $ref: "#/components/schemas/AccessId"
           required:
             - id

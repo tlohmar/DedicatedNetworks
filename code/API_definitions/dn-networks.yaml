@@ -213,17 +213,14 @@ components:
           description: Profile id for the dedicated network
           $ref: 'dn-profiles.yaml#/components/schemas/NetworkProfileId'
         serviceTime:
-          description: Time during which the dedicated network is to be available
           $ref: '#/components/schemas/ServiceTime'
         serviceArea:
-          description: Geografical area within which the service of the dedicated network is to be available
           $ref: '#/components/schemas/Area'
         sink:
           description: Notification sink for sending notifications
           type: string
           format: uri
         sinkCredential:
-          description: Sink credentials
           $ref: '#/components/schemas/SinkCredential'
       required:
         - profileId
@@ -237,10 +234,8 @@ components:
         - type: object
           properties:
             id:
-              description: Network ID in UUID format
               $ref: '#/components/schemas/NetworkId'
             status:
-              description: Current status of the dedicated network
               $ref: '#/components/schemas/NetworkStatus'
           required:
             - id

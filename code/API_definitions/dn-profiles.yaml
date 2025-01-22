@@ -99,10 +99,8 @@ components:
         maxNumberOfDevices:
           type: integer
         aggregatedUlThroughput:
-          description: Aggregated Uplink Throughput for all devices, reserved for the dedicated network
           $ref: "#/components/schemas/BitRate"
         aggregatedDlThroughput:
-          description: Aggregated Downlink Throughput for all devices, reserved for the dedicated network
           $ref: "#/components/schemas/BitRate"
         qosProfiles:
           description: Qos Profiles, which are supported by the dedicated network.
