@@ -1,6 +1,9 @@
 openapi: 3.0.3
 info:
   title: Dedicated Network - Networks API
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
   version: 0.0.1
   x-camara-commonalities: 0.4.0
 servers:
@@ -210,7 +213,7 @@ components:
       type: object
       properties:
         profileId:
-          $ref: 'dn-profiles.yaml#/components/schemas/NetworkProfileId'
+          $ref: 'dedicated-network-profiles.yaml#/components/schemas/NetworkProfileId'
         serviceTime:
           $ref: '#/components/schemas/ServiceTime'
         serviceArea:

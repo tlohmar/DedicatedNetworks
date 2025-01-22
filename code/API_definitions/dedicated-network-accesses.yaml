@@ -1,6 +1,9 @@
 openapi: 3.0.3
 info:
   title: Dedicated Network - Network Accesses API
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
   version: 0.0.1
   x-camara-commonalities: 0.4.0
 servers:
@@ -25,7 +28,7 @@ paths:
           in: query
           description: Dedicated network id
           schema:
-            $ref: 'dn-networks.yaml#/components/schemas/NetworkId'
+            $ref: 'dedicated-network.yaml#/components/schemas/NetworkId'
         - $ref: "#/components/parameters/x-device"
         - $ref: "#/components/parameters/x-correlator"
       responses:
@@ -196,7 +199,7 @@ components:
       type: object
       properties:
         networkId:
-          $ref: "dn-networks.yaml#/components/schemas/NetworkId"
+          $ref: "dedicated-network.yaml#/components/schemas/NetworkId"
         device:
           $ref: "#/components/schemas/Device"
         qosProfiles:
