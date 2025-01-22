@@ -15,7 +15,7 @@ tags:
 paths:
   /networks:
     get:
-      tags: 
+      tags:
         - Networks
       summary: Get a list of dedicated networks
       operationId: listNetworks
@@ -28,7 +28,7 @@ paths:
             application/json:
               schema:
                 type: array
-                items: 
+                items:
                   $ref: '#/components/schemas/NetworkInfo'
         "400":
           $ref: "#/components/responses/Generic400"
@@ -41,9 +41,9 @@ paths:
         "500":
           $ref: "#/components/responses/Generic500"
         "503":
-          $ref: "#/components/responses/Generic503"         
+          $ref: "#/components/responses/Generic503"
     post:
-      tags: 
+      tags:
         - Networks
       summary: Request to create a dedicated network
       operationId: createNetwork
@@ -54,7 +54,7 @@ paths:
             schema:
               $ref: '#/components/schemas/CreateNetwork'
       parameters:
-        - $ref: "#/components/parameters/x-correlator"      
+        - $ref: "#/components/parameters/x-correlator"
       callbacks:
         notifications:
           "{$request.body#/sink}":
@@ -77,7 +77,7 @@ paths:
                       $ref: "#/components/schemas/CloudEvent"
                     examples:
                       NETWORK_STATUS_CHANGED_EXAMPLE:
-                        $ref: "#/components/examples/NETWORK_STATUS_CHANGED_EXAMPLE"    
+                        $ref: "#/components/examples/NETWORK_STATUS_CHANGED_EXAMPLE"
               responses:
                 "204":
                   description: Successful notification
@@ -98,7 +98,7 @@ paths:
                   $ref: "#/components/responses/Generic503"
               security:
                 - {}
-                - notificationsBearerAuth: []                        
+                - notificationsBearerAuth: []
       responses:
         '201':
           description: Reception acknowlegement a dedicated network request
@@ -124,11 +124,11 @@ paths:
         "500":
           $ref: "#/components/responses/Generic500"
         "503":
-          $ref: "#/components/responses/Generic503" 
+          $ref: "#/components/responses/Generic503"
 
   /networks/{networkId}:
     get:
-      tags: 
+      tags:
         - Networks
       summary: Get the current information about a dedicated network
       operationId: readNetwork
@@ -151,7 +151,7 @@ paths:
         '404':
           $ref: "#/components/responses/Generic404"
     delete:
-      tags: 
+      tags:
         - Networks
       summary: Destroy a dedicated network
       operationId: deleteNetwork
@@ -219,7 +219,7 @@ components:
           description: Geografical area within which the service of the dedicated network is to be available
           $ref: '#/components/schemas/Area'
         sink:
-          description: Notification sink for sending notifications 
+          description: Notification sink for sending notifications
           type: string
           format: uri
         sinkCredential:
@@ -243,8 +243,8 @@ components:
               description: Current status of the dedicated network
               $ref: '#/components/schemas/NetworkStatus'
           required:
-          - id
-          - status
+            - id
+            - status
 
     CreateNetwork:
       description: Attributes required to create a dedicated network
@@ -258,7 +258,7 @@ components:
         * `REQUESTED` - The DN is requested, but not approved. Possible transitions to RESERVED, ACTIVATED and TERMINATED states
         * `RESERVED` - Request is accepted by the CSP (CSP has committed the requested resources), but the Network cannot be used (outside of requested time-window)
         * `ACTIVATED` - Network turns from reserved into Activated. Now, devices with access can use the network. Possible transitions to RESERVED or TERMINATED states
-        * `TERMINATED` - The Network resource is used and up for deletion. The API does not allow any action (except delete). 
+        * `TERMINATED` - The Network resource is used and up for deletion. The API does not allow any action (except delete).
 
       type: string
       enum:
@@ -371,7 +371,7 @@ components:
           required:
             - areaName
           properties:
-            areaName: 
+            areaName:
               type: string
 
     SinkCredential:
