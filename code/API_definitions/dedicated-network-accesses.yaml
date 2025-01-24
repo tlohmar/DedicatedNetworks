@@ -162,18 +162,6 @@ components:
       name: x-device
       in: header
       description: Device object represented in a header
-      schema:
-        $ref: "#/components/headers/x-device"
-      example: 'phonenumber="+123456789"'
-
-  headers:
-    x-correlator:
-      description: Correlation id for the different services
-      schema:
-        type: string
-
-    x-device:
-      description: |
         Device object (#/components/schemas/Device") represented in a header.
         It is serialized according to RFC 8941 as a structured field value where
         the Device object is a dictionary, with the following additonal provisions
@@ -183,6 +171,13 @@ components:
               as per section 3.3.3 of the RFC
             - if the property value is a string and contains non-ASCII characters, the string must be serialized as Byte Sequence using UTF-8 encoding,
               as per section 3.3.5 of the RFC
+      schema:
+        type: string
+      example: 'phonenumber="+123456789"'
+
+  headers:
+    x-correlator:
+      description: Correlation id for the different services
       schema:
         type: string
 
