@@ -174,7 +174,7 @@ components:
 
     x-device:
       description: |
-        Device object represented in a header.
+        Device object (#/components/schemas/Device") represented in a header.
         It is serialized according to RFC 8941 as a structured field value where
         the Device object is a dictionary, with the following additonal provisions:
           - property names are changed to lower case to comply with the RFC
@@ -183,10 +183,8 @@ components:
               as per section 3.3.3 of the RFC
             - if the property value is a string and contains non-ASCII characters, the string must be serialized as Byte Sequence using UTF-8 encoding,
               as per section 3.3.5 of the RFC
-      content:
-        text/plain:
-          schema:
-            $ref: "#/components/schemas/Device"
+      schema:
+        type: string
 
   schemas:
     AccessId:
