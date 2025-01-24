@@ -176,9 +176,9 @@ components:
       description: |
         Device object (#/components/schemas/Device") represented in a header.
         It is serialized according to RFC 8941 as a structured field value where
-        the Device object is a dictionary, with the following additonal provisions:
+        the Device object is a dictionary, with the following additonal provisions
           - property names are changed to lower case to comply with the RFC
-          - serializing property values must comply with the RFC depending on the type, and in particular:
+          - serializing property values must comply with the RFC depending on the type, and in particular
             - if the property value is a string which contains only ASCII characters, the string can be serialized as String,
               as per section 3.3.3 of the RFC
             - if the property value is a string and contains non-ASCII characters, the string must be serialized as Byte Sequence using UTF-8 encoding,
