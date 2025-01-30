@@ -2,5 +2,5 @@
 |---------------|------------------------| ----------------------|
 | Ericsson | Thorsten Lohmar  | @tlohmar |
 | Nokia | Peter Kovacs | @PeterKovacs2 |
-| Telefonica| Jorge Garcia Hospital | @jgarciahospital |
+| Telefonica | Alejandro Palmier | @alejandropalmier |
 | Vodafone | Steve Vickers | @SteveV-Vodafone |
