@@ -4,10 +4,10 @@ info:
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-  version: 0.0.1
+  version: wip
   x-camara-commonalities: 0.4.0
 servers:
-  - url: "{apiRoot}/dedicated-network-accesses/v0"
+  - url: "{apiRoot}/dedicated-network-accesses/vwip"
     variables:
       apiRoot:
         default: http://localhost:9091
