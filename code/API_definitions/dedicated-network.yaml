@@ -1,11 +1,13 @@
 openapi: 3.0.3
 info:
   title: Dedicated Network - Networks API
+  description: |
+    This API allows for requesting a Dedicated Network, which provides a set of capabilities and connectivity performance targets. The Dedicated Network may be requested for a particular geographical location and at a particular time window. Depending on the requested start time for the dedicated network, the network may first enter a _reserved_ state. 
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   version: wip
-  x-camara-commonalities: 0.4.0
+  x-camara-commonalities: 0.5
 servers:
   - url: "{apiRoot}/dedicated-network/vwip"
     variables:

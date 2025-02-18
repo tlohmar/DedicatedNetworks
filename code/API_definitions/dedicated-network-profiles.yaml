@@ -1,11 +1,13 @@
 openapi: 3.0.3
 info:
   title: Dedicated Network - Network Profiles API
+  description: |
+    This API allows for discovering available network profiles, which are offered by the network provider to be used in conjunction of the Dedicated Network API. Network profiles describe the capabilities and performance targets of a dedicated network.   
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   version: wip
-  x-camara-commonalities: 0.4.0
+  x-camara-commonalities: 0.5
 servers:
   - url: "{apiRoot}/dedicated-network-profiles/vwip"
     variables:
