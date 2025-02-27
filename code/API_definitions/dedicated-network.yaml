@@ -24,6 +24,9 @@ paths:
         - Networks
       summary: Get a list of dedicated networks
       operationId: listNetworks
+      security:
+        - openId:
+            - dedicated-networks:networks:read
       parameters:
         - $ref: "#/components/parameters/x-correlator"
       responses:
@@ -52,6 +55,9 @@ paths:
         - Networks
       summary: Request to create a dedicated network
       operationId: createNetwork
+      security:
+        - openId:
+            - dedicated-networks:network:create
       requestBody:
         required: true
         content:
@@ -137,6 +143,9 @@ paths:
         - Networks
       summary: Get the current information about a dedicated network
       operationId: readNetwork
+      security:
+        - openId:
+            - dedicated-networks:network:read
       parameters:
         - name: networkId
           in: path
@@ -160,6 +169,9 @@ paths:
         - Networks
       summary: Destroy a dedicated network
       operationId: deleteNetwork
+      security:
+        - openId:
+            - dedicated-networks:network:destroy
       parameters:
         - name: networkId
           in: path
@@ -185,6 +197,9 @@ paths:
 
 components:
   securitySchemes:
+    openId:
+      type: openIdConnect
+      openIdConnectUrl: https://example.com/.well-known/openid-configuration
     notificationsBearerAuth:
       description: Bearer authentication for notifications
       type: http
