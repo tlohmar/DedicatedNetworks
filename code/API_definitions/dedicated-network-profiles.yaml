@@ -23,7 +23,7 @@ paths:
       operationId: readNetworkProfiles
       security:
         - openId:
-            - dedicated-networks:profiles:read
+            - dedicated-network:profiles:read
       parameters:
         - $ref: "#/components/parameters/x-correlator"
       responses:
@@ -55,7 +55,7 @@ paths:
       operationId: readNetworkProfile
       security:
         - openId:
-            - dedicated-networks:profile:read
+            - dedicated-network:profile:read
       parameters:
         - name: profileId
           in: path

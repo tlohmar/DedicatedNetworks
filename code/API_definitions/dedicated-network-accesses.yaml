@@ -27,7 +27,7 @@ paths:
       operationId: listNetworkAccesses
       security:
         - openId:
-            - dedicated-networks:accesses:read
+            - dedicated-network:accesses:read
       parameters:
         - name: networkId
           in: query
@@ -64,7 +64,7 @@ paths:
       operationId: createNetworkAccess
       security:
         - openId:
-            - dedicated-networks:access:create
+            - dedicated-network:access:create
       requestBody:
         content:
           application/json:
@@ -104,7 +104,7 @@ paths:
       operationId: readNetworkAccess
       security:
         - openId:
-            - dedicated-networks:access:read
+            - dedicated-network:access:read
       parameters:
         - name: accessId
           in: path
@@ -139,7 +139,7 @@ paths:
       operationId: deleteNetworkAccess
       security:
         - openId:
-            - dedicated-networks:access:destroy
+            - dedicated-network:access:destroy
       parameters:
         - name: accessId
           in: path

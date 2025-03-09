@@ -26,7 +26,7 @@ paths:
       operationId: listNetworks
       security:
         - openId:
-            - dedicated-networks:networks:read
+            - dedicated-network:networks:read
       parameters:
         - $ref: "#/components/parameters/x-correlator"
       responses:
@@ -57,7 +57,7 @@ paths:
       operationId: createNetwork
       security:
         - openId:
-            - dedicated-networks:network:create
+            - dedicated-network:network:create
       requestBody:
         required: true
         content:
@@ -145,7 +145,7 @@ paths:
       operationId: readNetwork
       security:
         - openId:
-            - dedicated-networks:network:read
+            - dedicated-network:network:read
       parameters:
         - name: networkId
           in: path
@@ -171,7 +171,7 @@ paths:
       operationId: deleteNetwork
       security:
         - openId:
-            - dedicated-networks:network:destroy
+            - dedicated-network:network:destroy
       parameters:
         - name: networkId
           in: path
