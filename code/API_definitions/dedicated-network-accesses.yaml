@@ -139,7 +139,7 @@ paths:
       operationId: deleteNetworkAccess
       security:
         - openId:
-            - dedicated-network:access:destroy
+            - dedicated-network:access:delete
       parameters:
         - name: accessId
           in: path

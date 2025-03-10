@@ -167,11 +167,11 @@ paths:
     delete:
       tags:
         - Networks
-      summary: Destroy a dedicated network
+      summary: Delete a dedicated network
       operationId: deleteNetwork
       security:
         - openId:
-            - dedicated-network:network:destroy
+            - dedicated-network:network:delete
       parameters:
         - name: networkId
           in: path
