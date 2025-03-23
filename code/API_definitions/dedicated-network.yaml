@@ -25,7 +25,7 @@ paths:
       summary: Get a list of dedicated networks
       operationId: listNetworks
       security:
-        - openId:
+        - oAuth2:
             - dedicated-network:networks:read
       parameters:
         - $ref: "#/components/parameters/x-correlator"
@@ -56,7 +56,7 @@ paths:
       summary: Request to create a dedicated network
       operationId: createNetwork
       security:
-        - openId:
+        - oAuth2:
             - dedicated-network:network:create
       requestBody:
         required: true
@@ -144,7 +144,7 @@ paths:
       summary: Get the current information about a dedicated network
       operationId: readNetwork
       security:
-        - openId:
+        - oAuth2:
             - dedicated-network:network:read
       parameters:
         - name: networkId
@@ -170,7 +170,7 @@ paths:
       summary: Delete a dedicated network
       operationId: deleteNetwork
       security:
-        - openId:
+        - oAuth2:
             - dedicated-network:network:delete
       parameters:
         - name: networkId
@@ -197,9 +197,17 @@ paths:
 
 components:
   securitySchemes:
-    openId:
-      type: openIdConnect
-      openIdConnectUrl: https://example.com/.well-known/openid-configuration
+    oAuth2:
+       type: oauth2
+       flows:
+        clientCredentials:
+          tokenUrl: https://api.example.com/oauth/token
+          scopes:
+            dedicated-network:networks:read: Get a list of networks
+            dedicated-network:network:create: Create a dedicated network
+            dedicated-network:network:read: Get the current information about a network
+            dedicated-network:network:delete: Delete a Network
+
     notificationsBearerAuth:
       description: Bearer authentication for notifications
       type: http
