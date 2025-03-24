@@ -166,8 +166,8 @@ paths:
 components:
   securitySchemes:
     oAuth2:
-       type: oauth2
-       flows:
+      type: oauth2
+      flows:
         clientCredentials:
           tokenUrl: https://api.example.com/oauth/token
           scopes:
