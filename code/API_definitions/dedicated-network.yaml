@@ -203,10 +203,10 @@ components:
         clientCredentials:
           tokenUrl: https://api.example.com/oauth/token
           scopes:
-            dedicated-network:networks:read: Get a list of networks
-            dedicated-network:network:create: Create a dedicated network
-            dedicated-network:network:read: Get the current information about a network
-            dedicated-network:network:delete: Delete a Network
+            dedicated-network:networks:read: Read a list of networks
+            dedicated-network:network:create: Create a network
+            dedicated-network:network:read: Read a network
+            dedicated-network:network:delete: Delete a network
 
     notificationsBearerAuth:
       description: Bearer authentication for notifications

@@ -171,10 +171,10 @@ components:
         clientCredentials:
           tokenUrl: https://api.example.com/oauth/token
           scopes:
-            dedicated-network:accesses:read: Get a list of device accesses for networks
-            dedicated-network:access:create: Create a device access to a network with given configuration
-            dedicated-network:access:read: Get a device access for the network and its configuration
-            dedicated-network:access:delete: Delete a device access to a network
+            dedicated-network:accesses:read: Read a list of accesses
+            dedicated-network:access:create: Create a device access
+            dedicated-network:access:read: Read a device access
+            dedicated-network:access:delete: Delete a device access
 
   parameters:
     x-correlator:
