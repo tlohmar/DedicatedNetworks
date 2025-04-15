@@ -32,9 +32,9 @@ paths:
       operationId: readNetworkProfiles
       security:
         - openId:
-          - dedicated-network-profiles:profiles:read
+            - dedicated-network-profiles:profiles:read
         - oAuth2:
-          - dedicated-network-profiles:profiles:read
+            - dedicated-network-profiles:profiles:read
       parameters:
         - $ref: "#/components/parameters/x-correlator"
       responses:
@@ -66,9 +66,9 @@ paths:
       operationId: readNetworkProfile
       security:
         - openId:
-          - dedicated-network-profiles:profiles:read
+            - dedicated-network-profiles:profiles:read
         - oAuth2:
-          - dedicated-network-profiles:profiles:read
+            - dedicated-network-profiles:profiles:read
       parameters:
         - name: profileId
           in: path
@@ -327,4 +327,3 @@ components:
                 status: 503
                 code: UNAVAILABLE
                 message: Service Unavailable.
-

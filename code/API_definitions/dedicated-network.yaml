@@ -35,9 +35,9 @@ paths:
       operationId: listNetworks
       security:
         - openId:
-          - dedicated-network:networks:read
+            - dedicated-network:networks:read
         - oAuth2:
-          - dedicated-network:networks:read
+            - dedicated-network:networks:read
       parameters:
         - $ref: "#/components/parameters/x-correlator"
       responses:
@@ -68,9 +68,9 @@ paths:
       operationId: createNetwork
       security:
         - openId:
-          - dedicated-network:networks:create
+            - dedicated-network:networks:create
         - oAuth2:
-          - dedicated-network:networks:create
+            - dedicated-network:networks:create
       requestBody:
         required: true
         content:
@@ -158,9 +158,9 @@ paths:
       operationId: readNetwork
       security:
         - openId:
-          - dedicated-network:networks:read
+            - dedicated-network:networks:read
         - oAuth2:
-          - dedicated-network:networks:read
+            - dedicated-network:networks:read
       parameters:
         - name: networkId
           in: path
@@ -186,9 +186,9 @@ paths:
       operationId: deleteNetwork
       security:
         - openId:
-          - dedicated-network:networks:delete
+            - dedicated-network:networks:delete
         - oAuth2:
-          - dedicated-network:networks:delete
+            - dedicated-network:networks:delete
       parameters:
         - name: networkId
           in: path
@@ -215,8 +215,8 @@ paths:
 components:
   securitySchemes:
     openId:
-       type: openIdConnect
-       openIdConnectUrl: https://example.com/.well-known/openid-configuration
+      type: openIdConnect
+      openIdConnectUrl: https://example.com/.well-known/openid-configuration
     oAuth2:
       type: oauth2
       flows:
