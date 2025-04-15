@@ -3,6 +3,15 @@ info:
   title: Dedicated Network - Network Accesses API
   description: |
     This API allows for requesting network access for devices. A device is identified by the CAMARA _device object_, containing either an MSIDSN or a Network Access Identifier.
+
+    # Authorization and authentication
+
+    The "Camara Security and Interoperability Profile" provides details of how an API consumer requests an access token. Please refer to Identity and Consent Management (https://github.com/camaraproject/IdentityAndConsentManagement/) for the released version of the profile.
+
+    The specific authorization flows to be used will be agreed upon during the onboarding process, happening between the API consumer and the API provider, taking into account the declared purpose for accessing the API, whilst also being subject to the prevailing legal framework dictated by local legislation.
+
+    In cases where personal data is processed by the API and users can exercise their rights through mechanisms such as opt-in and/or opt-out, the use of three-legged access tokens is mandatory. This ensures that the API remains in compliance with privacy regulations, upholding the principles of transparency and user-centric privacy-by-design.
+
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
@@ -26,8 +35,10 @@ paths:
       summary: Get a list of device accesses to dedicated networks, optionally filtered for a given device and/or for a given dedicated network
       operationId: listNetworkAccesses
       security:
+        - openId:
+          - dedicated-network-accesses:accesses:read
         - oAuth2:
-            - dedicated-network:accesses:read
+          - dedicated-network-accesses:accesses:read
       parameters:
         - name: networkId
           in: query
@@ -63,8 +74,10 @@ paths:
       summary: Create a device access to a dedicated network with given configuration
       operationId: createNetworkAccess
       security:
+        - openId:
+          - dedicated-network-accesses:accesses:create
         - oAuth2:
-            - dedicated-network:access:create
+          - dedicated-network-accesses:accesses:create
       requestBody:
         content:
           application/json:
@@ -103,8 +116,10 @@ paths:
       summary: Get a device access to the dedicated network and its configuration
       operationId: readNetworkAccess
       security:
+        - openId:
+          - dedicated-network-accesses:accesses:read
         - oAuth2:
-            - dedicated-network:access:read
+          - dedicated-network-accesses:accesses:read
       parameters:
         - name: accessId
           in: path
@@ -138,8 +153,10 @@ paths:
       summary: Delete a device access to the dedicated network
       operationId: deleteNetworkAccess
       security:
+        - openId:
+          - dedicated-network-accesses:accesses:delete
         - oAuth2:
-            - dedicated-network:access:delete
+          - dedicated-network-accesses:accesses:delete
       parameters:
         - name: accessId
           in: path
@@ -165,17 +182,18 @@ paths:
 
 components:
   securitySchemes:
+    openId:
+      type: openIdConnect
+      openIdConnectUrl: https://example.com/.well-known/openid-configuration
     oAuth2:
       type: oauth2
       flows:
         clientCredentials:
           tokenUrl: https://api.example.com/oauth/token
           scopes:
-            dedicated-network:accesses:read: Read a list of accesses
-            dedicated-network:access:create: Create a device access
-            dedicated-network:access:read: Read a device access
-            dedicated-network:access:delete: Delete a device access
-
+            dedicated-network-accesses:accesses:read: Read one or more accesses
+            dedicated-network-accesses:accesses:create: Create an access
+            dedicated-network-accesses:accesses:delete: Delete an access
   parameters:
     x-correlator:
       name: x-correlator
