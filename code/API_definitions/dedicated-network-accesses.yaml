@@ -72,6 +72,9 @@ paths:
       tags:
         - Accesses
       summary: Create a device access to a dedicated network with given configuration
+      description: |
+        **NOTE:**
+          - When the API allows usage of a two-legged access token and the invoker uses it, the optional `device` object shall be present.
       operationId: createNetworkAccess
       security:
         - openId:
@@ -249,7 +252,6 @@ components:
           type: string
       required:
         - networkId
-        - device
 
     CreateNetworkAccess:
       description: Attributes required to create a dedicated network access for a device.
