@@ -32,7 +32,7 @@ Repository to describe, develop, document, and test the service APIs for Dedicat
 
 
 
-**The latest public release is [r1.1](https://github.com/camaraproject/DedicatedNetworks/releases/tag/r1.1), with the API versions listed below**
+**The first pre-release is [r1.1](https://github.com/camaraproject/DedicatedNetworks/releases/tag/r1.1), with the API versions listed below**
 
 To facilitate understanding of these APIs, please consult the [General Description](https://github.com/camaraproject/DedicatedNetworks/blob/r1.1/documentation/API_documentation/DedicatedNetworks_GeneralDescription.md) for essential concepts and workflows prior to examining the technical specifications.
 
