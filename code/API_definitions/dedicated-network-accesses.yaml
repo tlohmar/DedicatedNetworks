@@ -56,7 +56,7 @@ info:
   version: 0.1.0-rc.1
   x-camara-commonalities: 0.5
 servers:
-  - url: "{apiRoot}/dedicated-network-accesses/v0.1rc1
+  - url: "{apiRoot}/dedicated-network-accesses/v0.1rc1"
     variables:
       apiRoot:
         default: http://localhost:9091
