@@ -10,8 +10,8 @@ This release contains the definition and documentation of
 * dedicated-network-profiles v0.1.0-rc.1
 
 The API definition(s) are based on
-* Commonalities v0.5.0
-* Identity and Consent Management v0.3.0
+* Commonalities v0.6.0-rc.1
+* Identity and Consent Management v0.4.0-rc.1
 
 ## dedicated-network v0.1.0-rc.1
 
