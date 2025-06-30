@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: Dedicated Network - Network Profiles API
+  title: Dedicated Network - Network Profiles
   description: |
 
     This API allows for discovering available network profiles, which are offered by the network provider to be used in conjunction of the Dedicated Network API. Network profiles describe the capabilities and performance targets of a dedicated network. For more information about the Dedicated Networks APIs, see [link]().

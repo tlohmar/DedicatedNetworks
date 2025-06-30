@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: Dedicated Network - Networks API
+  title: Dedicated Network - Networks
   description: |
     This API allows for requesting a Dedicated Network, which provides a set of capabilities and connectivity performance targets. The Dedicated Network may be requested for a particular geographical location and at a particular time window. Depending on the requested start time for the dedicated network, the network may first enter a _reserved_ state.
 

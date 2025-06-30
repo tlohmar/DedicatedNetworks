@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: Dedicated Network - Accesses API
+  title: Dedicated Network - Accesses
   description: |
     This API allows for requesting network access for devices. A device is identified by the CAMARA _device object_, containing either an MSIDSN or a Network Access Identifier.
 
