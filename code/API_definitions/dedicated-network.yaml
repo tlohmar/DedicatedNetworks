@@ -92,10 +92,6 @@ paths:
           $ref: "#/components/responses/Generic403"
         "404":
           $ref: "#/components/responses/Generic404"
-        "500":
-          $ref: "#/components/responses/Generic500"
-        "503":
-          $ref: "#/components/responses/Generic503"
     post:
       tags:
         - Networks
@@ -149,10 +145,6 @@ paths:
                   $ref: "#/components/responses/Generic403"
                 "410":
                   $ref: "#/components/responses/Generic410"
-                "500":
-                  $ref: "#/components/responses/Generic500"
-                "503":
-                  $ref: "#/components/responses/Generic503"
               security:
                 - {}
                 - notificationsBearerAuth: []
@@ -178,10 +170,6 @@ paths:
           $ref: "#/components/responses/Generic403"
         "404":
           $ref: "#/components/responses/Generic404"
-        "500":
-          $ref: "#/components/responses/Generic500"
-        "503":
-          $ref: "#/components/responses/Generic503"
 
   /networks/{networkId}:
     get:
@@ -236,10 +224,6 @@ paths:
           $ref: "#/components/responses/Generic403"
         "404":
           $ref: "#/components/responses/Generic404"
-        "500":
-          $ref: "#/components/responses/Generic500"
-        "503":
-          $ref: "#/components/responses/Generic503"
 
 components:
   securitySchemes:
@@ -642,37 +626,6 @@ components:
                 status: 410
                 code: GONE
                 message: Access to the target resource is no longer available.
-
-    Generic500:
-      description: Internal server error
-      headers:
-        x-correlator:
-          $ref: '#/components/headers/x-correlator'
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/ErrorInfo"
-          example:
-            status: 500
-            code: INTERNAL
-            message: "Internal server error: ..."
-
-    Generic503:
-      description: Service Unavailable
-      headers:
-        x-correlator:
-          $ref: "#/components/headers/x-correlator"
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/ErrorInfo"
-          examples:
-            GENERIC_503_UNAVAILABLE:
-              description: Service is not available. Temporary situation usually related to maintenance process in the server side
-              value:
-                status: 503
-                code: UNAVAILABLE
-                message: Service Unavailable.
 
   examples:
 
