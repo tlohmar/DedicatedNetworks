@@ -42,6 +42,9 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   version: 0.1.0-rc.1
   x-camara-commonalities: 0.6
+externalDocs:
+  description: Product documentation at CAMARA
+  url: https://github.com/camaraproject/DedicatedNetworks
 servers:
   - url: "{apiRoot}/dedicated-network-profiles/v0.1rc1"
     variables:
