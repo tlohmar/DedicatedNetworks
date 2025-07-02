@@ -270,9 +270,10 @@ components:
         serviceArea:
           $ref: '#/components/schemas/Area'
         sink:
-          description: Notification sink for sending notifications
+          description: The address to which events shall be delivered using the selected protocol.
           type: string
           format: uri
+          pattern: ^https:\/\/.+$
         sinkCredential:
           $ref: '#/components/schemas/SinkCredential'
       required:
