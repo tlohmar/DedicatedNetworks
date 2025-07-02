@@ -88,8 +88,6 @@ paths:
       security:
         - openId:
             - dedicated-network-profiles:profiles:read
-        - oAuth2:
-            - dedicated-network-profiles:profiles:read
       parameters:
         - name: profileId
           in: path
