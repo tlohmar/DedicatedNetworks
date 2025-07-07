@@ -1,6 +1,6 @@
 # High level description of Dedicated Networks concept and APIs
 ## Introduction
-_Dedicated Networks_ enable dedicated use of public network connectivity resources by reserving some of these resources for use by devices and applications. To these devices and applications, the reserved resources appear as their own virtual or logical network. Please check [here](https://github.com/camaraproject/DedicatedNetworks/blob/main/documentation/SupportingDocuments/UsageScenarios.md) for several usage scenarios for Dedicated Networks.
+_Dedicated Networks_ enable dedicated use of public network connectivity resources by reserving some of these resources for use by devices and applications. To these devices and applications, the reserved resources appear as their own virtual or logical network. Please check [here](../SupportingDocuments/UsageScenarios.md) for several usage scenarios for Dedicated Networks.
 
 Fixed and Mobile Networks already offer the capability of separating devices into different networks. These concepts are sometimes called logical networks or virtual private networks. Multiple of these networks can coexist on the same physical network and can separate target traffic from other traffic for assured performance, enhanced security and other scenarios where consistent experience is required.
 
@@ -23,6 +23,8 @@ API Consumers have control over which devices are allowed to access and use the 
 Detailed characteristics, behaviors and costs pertaining to Dedicated Networks are typically described by the **API Provider** in the terms and conditions. Such terms and conditions may also contain obligations and restrictions.
 
 An API Provider realizes Dedicated Networks based on the physical network resources managed by a Network Provider. An API Provider can be the Network Provider.
+
+The present set of [Usage Scenarios](../SupportingDocuments/UsageScenarios.md) focuses on B2B use-cases, where the owner of the devices and the device subscriptions is also acting as API invoker for the Networks and the Accesses APIs. This constellation allows using two-legged access tokens, since no additional consent needs to be obtained. As device identifiers, only the MSISDN and the Network Access Identifier (NAI, e.g. for Non-MSISDN devices) are supported. The device might not have an IP address assigned at time of Accesses API usage and the usage of MSISDN / NAIs might be more practical.
 
 **Key roles**
 
