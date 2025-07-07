@@ -153,6 +153,8 @@ components:
 
   schemas:
     NetworkProfileId:
+      description: |
+        Identifier of the network profile.
       type: string
 
     NetworkProfile:
@@ -161,20 +163,14 @@ components:
       type: object
       properties:
         id:
-          description: |
-            Identifier of the network profile.
           $ref: '#/components/schemas/NetworkProfileId'
         maxNumberOfDevices:
           description: |
             Maximum number of devices that is allowed to have access to the network at any point in time.
           type: integer
         aggregatedUlThroughput:
-          description: |
-            Aggregated uplink throughput.
           $ref: "#/components/schemas/BitRate"
         aggregatedDlThroughput:
-          description: |
-            Aggregated downlink throughput.
           $ref: "#/components/schemas/BitRate"
         qosProfiles:
           description: Qos Profiles, which are supported by the dedicated network. See [Quality-on-Demand](https://github.com/camaraproject/QualityOnDemand) QOD and QOS Profiles API.
