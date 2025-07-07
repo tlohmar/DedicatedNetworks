@@ -22,7 +22,7 @@ info:
 
     - the networkId to access is given
 
-    - the `device` object (CAMARA device object) to identify the device. Either a MSISDN or a Network Access Identifier can be used.
+    - the `device` object (CAMARA device object) to identify the device. Either a MSISDN or a Network Access Identifier (NAI) can be used. The NAI may be used for Non-MSISDN devices.<br>Note: Usage of IPv4 or IPv6 addresses for device identification is not supported, since either the device has no IP address assigned at time of using the device access API or Non-IP Addresses are simpler to use.
 
     - Optionally, a default QoS Profile can be set for the device
 
