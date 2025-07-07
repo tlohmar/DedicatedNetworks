@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: Dedicated Network - Accesses API
   description: |
-    This API allows for requesting network access for devices. A device is identified by the CAMARA _device object_, containing either an MSIDSN or a Network Access Identifier.
+    This API allows for requesting network access for devices. A device is identified by the CAMARA _device object_, containing either an MSIDSN or a Network Access Identifier. For more information about the Dedicated Networks APIs, see [link](../../documentation/API_documentation/DedicatedNetworks_GeneralDescription.md).
 
     A Device Access represents the permission for a specific device to use a Dedicated Network's reserved connectivity resources. Only devices for which a Device Access resource has been created can use the connectivity resources allocated for that network. The usage of resources can be tailored to each device within the constraints of the applicable Network Profile.
 
@@ -24,9 +24,9 @@ info:
 
     - the `device` object (CAMARA device object) to identify the device. Either a MSISDN or a Network Access Identifier can be used.
 
-    - Optionally, a default QoS Profile can be set for the device
+    - Optionally, a default QoS Profile (see QOS Profiles in [Quality-on-Demand](https://github.com/camaraproject/QualityOnDemand)) can be set for the device.
 
-    - Optionally, a subset of QoS Profiles from this network can be provided to further restrict which QoS Profiles the device can access
+    - Optionally, a subset of QoS Profiles (see QOS Profiles in [Quality-on-Demand](https://github.com/camaraproject/QualityOnDemand)) from this network can be provided to further restrict which QoS Profiles the device can access.
 
     The API returns an accessId.
 
@@ -282,13 +282,13 @@ components:
         device:
           $ref: "#/components/schemas/Device"
         qosProfiles:
-          description: (Optional) List of supported QOS profiles usable for the device. When absent, all QosProfiles of the Network are supported. Only a subset of the QOS profiles of the network is allowed
+          description: (Optional) List of supported QOS profiles (see QOS Profiles in [Quality-on-Demand](https://github.com/camaraproject/QualityOnDemand)) usable for the device. When absent, all QosProfiles of the Network are supported. Only a subset of the QOS profiles of the network is allowed.
           type: array
           items:
             type: string
           minItems: 1
         defaultQosProfile:
-          description: (Optional) The default QOS profile of a device access. When absent, the defaultQosProfile of the Network is used
+          description: (Optional) The default QOS profile of a device access (see QOS Profiles in [Quality-on-Demand](https://github.com/camaraproject/QualityOnDemand)). When absent, the defaultQosProfile of the Network is used.
           type: string
       required:
         - networkId
