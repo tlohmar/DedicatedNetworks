@@ -24,9 +24,9 @@ info:
 
     - the `device` object (CAMARA device object) to identify the device. Either a MSISDN or a Network Access Identifier can be used.
 
-    - Optionally, a default QoS Profile (see QOS Profiles in [Quality-on-Demand](https://github.com/camaraproject/QualityOnDemand)) can be set for the device.
+    - Optionally, a default QoS Profile can be set for the device (see [Network Profiles](./dedicated-network-profiles.yaml#network-profiles)).
 
-    - Optionally, a subset of QoS Profiles (see QOS Profiles in [Quality-on-Demand](https://github.com/camaraproject/QualityOnDemand)) from this network can be provided to further restrict which QoS Profiles the device can access.
+    - Optionally, a subset of QoS Profiles (see [Network Profiles](./dedicated-network-profiles.yaml#network-profiles)) from this network can be provided to further restrict which QoS Profiles the device can access.
 
     The API returns an accessId.
 

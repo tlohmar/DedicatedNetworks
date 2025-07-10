@@ -41,8 +41,13 @@ The APIs are summarized in the table below followed by a brief description. Deta
 | **API** | **Purpose of the API** | **Key Abstractions and concepts** |
 | ---- | ------- | ----|
 | Dedicated Network API | Reservation and lifecycle management of network connectivity resources for dedicated use. | A Dedicated Network is a logical resource and is used to embody the reservation of network connectivity resources in the physical network. Initiating a new reservation request using this API results in a new Dedicated Network resource being created. The Dedicated Network undergoes various lifecycle States including REQUESTED, RESERVED, ACTIVATED and TERMINATED. Reservation of resources occurs based on the selected Network Profile, duration when the reservation is needed (Service Time) and geographical areas where the service is needed (Service Area).<br>Note, the request for a network creation does initially not include any device identifier. Access of devices is added in a separate step. | 
-| Dedicated Network Profiles API | Discovery of predefined set of network capabilities and performance characteristics | A Network Profile represents a predefined set of network capabilities and performance characteristics that can be applied when creating dedicated networks. Each profile represents a validated, supported configuration that has been pre-approved in the terms and conditions between the API Provider and API Consumer. The Network Profile re-uses [Quality-on-Demand](https://github.com/camaraproject/QualityOnDemand) QOS Profiles concept for describing connectivity performance characteristics. When multiple QOS profiles are defined within a Network Profile, the API Consumer may either statically a different QOS profile (from the set of QOS profiles) for each device or may dynamically create QOS Sessions using the [Quality-on-Demand](https://github.com/camaraproject/QualityOnDemand) API. |
+| Dedicated Network Profiles API | Discovery of predefined set of network capabilities and performance characteristics | A Network Profile represents a predefined set of network capabilities and performance characteristics that can be applied when creating dedicated networks. Each profile represents a validated, supported configuration that has been pre-approved in the terms and conditions between the API Provider and API Consumer. |
 | Dedicated Network Accesses API | Managing access to the Dedicated Network, i.e., controlling which devices may benefit from the reserved resources and capabilities | A Device Access represents the permission for a specific device to use a Dedicated Network's reserved connectivity resources. The usage of resources can be tailored to each device within the constraints of the applicable Network Profile. |
+
+The Network Profile re-uses the concept of named QoS Profiles from [QualityOnDemand](https://github.com/camaraproject/QualityOnDemand) for describing connectivity performance characteristics. An API provider may offer the QualityOnDemand QoS Profiles API for resolving a QoS Profile name into more understandable metrics. 
+
+When multiple QoS profiles are defined within a Network Profile, the API Consumer may either statically assign a different QoS profile (from the set of QoS profiles) for each device access or may dynamically create QoS Sessions using the QualityOnDemand Quality-On-Demand API.
+The API Consumer may also restict the list of possible QoS Profiles within a Device Access.
 
 A high-level sequence of steps involved when using Dedicated Network APIs is depicted in the diagram below and further described in their respective sections.
 
@@ -147,8 +152,8 @@ Description of main steps
         * Creating an Access resource corresponds to giving access for a device to the network.
         * Deleting an Access resource corresponds to revoking access for a device to the network.
 1.  When Dedicated Network is in ACTIVATED state: Devices with access will be able to connect to the network.
-    * When a default QOS profile is defined within the Network Profile (or changed via the Access resources), the all traffic of the device will be treated with this QOS profile as default
-    * When multiple QOS profiles are defined within the Network Profile (or changed via the Access resources), the API Consumer may use the QOD API for managing QOS Sessions with the QOS Profiles listed in the Network Profile.
+    * When a default QoS profile is defined within the Network Profile (or changed via the Access resources), the all traffic of the device will be treated with this QoS profile as default
+    * When multiple QoS profiles are defined within the Network Profile (or changed via the Access resources), the API Consumer may use the QOD API for managing QoS Sessions with the QoS Profiles listed in the Network Profile.
 
 
 ## States of the network
