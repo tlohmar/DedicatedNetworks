@@ -171,7 +171,6 @@ components:
             $ref: '#/components/schemas/QosProfileName'
           minItems: 1
         defaultQosProfile:
-          description: default Qos Profiles of a device access.
           $ref: '#/components/schemas/QosProfileName'
       required:
         - id
