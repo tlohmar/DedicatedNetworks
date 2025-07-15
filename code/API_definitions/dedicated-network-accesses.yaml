@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: Dedicated Network - Accesses API
   description: |
-    This API allows for requesting network access for devices. A device is identified by the CAMARA _device object_, containing either an MSIDSN or a Network Access Identifier. For more information about the Dedicated Networks APIs, see [link](../../documentation/API_documentation/DedicatedNetworks_GeneralDescription.md).
+    This API allows for requesting network access for devices. A device is identified by the CAMARA _device object_, containing either an MSIDSN or a Network Access Identifier. For more information about the Dedicated Networks APIs, see the _GeneralDescription_ document in the Dedicated Networks [repository](https://github.com/camaraproject/DedicatedNetworks/).
 
     A Device Access represents the permission for a specific device to use a Dedicated Network's reserved connectivity resources. Only devices for which a Device Access resource has been created can use the connectivity resources allocated for that network. The usage of resources can be tailored to each device within the constraints of the applicable Network Profile.
 
@@ -24,9 +24,9 @@ info:
 
     - the `device` object (CAMARA device object) to identify the device. Either a MSISDN or a Network Access Identifier can be used.
 
-    - Optionally, a default QoS Profile can be set for the device (see [Network Profiles](./dedicated-network-profiles.yaml#network-profiles)).
+    - Optionally, a default QoS Profile can be set for the device (see Network Profiles section in the dedicated-network-profiles API in the [Dedicated Networks repository](https://github.com/camaraproject/DedicatedNetworks/)).
 
-    - Optionally, a subset of QoS Profiles (see [Network Profiles](./dedicated-network-profiles.yaml#network-profiles)) from this network can be provided to further restrict which QoS Profiles the device can access.
+    - Optionally, a subset of QoS Profiles (see Network Profiles section in the dedicated-network-profiles API) from this network can be provided to further restrict which QoS Profiles the device can access.
 
     The API returns an accessId.
 
