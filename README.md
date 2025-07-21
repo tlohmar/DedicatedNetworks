@@ -10,7 +10,9 @@
 
 # DedicatedNetworks
 
-Repository to describe, develop, document, and test the service APIs for DedicatedNetworks
+Sandbox API Repository to describe, develop, document, and test the DedicatedNetworks Service API(s). The repository does not yet belong to a CAMARA Sub Project.
+
+* API Repository [wiki page](https://lf-camaraproject.atlassian.net/wiki/x/XIArAQ)
 
 ## Scope
 
