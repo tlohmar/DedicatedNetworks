@@ -1,4 +1,3 @@
-
 <a href="https://github.com/camaraproject/DedicatedNetworks/commits/" title="Last Commit"><img src="https://img.shields.io/github/last-commit/camaraproject/DedicatedNetworks?style=plastic"></a>
 <a href="https://github.com/camaraproject/DedicatedNetworks/issues" title="Open Issues"><img src="https://img.shields.io/github/issues/camaraproject/DedicatedNetworks?style=plastic"></a>
 <a href="https://github.com/camaraproject/DedicatedNetworks/pulls" title="Open Pull Requests"><img src="https://img.shields.io/github/issues-pr/camaraproject/DedicatedNetworks?style=plastic"></a>
