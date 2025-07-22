@@ -3,7 +3,7 @@ info:
   title: Dedicated Network - Accesses
   description: |
     This API allows for requesting network access for devices.
-   
+
     A Device Access represents the permission for a specific device to use a Dedicated Network's reserved connectivity resources. Only devices for which a Device Access resource has been created can use the connectivity resources allocated for that network. The usage of resources can be tailored to each device within the constraints of the applicable Network Profile.
 
     A device is identified by the CAMARA `device` object, where at least one identifier for the device (user equipment) out of four options: IPv4 address, IPv6 address, Phone number, or Network Access Identifier assigned by the mobile network operator for the device.
