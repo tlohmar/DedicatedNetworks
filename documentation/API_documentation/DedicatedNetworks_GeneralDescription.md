@@ -6,11 +6,11 @@ Fixed and Mobile Networks already offer the capability of separating devices int
 
 There are different options to technically realize a Dedicated Network. For example:
 
-- Using 5G Network Slices (see 3GPP 23.501, clause 5.15)
+- Using 5G Network Slices (see 3GPP 23.501 Rel-15, clause 5.15)
 
-- Using 5G Non-Public Networks (NPN), specifically the Public Network Integrated NPN (PNI-NPN), see 3GPP 23.501, clause 5.30)
+- Using 5G Non-Public Networks (NPN), specifically the Public Network Integrated NPN (PNI-NPN), see 3GPP 23.501 Rel-16, clause 5.30)
 
-- Using a separate 4G APN (see 3GPP 23.401) or 5G DNNs (see 3GPP 23.501). Note, a DNN is equivalent to an APN, per 3GPP 23.003.
+- Using a separate 4G APN (see 3GPP 23.401 Rel-8) or 5G DNNs (see 3GPP 23.501 Rel-15). Note, a DNN is equivalent to an APN, per 3GPP 23.003 Rel-15.
 
 Dedicated Networks abstract the complexity across **Network Provider** realizations to enable coherent use of diverse network capabilities.
 
@@ -23,6 +23,9 @@ API Consumers have control over which devices are allowed to access and use the 
 Detailed characteristics, behaviors and costs pertaining to Dedicated Networks are typically described by the **API Provider** in the terms and conditions. Such terms and conditions may also contain obligations and restrictions.
 
 An API Provider realizes Dedicated Networks based on the physical network resources managed by a Network Provider. An API Provider can be the Network Provider.
+
+The present set of [Usage Scenarios](../SupportingDocuments/UsageScenarios.md) focuses on B2B use-cases, where the owner of the devices / device subscriptions is also acting as API invoker for the Networks and the Accesses APIs. This constellation allows using using the MSISDN as device identifier with a two-legged access tokens, since no additional consent needs to be obtained.
+
 
 **Key roles**
 
@@ -42,7 +45,7 @@ The APIs are summarized in the table below followed by a brief description. Deta
 | ---- | ------- | ----|
 | Dedicated Network API | Reservation and lifecycle management of network connectivity resources for dedicated use. | A Dedicated Network is a logical resource and is used to embody the reservation of network connectivity resources in the physical network. Initiating a new reservation request using this API results in a new Dedicated Network resource being created. The Dedicated Network undergoes various lifecycle States including REQUESTED, RESERVED, ACTIVATED and TERMINATED. Reservation of resources occurs based on the selected Network Profile, duration when the reservation is needed (Service Time) and geographical areas where the service is needed (Service Area). |
 | Dedicated Network Profiles API | Discovery of predefined set of network capabilities and performance characteristics | A Network Profile represents a predefined set of network capabilities and performance characteristics that can be applied when creating dedicated networks. Each profile represents a validated, supported configuration that has been pre-approved in the _terms and conditions_ between the API Provider and API Consumer. |
-| Dedicated Network Accesses API | Managing access to the Dedicated Network, i.e., controlling which devices may benefit from the reserved resources and capabilities | A Device Access represents the permission for a specific device to use a Dedicated Network's reserved connectivity resources. The usage of resources can be tailored to each device within the constraints of the applicable Network Profile. |
+| Dedicated Network Accesses API | Managing access to the Dedicated Network, i.e., controlling which devices may benefit from the reserved resources and capabilities | A Device Access represents the permission for a specific device to use a Dedicated Network's reserved connectivity resources. The usage of resources can be tailored to each device within the constraints of the applicable Network Profile.<br>The access for devices to the network can only be managed when the Network is created and not in the TERMINATED [state](#states-of-the-network). |
 
 The Accesses and the Network Profile re-use the concept of named QoS Profiles from [QualityOnDemand](https://github.com/camaraproject/QualityOnDemand) for describing connectivity performance characteristics. An API provider may offer the `qos-profiles` API for resolving a QoS Profile name into characteristics of a specific QoS profile. 
 
