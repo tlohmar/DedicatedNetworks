@@ -29,8 +29,26 @@ Feature: CAMARA Dedicated Network API, wip - Networks API Operations
 
   # Success scenarios for POST /networks
 
-  @dedicated_network_createNetwork_01_success
-  Scenario: Create a dedicated network with valid parameters
+  @dedicated_network_createNetwork_01_success_basic
+  Scenario: Create a dedicated network (basic success)
+    Given the resource "/dedicated-network/vwip/networks"
+    And the header "Content-Type" is set to "application/json"
+    And the request body is set to a request body compliant with the schema at "/components/schemas/CreateNetwork"
+    And the request body property "$.profileId" is set to a valid network profile ID
+    And the request body property "$.serviceTime" is set to a valid service time window
+    And the request body property "$.serviceArea.areaType" is set to "AREANAME"
+    And the request body property "$.serviceArea.areaName" is set to a valid area name
+    When the request "createNetwork" is sent
+    Then the response status code is 201
+    And the response header "Content-Type" is "application/json"
+    And the response header "x-correlator" has the same value as the request header "x-correlator"
+    And the response header "Location" exists and contains a URL with the created network ID
+    And the response body complies with the OAS schema at "/components/schemas/NetworkInfo"
+    And the response property "$.id" exists and is a valid UUID
+    And the response property "$.status" is "REQUESTED"
+
+  @dedicated_network_createNetwork_02_success_echo
+  Scenario: Create a dedicated network (response echoes request fields)
     Given the resource "/dedicated-network/vwip/networks"
     And the header "Content-Type" is set to "application/json"
     And the request body is set to a request body compliant with the schema at "/components/schemas/CreateNetwork"
@@ -42,16 +60,10 @@ Feature: CAMARA Dedicated Network API, wip - Networks API Operations
     And the request body property "$.sinkCredential.credentialType" is set to "ACCESSTOKEN"
     When the request "createNetwork" is sent
     Then the response status code is 201
-    And the response header "Content-Type" is "application/json"
-    And the response header "x-correlator" has the same value as the request header "x-correlator"
-    And the response header "Location" exists and contains a URL with the created network ID
-    And the response body complies with the OAS schema at "/components/schemas/NetworkInfo"
     And the response property "$.profileId" has the same value as in the request body
     And the response property "$.serviceTime" has the same value as in the request body
     And the response property "$.serviceArea" has the same value as in the request body
     And the response property "$.sink" exists only if provided in the request body and with the same value
-    And the response property "$.id" exists and is a valid UUID
-    And the response property "$.status" is "REQUESTED"
 
   # Success scenarios for GET /networks/{networkId}
 

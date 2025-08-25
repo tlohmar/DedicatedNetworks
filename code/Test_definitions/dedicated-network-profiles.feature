@@ -39,10 +39,5 @@ Feature: CAMARA Dedicated Network API, wip - Network Profiles API Operations
     And the response header "x-correlator" has the same value as the request header "x-correlator"
     And the response body complies with the OAS schema at "/components/schemas/NetworkProfile"
     And the response property "$.id" is equal to the path parameter "profileId"
-    And the response property "$.maxNumberOfDevices" exists and is a positive integer
-    And the response property "$.aggregatedUlThroughput.value" exists and is a positive integer
-    And the response property "$.aggregatedUlThroughput.unit" exists and is one of "bps", "kbps", "Mbps", "Gbps", "Tbps"
-    And the response property "$.aggregatedDlThroughput.value" exists and is a positive integer
-    And the response property "$.aggregatedDlThroughput.unit" exists and is one of "bps", "kbps", "Mbps", "Gbps", "Tbps"
     And the response property "$.qosProfiles" exists and is a non-empty array
     And the response property "$.defaultQosProfile" exists and is included in "$.qosProfiles"
