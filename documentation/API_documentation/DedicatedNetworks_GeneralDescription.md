@@ -108,12 +108,12 @@ sequenceDiagram
     participant D as Device(s)
     Note over App,D: Pre-requisites completed
     
-    rect rgba(51, 49, 49, 1)
+    rect rgba(51, 49, 49, 0.6)
         note right of App: 1: Reading Profiles
         App->>P: GET /profiles
         P->>App: 200 OK (Profiles [profileId, ...])
     end
-    rect rgba(51, 49, 49, 1)
+    rect rgba(51, 49, 49, 0.6)
         note right of App: 2: Creating a Dedicated Network
         App->>N: POST /networks (profileId, serviceArea, serviceTime, ...)
         N->>App: 201 Created (networkId, status=REQUESTED, ...)
@@ -126,7 +126,7 @@ sequenceDiagram
             N-->>App: 200 OK (networkId, status=ACTIVATED)
         end
     end
-    rect rgba(51, 49, 49, 1)
+    rect rgba(51, 49, 49, 0.6)
         note right of App: 3: Managing Device Access
         loop Create Access resource for a given device to the given network
             App->>A: POST /accesses (networkId, device)
