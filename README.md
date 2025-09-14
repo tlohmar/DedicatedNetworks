@@ -16,7 +16,7 @@ Sandbox API Repository to describe, develop, document, and test the DedicatedNet
 ## Scope
 
 * Service APIs for DedicatedNetworks (see [APIBacklog.md](https://github.com/camaraproject/APIBacklog/blob/main/documentation/APIbacklog.md))
-* The API provides the customer with the ability to:
+* The API provides the API Consumer with the ability to:
   * request/modify/delete a (logical) Dedicated Network for API consumers.
   * A Dedicated Network offers
     * specific connectivity performance (e.g. speed/ latency)
