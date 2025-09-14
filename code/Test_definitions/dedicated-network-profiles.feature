@@ -1,4 +1,4 @@
-Feature: CAMARA Dedicated Network API, v0.1 - Network Profiles API Operations
+Feature: CAMARA Dedicated Network API, v0.1.0 - Network Profiles API Operations
   # Input to be provided by the implementation to the tester
   #
   # Implementation indications:

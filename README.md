@@ -37,22 +37,22 @@ Sandbox API Repository to describe, develop, document, and test the DedicatedNet
 
 To facilitate understanding of these APIs, please consult the [General Description](https://github.com/camaraproject/DedicatedNetworks/blob/r1.2/documentation/API_documentation/DedicatedNetworks_GeneralDescription.md) for essential concepts and workflows prior to examining the technical specifications.
 
-* **dedicated-network v0.1.0 (initial release)**
+* **dedicated-network v0.1.0 (initial public release)**
   [[YAML]](https://github.com/camaraproject/DedicatedNetworks/blob/r1.2/code/API_definitions/dedicated-network.yaml)
   [[View it on ReDoc]](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/camaraproject/DedicatedNetworks/r1.2/code/API_definitions/dedicated-network.yaml&nocors)
   [[View it on Swagger Editor]](https://camaraproject.github.io/swagger-ui/?url=https://raw.githubusercontent.com/camaraproject/DedicatedNetworks/r1.2/code/API_definitions/dedicated-network.yaml)
 
-* **dedicated-network-profiles v0.1.0 (initial release)**
+* **dedicated-network-profiles v0.1.0 (initial public release)**
   [[YAML]](https://github.com/camaraproject/DedicatedNetworks/blob/r1.2/code/API_definitions/dedicated-network-profiles.yaml)
   [[View it on ReDoc]](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/camaraproject/DedicatedNetworks/r1.2/code/API_definitions/dedicated-network-profiles.yaml&nocors)
   [[View it on Swagger Editor]](https://camaraproject.github.io/swagger-ui/?url=https://raw.githubusercontent.com/camaraproject/DedicatedNetworks/r1.2/code/API_definitions/dedicated-network-profiles.yaml)
 
-* **dedicated-network-accesses v0.1.0 (initial release)**
+* **dedicated-network-accesses v0.1.0 (initial public release)**
   [[YAML]](https://github.com/camaraproject/DedicatedNetworks/blob/r1.2/code/API_definitions/dedicated-network-accesses.yaml)
   [[View it on ReDoc]](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/camaraproject/DedicatedNetworks/r1.2/code/API_definitions/dedicated-network-accesses.yaml&nocors)
   [[View it on Swagger Editor]](https://camaraproject.github.io/swagger-ui/?url=https://raw.githubusercontent.com/camaraproject/DedicatedNetworks/r1.2/code/API_definitions/dedicated-network-accesses.yaml)
 
-Previous releases and pre-releases are available here: https://github.com/camaraproject/DedicatedNetworks/releases
+Previous public releases and pre-releases are available here: https://github.com/camaraproject/DedicatedNetworks/releases
 
 For changes see the [CHANGELOG.md](https://github.com/camaraproject/DedicatedNetworks/blob/main/CHANGELOG.md)
 

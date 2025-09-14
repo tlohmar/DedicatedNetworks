@@ -1,4 +1,4 @@
-Feature: CAMARA Dedicated Network API, v0.1 - Network Accesses API Operations
+Feature: CAMARA Dedicated Network API, v0.1.0 - Network Accesses API Operations
   # Input to be provided by the implementation to the tester
   #
   # Implementation indications:
