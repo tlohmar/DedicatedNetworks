@@ -9,7 +9,7 @@
 
 # DedicatedNetworks
 
-Sandbox API Repository to describe, develop, document, and test the DedicatedNetworks Service API(s). The repository does not yet belong to a CAMARA Sub Project.
+Sandbox API Repository to describe, develop, document, and test the DedicatedNetworks Service API(s) within the Sub Project [Quality On Demand](https://lf-camaraproject.atlassian.net/wiki/x/hAClB).
 
 * API Repository [wiki page](https://lf-camaraproject.atlassian.net/wiki/x/XIArAQ)
 
