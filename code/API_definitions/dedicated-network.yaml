@@ -260,12 +260,15 @@ components:
       type: string
       format: uuid
 
+    NetworkProfileId:
+      type: string
+
     BaseNetworkInfo:
       description: Common attributes of a dedicated network
       type: object
       properties:
         profileId:
-          $ref: 'dedicated-network-profiles.yaml#/components/schemas/NetworkProfileId'
+          $ref: '#/components/schemas/NetworkProfileId'
         serviceTime:
           $ref: '#/components/schemas/ServiceTime'
         serviceArea:
