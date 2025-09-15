@@ -14,7 +14,7 @@ Feature: CAMARA Dedicated Network API, wip - Network Accesses API Operations
   Background: Common accesses setup
     Given an environment at "apiRoot"
     And the header "Authorization" is set to a valid access token
-    And the header "x-correlator" is set to a string value
+    And the header "x-correlator" complies with the schema at "#/components/schemas/XCorrelator"
 
   # Success scenarios for GET /accesses
 
