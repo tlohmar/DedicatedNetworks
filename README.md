@@ -9,7 +9,7 @@
 
 # DedicatedNetworks
 
-Sandbox API Repository to describe, develop, document, and test the DedicatedNetworks Service API(s) within the Sub Project [Quality On Demand](https://lf-camaraproject.atlassian.net/wiki/x/hAClB).
+Sandbox API Repository to describe, develop, document, and test the DedicatedNetworks Service API(s) within the Sub Project [Connectivity Quality Management](https://lf-camaraproject.atlassian.net/wiki/x/hAClB).
 
 * API Repository [wiki page](https://lf-camaraproject.atlassian.net/wiki/x/XIArAQ)
 
@@ -62,5 +62,5 @@ For changes see the [CHANGELOG.md](https://github.com/camaraproject/DedicatedNet
     * [Registration / Join](https://zoom-lfx.platform.linuxfoundation.org/meeting/94505909302?password=67b9a175-154f-4fe1-986d-0b825227a95b)
     * Minutes: Access [meeting minutes](https://lf-camaraproject.atlassian.net/l/cp/S3hQ1AFG)
 * Mailing List
-    * Subscribe / Unsubscribe to the mailing list of this Sub Project <https://lists.camaraproject.org/g/sp-dedicated-networks>.
-    * A message to the community of this Sub Project can be sent using sp-dedicated-networks@lists.camaraproject.org.
+    * Subscribe / Unsubscribe to the mailing list of this Sub Project <https://lists.camaraproject.org/g/sp-cqm>.
+    * A message to the community of this Sub Project can be sent using sp-cqm@lists.camaraproject.org.
