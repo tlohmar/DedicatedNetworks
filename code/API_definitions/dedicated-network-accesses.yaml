@@ -54,7 +54,7 @@ info:
 
      ## Error handling:
 
-     - If the dedicated network identified by the networkId is in a wrong state when creating a device access, e.g. it is in the TERMINATED state, then the server will return an error with the `409 WRONG_STATE` error code.
+     - If the dedicated network identified by the networkId is in an incompatible state when creating a device access, e.g. it is in the TERMINATED state, then the server will return an error with the `409 INCOMPATIBLE_STATE` error code.
 
     # Querying one or more device accesses
 
@@ -555,7 +555,7 @@ components:
                       - ABORTED
                       - ALREADY_EXISTS
                       - CONFLICT
-                      - WRONG_STATE
+                      - INCOMPATIBLE_STATE
           examples:
             GENERIC_409_ABORTED:
               description: Concurreny of processes of the same nature/scope
@@ -575,12 +575,12 @@ components:
                 status: 409
                 code: CONFLICT
                 message: A specified resource duplicate entry found.
-            GENERIC_409_WRONG_STATE:
-              description: A resource referenced in the request is in a wrong state for the requested operation
+            GENERIC_409_INCOMPATIBLE_STATE:
+              description: A resource referenced in the request is in an incompatible state for the requested operation
               value:
                 status: 409
-                code: WRONG_STATE
-                message: A referenced resource is in a wrong state.
+                code: INCOMPATIBLE_STATE
+                message: A referenced resource is in an incompatible state.
 
     Generic410:
       description: Gone
