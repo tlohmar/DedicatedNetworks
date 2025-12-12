@@ -15,11 +15,11 @@ info:
 
     Network Profiles are designed to support different use-cases and should contain the matching `qos-profile` combinations. Generally, two types of Network Profiles can be identified
       * Network Profiles containing only a `defaultQosProfile`
-      * Network Profiles containing one or more additional `qos-profile`s with the `qosProfiles` array. When multiple QoS Profiles are supported within one Network Profile, the QualityOnDemand `quality-on-demand` API may be used to assign one of the available QoS profiles to a specific device while the Network is in `ACTIVATED` state 
+      * Network Profiles containing one or more additional `qos-profile`s with the `qosProfiles` array. When multiple QoS Profiles are supported within one Network Profile, the QualityOnDemand `quality-on-demand` API may be used to assign one of the available QoS profiles to a specific device while the Network is in `ACTIVATED` state
 
     Devices are not neccessarily using connectivity continuously. The value of the `maxNumberOfDevices` parameter should be set _generous_, considering that not all devices using connectivity simultaneously and/or continuously.
 
-    The parameters `aggregatedUlThroughput` and `aggregatedDlThroughput` define the (hard) limits of simultaneous connectivity usage, ie. sum of all traffic using the available QoS profiles.
+    The parameters `aggregatedUlThroughput` and `aggregatedDlThroughput` define the (hard) limits of simultaneous connectivity usage, ie. sum of all traffic pertaining all devices using the available QoS profiles.
 
     A detailed description of the individual parameters may be included within the _terms and conditions_ (outside of scope for the API).
 
