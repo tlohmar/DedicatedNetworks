@@ -13,6 +13,10 @@ Sandbox API Repository to describe, develop, document, and test the DedicatedNet
 
 * API Repository [wiki page](https://lf-camaraproject.atlassian.net/wiki/x/XIArAQ)
 
+* API Repository [wiki page](https://lf-camaraproject.atlassian.net/wiki/x/OICGAQ)
+
+For background on Dedicated Networks concepts and workflows, see the [General Description](documentation/API_documentation/DedicatedNetworks_GeneralDescription.md).
+
 ## Scope
 
 * Service APIs for DedicatedNetworks (see [APIBacklog.md](https://github.com/camaraproject/APIBacklog/blob/main/documentation/APIbacklog.md))
