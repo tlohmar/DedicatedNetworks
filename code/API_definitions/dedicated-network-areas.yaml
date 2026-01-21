@@ -5,15 +5,15 @@ info:
 
     # Introduction
 
-    This API allows for discovering available network service areas, which are the geographical areas offered by the network provider where consitent coverage according to indicated network profile(s) is provided, and which is to be used in conjunction with the Dedicated Network API.
+    This API allows for discovering available network service areas, which are the geographical areas offered by the network provider where consitent coverage according to indicated network profile(s) and QoS profiles is provided, and which is to be used in conjunction with the Dedicated Network API.
 
     For more information about the Dedicated Network APIs, see the _GeneralDescription_ document in the Dedicated Networks [repository](https://github.com/camaraproject/DedicatedNetworks/).
 
     # Network Service Areas
 
-    A Network Service Area represents a predefined geographical area with coverage consistent with one or more network profiles. It enables API Consumers to select the geographical area where they can expect to consume the reserved network connectivity resources. A Network Service Area is a validated, supported configuration that has been pre-approved between the API Provider and API Consumer.
+    A Network Service Area represents a geographical area with coverage consistent with the characteristics of the network profiles and the QoS profiles supported in the area. It enables API Consumers to select the geographical area where they can expect to consume the reserved network connectivity resources. A Network Service Area may have been pre-agreed between the API Provider and API Consumer.
 
-    A Network Service Area contains information about its geographical boundaries and the supported network profiles. It is uniquely identified by a UUID identifier and it contains a human readable name and description.
+    A Network Service Area contains information about its geographical boundaries and the supported network profiles and QoS profiles. It is uniquely identified by a UUID identifier and it contains a human readable name and description.
 
     # Network Service Areas API
 
@@ -54,6 +54,8 @@ info:
     - `byName` - to return the network service areas with a name matching exactly the input string
 
     - `byNetworkProfileId` - to return the network service areas which support the input network profile identifier
+
+    - `byQosProfileName` - to return the network service areas which support the input QoS profile name
 
     A specific network service area of the API consumer can be queried by performing a `GET` operation on the `/areas/{areaId}` endpoint.
 
@@ -153,6 +155,22 @@ components:
     NetworkProfileId:
       type: string
 
+    QosProfileName:
+      description: |
+        A unique name for identifying a specific QoS profile.
+        This may follow different formats depending on the service providers implementation.
+        Some options addresses:
+          - A UUID style string
+          - Support for predefined profiles QOS_S, QOS_M, QOS_L, and QOS_E
+          - A searchable descriptive name
+        The set of QoS Profiles that an operator is offering can be retrieved by means of the QoS Profile API.
+      type: string
+      example: QCI_1_voice
+      minLength: 3
+      maxLength: 256
+      format: string
+      pattern: "^[a-zA-Z0-9_.-]+$"
+
     ServiceAreaId:
       type: string
       format: uuid
@@ -171,6 +189,8 @@ components:
           type: string
         byNetworkProfileId:
           $ref: "#/components/schemas/NetworkProfileId"
+        byQosProfileName:
+          $ref: "#/components/schemas/QosProfileName"
 
     ServiceArea:
       description: Common attributes of a service area, i.e. where the dedicated network service is supported
@@ -189,10 +209,20 @@ components:
           items:
             $ref: "#/components/schemas/NetworkProfileId"
           minItems: 1
+        qosProfiles:
+          description: Qos Profiles which are supported in this area.
+          type: array
+          items:
+            $ref: '#/components/schemas/QosProfileName'
+          minItems: 1
       required:
         - id
         - area
-        - networkProfiles
+      anyOf:
+        - required:
+          - networkProfiles
+        - required:
+          - qosProfiles
 
     Area:
       description: Common attributes of a geographical area, base schema for all area types

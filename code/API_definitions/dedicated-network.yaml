@@ -18,7 +18,7 @@ info:
 
     The API Consumer needs to provide the following input parameters to create a network:
 
-    - the chosen Network Profile (profileId)
+    - the chosen Network Profile (networkProfileId) or QoS profile (qosProfileName). The choice is between a Network Profile (which contains properties like maximum number of devices, aggregated throughput, a list of supported QOS profiles, and a default QoS profile) and a QoS Profile which is equivalent to a simplified Network Profile for a single device, with just a default QoS profile, and with the aggregated throughput corresponding to the throughput defined by the QoS Profile.
 
     - the Service Area (serviceAreaId)
 
@@ -265,6 +265,22 @@ components:
       type: string
       format: uuid
 
+    QosProfileName:
+      description: |
+        A unique name for identifying a specific QoS profile.
+        This may follow different formats depending on the service providers implementation.
+        Some options addresses:
+          - A UUID style string
+          - Support for predefined profiles QOS_S, QOS_M, QOS_L, and QOS_E
+          - A searchable descriptive name
+        The set of QoS Profiles that an operator is offering can be retrieved by means of the QoS Profile API.
+      type: string
+      example: QCI_1_voice
+      minLength: 3
+      maxLength: 256
+      format: string
+      pattern: "^[a-zA-Z0-9_.-]+$"
+
     ServiceAreaId:
       type: string
       format: uuid
@@ -273,8 +289,10 @@ components:
       description: Common attributes of a dedicated network
       type: object
       properties:
-        profileId:
+        networkProfileId:
           $ref: '#/components/schemas/NetworkProfileId'
+        qosProfileName:
+          $ref: '#/components/schemas/QosProfileName'
         serviceTime:
           $ref: '#/components/schemas/ServiceTime'
         serviceAreaId:
@@ -287,9 +305,13 @@ components:
         sinkCredential:
           $ref: '#/components/schemas/SinkCredential'
       required:
-        - profileId
         - serviceTime
         - serviceAreaId
+      oneOf:
+        - required:
+          - networkProfileId
+        - required:
+          - qosProfileName
 
     NetworkInfo:
       description: Current dedicated network information
