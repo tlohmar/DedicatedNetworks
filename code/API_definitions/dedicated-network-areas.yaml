@@ -220,9 +220,9 @@ components:
         - area
       anyOf:
         - required:
-          - networkProfiles
+            - networkProfiles
         - required:
-          - qosProfiles
+            - qosProfiles
 
     Area:
       description: Common attributes of a geographical area, base schema for all area types

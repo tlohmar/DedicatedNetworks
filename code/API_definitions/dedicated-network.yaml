@@ -309,9 +309,9 @@ components:
         - serviceAreaId
       oneOf:
         - required:
-          - networkProfileId
+            - networkProfileId
         - required:
-          - qosProfileName
+            - qosProfileName
 
     NetworkInfo:
       description: Current dedicated network information
