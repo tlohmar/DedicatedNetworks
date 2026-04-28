@@ -306,6 +306,9 @@ components:
         name:
           description: A human-readable name to describe the network
           type: string
+          minLength: 1
+          maxLength: 256
+          # No empty string name allowed.
         networkProfileId:
           $ref: '#/components/schemas/NetworkProfileId'
         qosProfileName:
@@ -471,41 +474,42 @@ components:
         credentialType:
           type: string
           enum:
-            - PLAIN
+            # - PLAIN
             - ACCESSTOKEN
             - PRIVATE_KEY_JWT
-          description: The type of the credential - MUST be set to ACCESSTOKEN or PRIVATE_KEY_JWT for now
+          description: |
+            The type of the credential - MUST be set to ACCESSTOKEN or PRIVATE_KEY_JWT for now
       discriminator:
         propertyName: credentialType
         mapping:
-          PLAIN: '#/components/schemas/PlainCredential'
+          # PLAIN: '#/components/schemas/PlainCredential'
           ACCESSTOKEN: '#/components/schemas/AccessTokenCredential'
           PRIVATE_KEY_JWT: '#/components/schemas/PrivateKeyJWTCredential'
       required:
         - credentialType
 
-    PlainCredential:
-      type: object
-      description: A plain credential as a combination of an identifier and a secret.
-      allOf:
-        - $ref: '#/components/schemas/SinkCredential'
-        - type: object
-          required:
-            - identifier
-            - secret
-          properties:
-            identifier:
-              description: The identifier might be an account or username.
-              type: string
-              maxLength: 256
-            secret:
-              description: The secret might be a password or passphrase.
-              type: string
-              maxLength: 512
+    # PlainCredential:  # not used in CAMARA
+    #   type: object
+    #   description: A plain credential as a combination of an identifier and a secret.
+    #   allOf:
+    #     - $ref: "#/components/schemas/SinkCredential"
+    #     - type: object
+    #       required:
+    #         - identifier
+    #         - secret
+    #       properties:
+    #         identifier:
+    #           description: The identifier might be an account or username.
+    #           type: string
+    #           maxLength: 256
+    #         secret:
+    #           description: The secret might be a password or passphrase.
+    #           type: string
+    #           maxLength: 512
 
     AccessTokenCredential:
       type: object
-      description: An access token credential.
+      description: An access token credential. This type of credential is meant to be used by API Consumers that have limited capabilities to handle authorization requests.
       allOf:
         - $ref: '#/components/schemas/SinkCredential'
         - type: object
@@ -518,7 +522,12 @@ components:
               type: string
               format: date-time
               maxLength: 64
-              description: REQUIRED. An absolute UTC instant at which the token shall be considered expired. It must follow [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) and must have time zone.
+              description: |
+                REQUIRED. An absolute (UTC) timestamp at which the token shall be considered expired.
+                In the case of an ACCESS_TOKEN_EXPIRED termination reason, implementation should notify the client before the expiration date.
+                If the access token is a JWT and registered "exp" (Expiration Time) claim is present, the two expiry times should match.
+                It must follow [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) and must have time zone.
+              example: "2023-07-03T12:27:08.312Z"
             accessTokenType:
               description: REQUIRED. Type of the access token (See [OAuth 2.0](https://tools.ietf.org/html/rfc6749#section-7.1)). For the current version of the API the type MUST be set to `Bearer`.
               type: string
@@ -531,7 +540,7 @@ components:
 
     PrivateKeyJWTCredential:
       type: object
-      description: Use PRIVATE_KEY_JWT to get an access token. The authorization server information needed for this type of sink credential (token endpoint, client ID, JWKS URL) is shared upfront between the client and the CAMARA entity. This type of credential is to be used by clients that have an authorization server. 
+      description: Use PRIVATE_KEY_JWT to get an access token. The authorization server information needed for this type of sink credential (token endpoint, client ID, JWKS URL) is shared upfront between the client and the CAMARA entity. This type of credential is to be used by clients that have an authorization server.
       allOf:
         - $ref: "#/components/schemas/SinkCredential"
 
