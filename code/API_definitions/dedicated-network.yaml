@@ -309,7 +309,7 @@ components:
           description: A human-readable name to describe the network
           type: string
           minLength: 1
-          # No empty string name allowed. 
+          # No empty string name allowed.
           maxLength: 256
           # 256 characters should be enough for normal cases.
         networkProfileId:
