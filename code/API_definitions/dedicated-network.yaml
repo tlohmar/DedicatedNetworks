@@ -84,6 +84,8 @@ paths:
           description: name of a network
           schema:
             type: string
+            maxLength: 256
+            # according to name definition
         - $ref: "#/components/parameters/x-correlator"
       responses:
         '200':
@@ -173,7 +175,7 @@ paths:
                 type: string
                 format: uri
                 maxLength: 2048
-                # Is this too short? The standard should not limit deployments.
+                # This is typically a relative URL. Thus, 2048 characters can be enough.
         '400':
           $ref: "#/components/responses/Generic400"
         "401":
@@ -307,8 +309,9 @@ components:
           description: A human-readable name to describe the network
           type: string
           minLength: 1
+          # No empty string name allowed. 
           maxLength: 256
-          # No empty string name allowed.
+          # 256 characters should be enough for normal cases.
         networkProfileId:
           $ref: '#/components/schemas/NetworkProfileId'
         qosProfileName:
@@ -322,7 +325,7 @@ components:
           type: string
           format: uri
           maxLength: 2048
-          # Is this too short? the standrd should not limit deployments
+          # Follows the recommendation from CAMARA_event_common.yaml
           pattern: ^https:\/\/.+$
         sinkCredential:
           $ref: '#/components/schemas/SinkCredential'
@@ -388,6 +391,8 @@ components:
         type:
           description: The type of the event.
           type: string
+          maxLength: 512
+          # Follows CAMARA_event_common.yaml, although this is an enum
           enum:
             - "org.camaraproject.dedicated-network.v0.network-status-changed"
         specversion:
@@ -458,10 +463,12 @@ components:
         start:
           type: string
           format: date-time
+          maxLength: 64
           description: It must follow [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) and must have time zone. Recommended format is yyyy-MM-dd'T'HH:mm:ss.SSSZ (i.e. which allows 2023-07-03T14:27:08.312+02:00 or 2023-07-03T12:27:08.312Z)
         end:
           type: string
           format: date-time
+          maxLength: 64
           description: It must follow [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) and must have time zone. Recommended format is yyyy-MM-dd'T'HH:mm:ss.SSSZ (i.e. which allows 2023-07-03T14:27:08.312+02:00 or 2023-07-03T12:27:08.312Z)
       required:
         - start

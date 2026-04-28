@@ -203,7 +203,7 @@ paths:
               schema:
                 type: string
                 maxLength: 2048
-                # Is this long enough?
+                # This is typically a relative URL. Thus, 2048 characters can be enough.
         '400':
           $ref: "#/components/responses/Generic400"
         "401":
@@ -354,9 +354,13 @@ components:
       properties:
         code:
           type: string
+          maxLength: 96
+          # Aligned with ErrorInfo
           description: A human-readable code to describe the reason
         message:
           type: string
+          maxLength: 512
+          # Aligned with ErrorInfo
           description: A human-readable description of what the reason represents
 
     DeviceAccessStatusInfo:
