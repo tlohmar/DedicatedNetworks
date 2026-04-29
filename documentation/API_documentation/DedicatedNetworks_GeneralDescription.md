@@ -246,3 +246,19 @@ Explainations
 - A device's access state will transition from GRANTED to DENIED (with reason code: ACCESS_FAILED) if failure occured after its access has been granted.
 
 - A device's access state will transition from GRANTED to DENIED (with reason code: ACCESS_REVOKED) when its grant to access the network is revoked.
+
+## Bulk operations
+
+To optimize interactions between API Consumer and API Provider when managing access to a dedicated network for many devices, the Accesses API supports the following bulk operations:
+
+- Creating an access to a dedicated network with up to 100 devices in a request
+
+- Listing devices of an existing access, including access state information for each device
+
+- Adding up to 100 devices to an existing access
+
+- Removing up to 100 devices from an existing access
+
+- Notifying state changes for up to 100 devices in a callback
+
+Note that a total number of devices with access to a dedicated network is not limited to 100, the limit is applicable for a single operation only. A dedicated network may have multiple accesses and each access may have multiple devices. All devices of an access share the properties of that access.
