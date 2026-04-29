@@ -36,8 +36,7 @@ Feature: CAMARA Dedicated Network API, vwip - Networks API Operations
     And the request body is set to a request body compliant with the schema at "/components/schemas/CreateNetwork"
     And the request body property "$.profileId" is set to a valid network profile ID
     And the request body property "$.serviceTime" is set to a valid service time window
-    And the request body property "$.serviceArea.areaType" is set to "AREANAME"
-    And the request body property "$.serviceArea.areaName" is set to a valid area name
+    And the request body property "$.serviceAreaId" is set to a valid service area ID
     When the request "createNetwork" is sent
     Then the response status code is 201
     And the response header "Content-Type" is "application/json"
@@ -54,15 +53,14 @@ Feature: CAMARA Dedicated Network API, vwip - Networks API Operations
     And the request body is set to a request body compliant with the schema at "/components/schemas/CreateNetwork"
     And the request body property "$.profileId" is set to a valid network profile ID
     And the request body property "$.serviceTime" is set to a valid service time window
-    And the request body property "$.serviceArea.areaType" is set to "AREANAME"
-    And the request body property "$.serviceArea.areaName" is set to a valid area name
+    And the request body property "$.serviceArea.serviceAreaId" is set to a valid service area ID
     And the request body property "$.sink" is set to a valid notification URL
     And the request body property "$.sinkCredential.credentialType" is set to "ACCESSTOKEN"
     When the request "createNetwork" is sent
     Then the response status code is 201
     And the response property "$.profileId" has the same value as in the request body
     And the response property "$.serviceTime" has the same value as in the request body
-    And the response property "$.serviceArea" has the same value as in the request body
+    And the response property "$.serviceAreaId" has the same value as in the request body
     And the response property "$.sink" exists only if provided in the request body and with the same value
 
   # Success scenarios for GET /networks/{networkId}

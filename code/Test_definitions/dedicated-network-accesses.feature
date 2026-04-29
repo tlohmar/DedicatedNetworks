@@ -58,7 +58,6 @@ Feature: CAMARA Dedicated Network API, vwip - Network Accesses API Operations
     Given an existing dedicated network
     And the resource "/dedicated-network-accesses/vwip/accesses"
     And the header "Content-Type" is set to "application/json"
-    And the header "x-device" is set to a RFC 8941 structured field value representing the Device schema (#/components/schemas/Device) (e.g., 'phonenumber="+123456789"')
     And the request body is set to a request body compliant with the schema at "/components/schemas/CreateNetworkAccess"
     And the request body property "$.networkId" is set to the ID of the existing network
     When the request "createNetworkAccess" is sent
@@ -70,6 +69,7 @@ Feature: CAMARA Dedicated Network API, vwip - Network Accesses API Operations
     And the response property "$.networkId" has the same value as in the request body
     And the response property "$.device" contains the same device identifier information as provided in the "x-device" header
     And the response property "$.id" exists and is a valid UUID
+    And the response property "$.status" exists and complies with the OAS schema at "/components/schemas/DeviceAccessStatus"
 
   # Success scenarios for GET /accesses/{accessId}
 
@@ -84,6 +84,7 @@ Feature: CAMARA Dedicated Network API, vwip - Network Accesses API Operations
     And the response header "x-correlator" has the same value as the request header "x-correlator"
     And the response body complies with the OAS schema at "/components/schemas/NetworkAccessInfo"
     And the response property "$.id" is equal to the path parameter "accessId"
+    And the response property "$.status" complies with the OAS schema at "/components/schemas/DeviceAccessStatus"
 
   # Success scenarios for DELETE /accesses/{accessId}
 
