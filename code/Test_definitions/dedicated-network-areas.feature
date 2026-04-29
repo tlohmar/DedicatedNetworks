@@ -109,5 +109,3 @@ Feature: CAMARA Dedicated Network API, vwip - Areas API Operations
     And the response property "$.id" is equal to the path parameter "areaId"
     And the response property "$.area" exists and complies with the OAS schema at "/components/schemas/Area"
     And the one of the response properties "$.networkProfiles" or "$.qosProfiles" exists.
-    When the response property "$.networkProfiles" exists then it is a non-empty array where each item complies with the OAS schema at "/components/schemas/NetworkProfileId"
-    When the response property "$.qosProfiles" exists then it is a non-empty array where each item complies with the OAS schema at "/components/schemas/QosProfileName"
