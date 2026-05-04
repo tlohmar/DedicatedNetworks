@@ -9,7 +9,7 @@
 This pre-release contains the definition and documentation of
 * dedicated-network v0.2.0-rc.1
 * dedicated-network-accesses v0.2.0-rc.1
-* dedicated-network-profiles v0.1.0
+* dedicated-network-profiles v0.2.0-rc.1
 * dedicated-network-areas v0.1.0-rc.1
 
 The API definition(s) are based on
