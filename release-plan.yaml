@@ -19,7 +19,7 @@ repository:
 
   # Release type being prepared (must be set before release can be triggered)
   # Options: none | pre-release-alpha | pre-release-rc | public-release | maintenance-release
-  target_release_type: pre-release-rc
+  target_release_type: pre-release-alpha
 
 # Dependencies on Commonalities and ICM releases
 # Update per ReleaseManagement requirements for each release cycle
@@ -33,7 +33,7 @@ dependencies:
 apis:
   - api_name: dedicated-network-accesses
     target_api_version: 0.2.0
-    target_api_status: rc
+    target_api_status: alpha
     main_contacts:
       - tlohmar
       - PeterKovacs2
@@ -41,7 +41,7 @@ apis:
       - eric-murray
   - api_name: dedicated-network-profiles
     target_api_version: 0.2.0
-    target_api_status: rc
+    target_api_status: alpha
     main_contacts:
       - tlohmar
       - PeterKovacs2
@@ -49,7 +49,7 @@ apis:
       - eric-murray
   - api_name: dedicated-network
     target_api_version: 0.2.0
-    target_api_status: rc
+    target_api_status: alpha
     main_contacts:
       - tlohmar
       - PeterKovacs2
@@ -57,7 +57,7 @@ apis:
       - eric-murray
   - api_name: dedicated-network-areas
     target_api_version: 0.1.0
-    target_api_status: rc
+    target_api_status: alpha
     main_contacts:
       - tlohmar
       - PeterKovacs2
