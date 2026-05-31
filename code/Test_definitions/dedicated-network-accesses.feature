@@ -61,6 +61,7 @@ Feature: CAMARA Dedicated Network API, vwip - Network Accesses API Operations
     And the header "Content-Type" is set to "application/json"
     And the request body is set to a request body compliant with the schema at "/components/schemas/CreateNetworkAccess"
     And the request body property "$.networkId" is set to the ID of the existing network
+    # TODO: devices property as array with one or more device objects item
     And the request body property "$.device" is set to a valid device object
     When the request "createNetworkAccess" is sent
     Then the response status code is 201
@@ -69,7 +70,6 @@ Feature: CAMARA Dedicated Network API, vwip - Network Accesses API Operations
     #And the response header "Location" exists and contains a URL with the created access ID
     And the response body complies with the OAS schema at "/components/schemas/NetworkAccessInfo"
     And the response property "$.networkId" has the same value as in the request body
-    #And the response property "$.device" contains the same device identifier information as provided in the "x-device" header
     And the response property "$.id" exists and is a valid UUID
     And the response property "$.status" exists and complies with the OAS schema at "/components/schemas/DeviceAccessStatus"
 
@@ -100,3 +100,32 @@ Feature: CAMARA Dedicated Network API, vwip - Network Accesses API Operations
     When the request "deleteNetworkAccess" is sent
     Then the response status code is 204
     #And the response header "x-correlator" has the same value as the request header "x-correlator"
+
+  # Success scenarios for POST /devices/add
+
+  @dedicated_network_accesses_addNetworkaccess_01_success
+  Scenario: Add a device to an existing network access
+    Given an existing dedicated network
+    And an existing network access
+    And the resource "/dedicated-network-accesses/vwip/accesses/{accessId}/devices/add"
+    And the path parameter "accessId" is set to the ID of the existing access
+    And the header "Content-Type" is set to "application/json"
+    And the request body is set to a request body compliant with the schema at "/components/schemas/AddDevicesRequest"
+    And the request body array contains one or more valid device objects
+    When the request "addDevicesRequest" is sent
+    Then the response status code is 201
+    And the response body complies with the OAS schema at "/components/schemas/AddDevicessSuccess"
+
+  # Success scenarios for POST /devices/remove
+
+  @dedicated_network_accesses_removeNetworkaccess_01_success
+  Scenario: Remove a device to an existing network access
+    Given an existing dedicated network
+    And an existing network access
+    And the resource "/dedicated-network-accesses/vwip/accesses/{accessId}/devices/add"
+    And the path parameter "accessId" is set to the ID of the existing access
+    And the header "Content-Type" is set to "application/json"
+    And the request body is set to a request body compliant with the schema at "/components/schemas/RemoveDevicesRequest"
+    And the request body array contains one or more valid device objects
+    When the request "removeDevicesRequest" is sent
+    Then the response status code is 204
