@@ -111,7 +111,7 @@ Feature: CAMARA Dedicated Network API, vwip - Network Accesses API Operations
     And the path parameter "accessId" is set to the ID of the existing access
     And the header "Content-Type" is set to "application/json"
     And the request body is set to a request body compliant with the schema at "/components/schemas/AddDevicesRequest"
-    And the request body array contains one or more valid device objects
+    And the request body array contains one or more (up to 100) valid device objects
     When the request "addDevicesRequest" is sent
     Then the response status code is 201
     And the response body complies with the OAS schema at "/components/schemas/AddDevicessSuccess"
@@ -126,6 +126,6 @@ Feature: CAMARA Dedicated Network API, vwip - Network Accesses API Operations
     And the path parameter "accessId" is set to the ID of the existing access
     And the header "Content-Type" is set to "application/json"
     And the request body is set to a request body compliant with the schema at "/components/schemas/RemoveDevicesRequest"
-    And the request body array contains one or more valid device objects
+    And the request body array contains one or more (up to 100) valid device objects
     When the request "removeDevicesRequest" is sent
     Then the response status code is 204
