@@ -67,6 +67,9 @@ servers:
       apiRoot:
         default: http://localhost:9091
         description: API root, defined by the service provider, e.g. `api.example.com` or `api.example.com/somepath`
+tags:
+  - name: Profiles
+    description: Discover and read dedicated network profiles
 paths:
   /profiles:
     get:
