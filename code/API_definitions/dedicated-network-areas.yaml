@@ -77,6 +77,9 @@ paths:
         - Areas
       summary: Retrieve dedicated network service areas, filtered by additional search criteria
       operationId: retrieveNetworkServiceAreas
+      security:
+        - openId:
+            - dedicated-network-areas:areas:read
       requestBody:
         description: Parameters to query service areas
         content:
@@ -110,6 +113,9 @@ paths:
         - Areas
       summary: Read a dedicated network service area
       operationId: readNetworkServiceArea
+      security:
+        - openId:
+            - dedicated-network-areas:areas:read
       parameters:
         - name: areaId
           in: path
@@ -134,6 +140,10 @@ paths:
           $ref: "#/components/responses/Generic404"
 
 components:
+  securitySchemes:
+    openId:
+      type: openIdConnect
+      openIdConnectUrl: https://example.com/.well-known/openid-configuration
 
   headers:
     x-correlator:

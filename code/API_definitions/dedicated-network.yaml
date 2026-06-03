@@ -208,6 +208,10 @@ paths:
                 $ref: '#/components/schemas/NetworkInfo'
         '400':
           $ref: "#/components/responses/Generic400"
+        "401":
+          $ref: "#/components/responses/Generic401"
+        "403":
+          $ref: "#/components/responses/Generic403"
         '404':
           $ref: "#/components/responses/Generic404"
     delete:
@@ -375,6 +379,7 @@ components:
 
     CloudEvent:
       description: Event compliant with the CloudEvents specification
+      type: object
       required:
         - id
         - source
