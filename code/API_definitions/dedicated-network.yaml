@@ -136,7 +136,7 @@ paths:
                 content:
                   application/cloudevents+json:
                     schema:
-                      $ref: "#/components/schemas/CloudEvent"
+                      $ref: "#/components/schemas/NetworkNotificationEvent"
                     examples:
                       NETWORK_STATUS_CHANGED_EXAMPLE:
                         $ref: "#/components/examples/NETWORK_STATUS_CHANGED_EXAMPLE"
@@ -362,46 +362,20 @@ components:
         - ACTIVATED
         - TERMINATED
 
-    CloudEvent:
-      description: Event compliant with the CloudEvents specification
-      type: object
-      required:
-        - id
-        - source
-        - specversion
-        - type
-        - time
-      properties:
-        id:
-          description: Identifier of this event, that must be unique in the source context.
-          type: string
-        source:
-          description: Identifies the context in which an event happened in the specific Provider Implementation.
-          type: string
-          format: uri-reference
-        type:
-          description: The type of the event.
-          type: string
-          enum:
-            - "org.camaraproject.dedicated-network.v0.network-status-changed"
-        specversion:
-          description: Version of the specification to which this event conforms (must be 1.0 if it conforms to cloudevents 1.0.2 version)
-          type: string
-          enum:
-            - '1.0'
-        datacontenttype:
-          description: 'media-type that describes the event payload encoding, must be "application/json" for CAMARA APIs'
-          type: string
-          enum:
-            - 'application/json'
-        data:
-          description: Event notification details payload, which depends on the event type
-          type: object
-        time:
-          description: |
-            Timestamp of when the occurrence happened. It must follow RFC 3339
-          type: string
-          format: date-time
+    NetworkEventType:
+      description: Enum of event types for the Dedicated Network API.
+      type: string
+      enum:
+        - org.camaraproject.dedicated-network.v0.network-status-changed
+
+    NetworkNotificationEvent:
+      description: Notification event for dedicated network status changes. Constrains the CloudEvent `type` to network-specific event types.
+      allOf:
+        - $ref: "../common/CAMARA_event_common.yaml#/components/schemas/CloudEvent"
+        - type: object
+          properties:
+            type:
+              $ref: "#/components/schemas/NetworkEventType"
       discriminator:
         propertyName: 'type'
         mapping:
@@ -409,21 +383,23 @@ components:
 
     EventNetworkStatusChanged:
       description: Event to notify a network status change
-      type: object
-      properties:
-        data:
-          type: object
-          description: Status change details
-          required:
-            - networkId
-            - status
+      allOf:
+        - $ref: "#/components/schemas/NetworkNotificationEvent"
+        - type: object
           properties:
-            networkId:
-              $ref: "#/components/schemas/NetworkId"
-            status:
-              $ref: "#/components/schemas/NetworkStatus"
-      required:
-        - data
+            data:
+              type: object
+              description: Status change details
+              required:
+                - networkId
+                - status
+              properties:
+                networkId:
+                  $ref: "#/components/schemas/NetworkId"
+                status:
+                  $ref: "#/components/schemas/NetworkStatus"
+          required:
+            - data
 
     ServiceTime:
       type: object
