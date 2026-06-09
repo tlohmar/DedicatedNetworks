@@ -349,17 +349,11 @@ paths:
           description: |
             Number of access devices to return per page
           schema:
-            type: integer
-            default: 10
-            minimum: 1
-            maximum: 100
-        - name: seek
+            $ref: "../common/CAMARA_common.yaml#/components/schemas/PerPage"
+        - name: page
           in: query
-          description: |
-            Marker to fetch the next page. When combined with filters (e.g., deviceStatus),
-            this will return the next set of devices matching those criteria.
           schema:
-            $ref: "#/components/schemas/SerializedDevice"
+            $ref: "../common/CAMARA_common.yaml#/components/schemas/Page"
         - name: deviceStatus
           in: query
           description: only access devices with this status are to be returned
@@ -367,25 +361,18 @@ paths:
             $ref: "#/components/schemas/DeviceStatus"
       responses:
         '200':
-          description: Complete list of devices returned (no further pages) (can be empty).
+          description: A list of devices matching the given criteria and in the requested page (can be empty).
           headers:
             X-Total-Count:
-              $ref: '#/components/headers/X-Total-Count'
+              $ref: '../common/CAMARA_common.yaml#/components/headers/x-total-count'
+            X-Total-Pages:
+              $ref: '../common/CAMARA_common.yaml#/components/headers/x-total-pages'
+            Link:  
+              $ref: '../common/CAMARA_common.yaml#/components/headers/link'
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AccessDevices'
-        '206':
-          description: Partial list of devices returned (more results available).
-          headers:
-            X-Total-Count:
-              $ref: '#/components/headers/X-Total-Count'
-            Content-Last-Key:
-              $ref: '#/components/headers/Content-Last-Key'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AccessDevices'
+                $ref: '#/components/schemas/AccessDevicesPage'
         '400':
           $ref: "#/components/responses/Generic400"
         "401":
@@ -515,14 +502,6 @@ components:
       description: Correlation id for the different services
       schema:
         $ref: "#/components/schemas/XCorrelator"
-    X-Total-Count:
-      description: The total number of devices in the entire collection.
-      schema:
-        type: integer
-    Content-Last-Key:
-      description: The identifier of the last device provided in the current response. Use this value in the 'seek' query parameter for the next request.
-      schema:
-        $ref: "#/components/schemas/SerializedDevice"
 
   schemas:
     XCorrelator:
@@ -587,6 +566,18 @@ components:
                     - REQUEST_FAILED
                     - ACCESS_REVOKED
                     - ACCESS_FAILED
+
+    AccessDevicesPage:
+      description: A page of access devices
+      type: object
+      required:
+        - items
+        - pagination
+      properties:
+        items:
+          $ref: "#/components/schemas/AccessDevices"
+        pagination:
+          $ref: "../common/CAMARA_common.yaml#/components/schemas/Pagination"
 
     AccessDevices:
       description: A list of access devices
