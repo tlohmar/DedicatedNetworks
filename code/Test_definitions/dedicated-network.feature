@@ -24,7 +24,7 @@ Feature: CAMARA Dedicated Network API, vwip - Networks API Operations
     When the request "listNetworks" is sent
     Then the response status code is 200
     And the response header "Content-Type" is "application/json"
-    #And the response header "x-correlator" has the same value as the request header "x-correlator"
+    And the response header "x-correlator" has the same value as the request header "x-correlator"
     And the response body is an array where each item complies with the OAS schema at "/components/schemas/NetworkInfo"
 
   # Success scenarios for POST /networks
@@ -40,8 +40,8 @@ Feature: CAMARA Dedicated Network API, vwip - Networks API Operations
     When the request "createNetwork" is sent
     Then the response status code is 201
     And the response header "Content-Type" is "application/json"
-    #And the response header "x-correlator" has the same value as the request header "x-correlator"
-    #And the response header "Location" exists and contains a URL with the created network ID
+    And the response header "x-correlator" has the same value as the request header "x-correlator"
+    And the response header "Location" exists and contains a URL with the created network ID
     And the response body complies with the OAS schema at "/components/schemas/NetworkInfo"
     And the response property "$.id" exists and is a valid UUID
     And the response property "$.status" is "REQUESTED"
@@ -73,7 +73,7 @@ Feature: CAMARA Dedicated Network API, vwip - Networks API Operations
     When the request "readNetwork" is sent
     Then the response status code is 200
     And the response header "Content-Type" is "application/json"
-    #And the response header "x-correlator" has the same value as the request header "x-correlator"
+    And the response header "x-correlator" has the same value as the request header "x-correlator"
     And the response body complies with the OAS schema at "/components/schemas/NetworkInfo"
     And the response property "$.id" is equal to the path parameter "networkId"
 
@@ -86,4 +86,4 @@ Feature: CAMARA Dedicated Network API, vwip - Networks API Operations
     And the path parameter "networkId" is set to the ID of the existing network
     When the request "deleteNetwork" is sent
     Then the response status code is 204
-    #And the response header "x-correlator" has the same value as the request header "x-correlator"
+    And the response header "x-correlator" has the same value as the request header "x-correlator"
