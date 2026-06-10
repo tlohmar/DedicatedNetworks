@@ -234,6 +234,8 @@ paths:
               required: true
               schema:
                 type: string
+                maxLength: 2048
+                # This is typically a relative URL. Thus, 2048 characters can be enough.
         '207':
           description: Successful creation of the access for some devices
           content:
