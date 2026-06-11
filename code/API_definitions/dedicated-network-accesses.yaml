@@ -367,7 +367,7 @@ paths:
               $ref: '../common/CAMARA_common.yaml#/components/headers/x-total-count'
             X-Total-Pages:
               $ref: '../common/CAMARA_common.yaml#/components/headers/x-total-pages'
-            Link:  
+            Link:
               $ref: '../common/CAMARA_common.yaml#/components/headers/link'
           content:
             application/json:
