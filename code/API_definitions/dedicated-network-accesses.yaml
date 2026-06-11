@@ -154,6 +154,8 @@ paths:
             application/json:
               schema:
                 type: array
+                maxItems: 1000000
+                # Limiting to a not too small number.
                 items:
                   $ref: '#/components/schemas/AccessInfo'
         "400":
@@ -642,6 +644,8 @@ components:
           type: string
           format: uri
           pattern: ^https:\/\/.+$
+          maxLength: 2048
+          # This is an absolute URL. Following commonalities length recommendation here. 
         sinkCredential:
           $ref: '#/components/schemas/SinkCredential'
       required:
