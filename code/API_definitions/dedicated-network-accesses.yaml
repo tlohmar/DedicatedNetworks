@@ -644,7 +644,7 @@ components:
           format: uri
           pattern: ^https:\/\/.+$
           maxLength: 2048
-          # This is an absolute URL. Following commonalities length recommendation here. 
+          # This is an absolute URL. Following commonalities length recommendation here.
         sinkCredential:
           $ref: '#/components/schemas/SinkCredential'
       required:
