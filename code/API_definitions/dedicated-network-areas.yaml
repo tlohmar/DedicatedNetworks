@@ -143,7 +143,7 @@ paths:
           required: true
           schema:
             $ref: "#/components/schemas/ServiceAreaId"
-        - $ref: "#/components/parameters/x-correlator"
+        - $ref: "../common/CAMARA_common.yaml#/components/parameters/x-correlator"
       responses:
         '200':
           description: Information about the dedicated network service area
@@ -166,24 +166,7 @@ components:
       type: openIdConnect
       openIdConnectUrl: https://example.com/.well-known/openid-configuration
 
-  headers:
-    x-correlator:
-      description: Correlation id for the different services
-      schema:
-        $ref: "#/components/schemas/XCorrelator"
-  parameters:
-    x-correlator:
-      name: x-correlator
-      in: header
-      description: Correlation id for the different services
-      schema:
-        $ref: "#/components/schemas/XCorrelator"
-
   schemas:
-    XCorrelator:
-      type: string
-      pattern: ^[a-zA-Z0-9-_:;.\/<>{}]{0,256}$
-      example: "b4333c46-49c0-4f62-80d7-f0ef930f1c46"
 
     NetworkProfileId:
       type: string
@@ -213,11 +196,11 @@ components:
       type: object
       properties:
         atLocation:
-          $ref: "#/components/schemas/Point"
+          $ref: "../common/CAMARA_common.yaml#/components/schemas/Point"
         overlappingArea:
-          $ref: "#/components/schemas/Area"
+          $ref: "../common/CAMARA_common.yaml#/components/schemas/Area"
         coveringArea:
-          $ref: "#/components/schemas/Area"
+          $ref: "../common/CAMARA_common.yaml#/components/schemas/Area"
         byName:
           type: string
         byNetworkProfileId:
@@ -235,7 +218,7 @@ components:
         description:
           type: string
         area:
-          $ref: '#/components/schemas/Area'
+          $ref: "../common/CAMARA_common.yaml#/components/schemas/Area"
         networkProfiles:
           description: Dedicated network profiles which are supported in this area.
           type: array
@@ -257,120 +240,13 @@ components:
         - required:
             - qosProfiles
 
-    Area:
-      description: Common attributes of a geographical area, base schema for all area types
-      type: object
-      properties:
-        areaType:
-          $ref: "#/components/schemas/AreaType"
-      required:
-        - areaType
-      discriminator:
-        propertyName: areaType
-        mapping:
-          CIRCLE: "#/components/schemas/Circle"
-          POLYGON: "#/components/schemas/Polygon"
-
-    AreaType:
-      type: string
-      description: |
-        Type of this area.
-        CIRCLE - The area is defined as a circle.
-        POLYGON - The area is defined as a polygon.
-      enum:
-        - CIRCLE
-        - POLYGON
-
-    Circle:
-      description: Circular area
-      allOf:
-        - $ref: "#/components/schemas/Area"
-        - type: object
-          properties:
-            center:
-              $ref: "#/components/schemas/Point"
-            radius:
-              type: integer
-              description: |
-                Radius from `center` in meters.
-              minimum: 1
-              maximum: 200000
-          required:
-            - center
-            - radius
-
-    Polygon:
-      description: Polygonal area. The Polygon should be a simple polygon, i.e. should not intersect itself.
-      allOf:
-        - $ref: "#/components/schemas/Area"
-        - type: object
-          required:
-            - boundary
-          properties:
-            boundary:
-              $ref: "#/components/schemas/PointList"
-
-    PointList:
-      description: List of points defining a polygon
-      type: array
-      items:
-        $ref: "#/components/schemas/Point"
-      minItems: 3
-      maxItems: 15
-
-    Point:
-      type: object
-      description: Coordinates (latitude, longitude) defining a location in a map.
-      required:
-        - latitude
-        - longitude
-      properties:
-        latitude:
-          $ref: "#/components/schemas/Latitude"
-        longitude:
-          $ref: "#/components/schemas/Longitude"
-      example:
-        latitude: 50.735851
-        longitude: 7.10066
-
-    Latitude:
-      description: Latitude component of a location.
-      type: number
-      format: double
-      minimum: -90
-      maximum: 90
-
-    Longitude:
-      description: Longitude component of location.
-      type: number
-      format: double
-      minimum: -180
-      maximum: 180
-
-    ErrorInfo:
-      type: object
-      required:
-        - status
-        - code
-        - message
-      properties:
-        status:
-          type: integer
-          description: HTTP response status code
-        code:
-          type: string
-          description: A human-readable code to describe the error
-        message:
-          type: string
-          description: A human-readable description of what the event represents
-
   responses:
     Generic400:
       description: Bad Request
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ErrorInfo"
+            $ref: "../common/CAMARA_common.yaml#/components/schemas/ErrorInfo"
           examples:
             GENERIC_400_INVALID_ARGUMENT:
               description: Invalid Argument. Generic Syntax Exception
@@ -389,11 +265,11 @@ components:
       description: Unauthorized
       headers:
         x-correlator:
-          $ref: "#/components/headers/x-correlator"
+          $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ErrorInfo"
+            $ref: "../common/CAMARA_common.yaml#/components/schemas/ErrorInfo"
           examples:
             GENERIC_401_UNAUTHENTICATED:
               description: Request cannot be authenticated
@@ -412,11 +288,11 @@ components:
       description: Forbidden
       headers:
         x-correlator:
-          $ref: "#/components/headers/x-correlator"
+          $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ErrorInfo"
+            $ref: "../common/CAMARA_common.yaml#/components/schemas/ErrorInfo"
           examples:
             GENERIC_403_PERMISSION_DENIED:
               description: Permission denied. OAuth2 token access does not have the required scope or when the user fails operational security
@@ -435,11 +311,11 @@ components:
       description: Not found
       headers:
         x-correlator:
-          $ref: "#/components/headers/x-correlator"
+          $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ErrorInfo"
+            $ref: "../common/CAMARA_common.yaml#/components/schemas/ErrorInfo"
           examples:
             GENERIC_404_NOT_FOUND:
               description: Resource is not found
@@ -452,11 +328,11 @@ components:
       description: Gone
       headers:
         x-correlator:
-          $ref: "#/components/headers/x-correlator"
+          $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ErrorInfo"
+            $ref: "../common/CAMARA_common.yaml#/components/schemas/ErrorInfo"
           examples:
             GENERIC_410_GONE:
               description: Use in notifications flow to allow API Consumer to indicate that its callback is no longer available
