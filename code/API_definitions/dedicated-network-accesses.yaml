@@ -212,7 +212,7 @@ paths:
                 content:
                   application/cloudevents+json:
                     schema:
-                      $ref: "#/components/schemas/CloudEvent"
+                      $ref: "#/components/schemas/AccessDeviceNotificationEvent"
                     examples:
                       DEVICE_STATUS_CHANGED_EXAMPLE:
                         $ref: "#/components/examples/DEVICE_STATUS_CHANGED_EXAMPLE"
@@ -787,46 +787,20 @@ components:
         accessDevice:
           $ref: '#/components/schemas/AccessDevice'
 
-    CloudEvent:
-      description: Event compliant with the CloudEvents specification
-      type: object
-      required:
-        - id
-        - source
-        - specversion
-        - type
-        - time
-      properties:
-        id:
-          description: Identifier of this event, that must be unique in the source context.
-          type: string
-        source:
-          description: Identifies the context in which an event happened in the specific Provider Implementation.
-          type: string
-          format: uri-reference
-        type:
-          description: The type of the event.
-          type: string
-          enum:
-            - "org.camaraproject.dedicated-network.v0.device-status-changed"
-        specversion:
-          description: Version of the specification to which this event conforms (must be 1.0 if it conforms to cloudevents 1.0.2 version)
-          type: string
-          enum:
-            - '1.0'
-        datacontenttype:
-          description: 'media-type that describes the event payload encoding, must be "application/json" for CAMARA APIs'
-          type: string
-          enum:
-            - 'application/json'
-        data:
-          description: Event notification details payload, which depends on the event type
-          type: object
-        time:
-          description: |
-            Timestamp of when the occurrence happened. It must follow RFC 3339
-          type: string
-          format: date-time
+    AccessDeviceEventType:
+      description: Enum of event types for the Dedicated Network Accesses API.
+      type: string
+      enum:
+        - org.camaraproject.dedicated-network-accesses.v0.device-status-changed
+
+    AccessDeviceNotificationEvent:
+      description: Notification event for device access status changes. Constrains the CloudEvent `type` to access-specific event types.
+      allOf:
+        - $ref: "../common/CAMARA_event_common.yaml#/components/schemas/CloudEvent"
+        - type: object
+          properties:
+            type:
+              $ref: "#/components/schemas/AccessDeviceEventType"
       discriminator:
         propertyName: 'type'
         mapping:
@@ -834,25 +808,27 @@ components:
 
     EventDeviceStatusChanged:
       description: Event to notify a status change of one or more devices in the context of an access to a dedicated network
-      type: object
-      properties:
-        data:
-          type: object
-          description: Status change details for one or more devices in the context of an access to a dedicated network
-          required:
-            - accessId
-            - accessDevices
+      allOf:
+        - $ref: "#/components/schemas/AccessDeviceNotificationEvent"
+        - type: object
           properties:
-            accessId:
-              $ref: "#/components/schemas/AccessId"
-            accessDevices:
-              type: array
-              items:
-                $ref: "#/components/schemas/AccessDevice"
-              minItems: 1
-              maxItems: 100
-      required:
-        - data
+            data:
+              type: object
+              description: Status change details for one or more devices in the context of an access to a dedicated network
+              required:
+                - accessId
+                - accessDevices
+              properties:
+                accessId:
+                  $ref: "#/components/schemas/AccessId"
+                accessDevices:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/AccessDevice"
+                  minItems: 1
+                  maxItems: 100
+          required:
+            - data
 
     Devices:
       description: A list of devices
@@ -1353,7 +1329,7 @@ components:
         id: 625b2d4b-4da7-4f07-9169-e60ffdf7667c
         source: 'https://api.example.com/dedicated-network-accesses/v0/accesses/b69e5404-3871-448d-8f9f-11dc5d29a4c8'
         specversion: '1.0'
-        type: "org.camaraproject.dedicated-network.v0.device-status-changed"
+        type: "org.camaraproject.dedicated-network-accesses.v0.device-status-changed"
         time: '2024-11-29T13:04:00Z'
         data:
           accessId: b69e5404-3871-448d-8f9f-11dc5d29a4c8
