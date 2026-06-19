@@ -641,8 +641,6 @@ components:
           items:
             type: string
             maxLength: 256
-          minItems: 1
-          maxItems: 128
         defaultQosProfile:
           description: (Optional) The default QOS profile for all devices included in the access. When absent, the defaultQosProfile of the network is used
           type: string
@@ -866,10 +864,6 @@ components:
     Devices:
       description: A list of devices
       type: array
-      maxItems: 100
-      # Aligned with CreateAccessRequest
-      maxItems: 100
-      # Aligned with CreateAccessRequest
       maxItems: 100
       # Aligned with CreateAccessRequest
       items:
