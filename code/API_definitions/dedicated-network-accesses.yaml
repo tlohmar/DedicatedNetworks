@@ -865,6 +865,8 @@ components:
       type: array
       maxItems: 100
       # Aligned with CreateAccessRequest
+      maxItems: 100
+      # Aligned with CreateAccessRequest
       items:
         $ref: "#/components/schemas/Device"
 
