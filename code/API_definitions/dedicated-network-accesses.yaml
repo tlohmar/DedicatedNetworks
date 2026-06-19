@@ -693,20 +693,20 @@ components:
           type: integer
           format: int64
           minimum: 0
-          maximum: 9223372036854775807
+          maximum: 9007199254740991
           # aligned with maxNumberOfDevice  in NW Profile, which aims to support IOT Use-cases
         totalGranted:
           description: the total number of devices included in the access with status GRANTED
           type: integer
           format: int64
           minimum: 0
-          maximum: 9223372036854775807
+          maximum: 9007199254740991
         totalDenied:
           description: the total number of devices included in the access with status DENIED
           type: integer
           format: int64
           minimum: 0
-          maximum: 9223372036854775807
+          maximum: 9007199254740991
       required:
         - totalDevices
         - totalGranted

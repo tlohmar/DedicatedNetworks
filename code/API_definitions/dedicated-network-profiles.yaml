@@ -197,7 +197,7 @@ components:
           example: 5
           format: int64
           minimum: 1
-          maximum: 9223372036854775807
+          maximum: 9007199254740991
           # int64 is motivated by IoT use-cases. There is no good reasoning for limiting the maximum.
         aggregatedUlThroughput:
           $ref: "#/components/schemas/BitRate"
