@@ -97,7 +97,7 @@ paths:
           description: name of a network profile
           schema:
             type: string
-        - $ref: "#/components/parameters/x-correlator"
+        - $ref: "../common/CAMARA_common.yaml#/components/parameters/x-correlator"
       responses:
         '200':
           description: List of available network profiles
@@ -129,7 +129,7 @@ paths:
           required: true
           schema:
             $ref: "#/components/schemas/NetworkProfileId"
-        - $ref: "#/components/parameters/x-correlator"
+        - $ref: "../common/CAMARA_common.yaml#/components/parameters/x-correlator"
       responses:
         '200':
           description: List of available network profiles
@@ -151,25 +151,7 @@ components:
     openId:
       type: openIdConnect
       openIdConnectUrl: https://example.com/.well-known/openid-configuration
-  headers:
-    x-correlator:
-      description: Correlation id for the different services
-      schema:
-        $ref: "#/components/schemas/XCorrelator"
-  parameters:
-    x-correlator:
-      name: x-correlator
-      in: header
-      description: Correlation id for the different services
-      schema:
-        $ref: "#/components/schemas/XCorrelator"
-
   schemas:
-
-    XCorrelator:
-      type: string
-      pattern: ^[a-zA-Z0-9-_:;.\/<>{}]{0,256}$
-      example: "b4333c46-49c0-4f62-80d7-f0ef930f1c46"
 
     NetworkProfileId:
       description: Network profile id in UUID format
@@ -246,34 +228,17 @@ components:
       format: string
       pattern: "^[a-zA-Z0-9_.-]+$"
 
-    ErrorInfo:
-      type: object
-      required:
-        - status
-        - code
-        - message
-      properties:
-        status:
-          type: integer
-          description: HTTP response status code
-        code:
-          type: string
-          description: A human-readable code to describe the error
-        message:
-          type: string
-          description: A human-readable description of what the event represents
-
   responses:
     Generic400:
       description: Bad Request
       headers:
         x-correlator:
-          $ref: "#/components/headers/x-correlator"
+          $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
       content:
         application/json:
           schema:
             allOf:
-              - $ref: "#/components/schemas/ErrorInfo"
+              - $ref: "../common/CAMARA_common.yaml#/components/schemas/ErrorInfo"
               - type: object
                 properties:
                   status:
@@ -301,12 +266,12 @@ components:
       description: Unauthorized
       headers:
         x-correlator:
-          $ref: "#/components/headers/x-correlator"
+          $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
       content:
         application/json:
           schema:
             allOf:
-              - $ref: "#/components/schemas/ErrorInfo"
+              - $ref: "../common/CAMARA_common.yaml#/components/schemas/ErrorInfo"
               - type: object
                 properties:
                   status:
@@ -327,12 +292,12 @@ components:
       description: Forbidden
       headers:
         x-correlator:
-          $ref: "#/components/headers/x-correlator"
+          $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
       content:
         application/json:
           schema:
             allOf:
-              - $ref: "#/components/schemas/ErrorInfo"
+              - $ref: "../common/CAMARA_common.yaml#/components/schemas/ErrorInfo"
               - type: object
                 properties:
                   status:
@@ -360,12 +325,12 @@ components:
       description: Not found
       headers:
         x-correlator:
-          $ref: "#/components/headers/x-correlator"
+          $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
       content:
         application/json:
           schema:
             allOf:
-              - $ref: "#/components/schemas/ErrorInfo"
+              - $ref: "../common/CAMARA_common.yaml#/components/schemas/ErrorInfo"
               - type: object
                 properties:
                   status:
@@ -393,12 +358,12 @@ components:
       description: Gone
       headers:
         x-correlator:
-          $ref: "#/components/headers/x-correlator"
+          $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
       content:
         application/json:
           schema:
             allOf:
-              - $ref: "#/components/schemas/ErrorInfo"
+              - $ref: "../common/CAMARA_common.yaml#/components/schemas/ErrorInfo"
               - type: object
                 properties:
                   status:
