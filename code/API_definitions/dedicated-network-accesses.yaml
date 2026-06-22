@@ -158,7 +158,7 @@ paths:
           schema:
             $ref: '#/components/schemas/NetworkId'
         - $ref: "#/components/parameters/x-device"
-        - $ref: "#/components/parameters/x-correlator"
+        - $ref: "../common/CAMARA_common.yaml#/components/parameters/x-correlator"
       responses:
         '200':
           description: List of existing accesses to dedicated networks, optionally filtered for a given device and/or for a dedicated network (the list can be empty)
@@ -206,7 +206,7 @@ paths:
                 Currently only DEVICE_STATUS_CHANGED event is defined.
               operationId: postNotification
               parameters:
-                - $ref: "#/components/parameters/x-correlator"
+                - $ref: "../common/CAMARA_common.yaml#/components/parameters/x-correlator"
               requestBody:
                 required: true
                 content:
@@ -221,7 +221,7 @@ paths:
                   description: Successful notification
                   headers:
                     x-correlator:
-                      $ref: '#/components/headers/x-correlator'
+                      $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
                 "400":
                   $ref: "#/components/responses/Generic400"
                 "401":
@@ -289,7 +289,7 @@ paths:
           required: true
           schema:
             $ref: "#/components/schemas/AccessId"
-        - $ref: "#/components/parameters/x-correlator"
+        - $ref: "../common/CAMARA_common.yaml#/components/parameters/x-correlator"
       responses:
         '200':
           description: Access information
@@ -323,7 +323,7 @@ paths:
           required: true
           schema:
             $ref: "#/components/schemas/AccessId"
-        - $ref: "#/components/parameters/x-correlator"
+        - $ref: "../common/CAMARA_common.yaml#/components/parameters/x-correlator"
       responses:
         '204':
           description: Successful deletion of the access
@@ -344,7 +344,7 @@ paths:
         required: true
         schema:
           $ref: "#/components/schemas/AccessId"
-      - $ref: "#/components/parameters/x-correlator"
+      - $ref: "../common/CAMARA_common.yaml#/components/parameters/x-correlator"
     get:
       tags:
         - Devices
@@ -402,7 +402,7 @@ paths:
         required: true
         schema:
           $ref: "#/components/schemas/AccessId"
-      - $ref: "#/components/parameters/x-correlator"
+      - $ref: "../common/CAMARA_common.yaml#/components/parameters/x-correlator"
     post:
       tags:
         - Devices
@@ -452,7 +452,7 @@ paths:
         required: true
         schema:
           $ref: "#/components/schemas/AccessId"
-      - $ref: "#/components/parameters/x-correlator"
+      - $ref: "../common/CAMARA_common.yaml#/components/parameters/x-correlator"
     post:
       tags:
         - Devices
@@ -496,12 +496,6 @@ components:
       type: openIdConnect
       openIdConnectUrl: https://example.com/.well-known/openid-configuration
   parameters:
-    x-correlator:
-      name: x-correlator
-      in: header
-      description: Correlation id for the different services
-      schema:
-        $ref: "#/components/schemas/XCorrelator"
     x-device:
       name: x-device
       in: header
@@ -509,19 +503,7 @@ components:
       schema:
         $ref: "#/components/schemas/SerializedDevice"
 
-  headers:
-    x-correlator:
-      description: Correlation id for the different services
-      schema:
-        $ref: "#/components/schemas/XCorrelator"
-
   schemas:
-    XCorrelator:
-      description: Correlation id for the different services
-      type: string
-      pattern: ^[a-zA-Z0-9-_:;.\/<>{}]{0,256}$
-      example: "b4333c46-49c0-4f62-80d7-f0ef930f1c46"
-
     AccessId:
       description: Network access id in UUID format
       type: string
@@ -602,7 +584,7 @@ components:
       type: object
       properties:
         device:
-          $ref: "#/components/schemas/Device"
+          $ref: "../common/CAMARA_common.yaml#/components/schemas/Device"
         status:
           $ref: "#/components/schemas/DeviceStatus"
         statusInfo:
@@ -749,7 +731,7 @@ components:
         Response body used when none of the devices could be processed successfully.
         It contains the overall error information and a list of results, one result per device.
       allOf:
-        - $ref: '#/components/schemas/ErrorInfo'
+        - $ref: "../common/CAMARA_common.yaml#/components/schemas/ErrorInfo"
         - $ref: "#/components/schemas/ResultsForDevices"
 
     ResultsForDevices:
@@ -773,7 +755,7 @@ components:
         - message
       properties:
         device:
-          $ref: '#/components/schemas/Device'
+          $ref: "../common/CAMARA_common.yaml#/components/schemas/Device"
         status:
           type: integer
           description: The HTTP status code for this specific device operation (e.g., 201, 404, 409)
@@ -834,29 +816,7 @@ components:
       description: A list of devices
       type: array
       items:
-        $ref: "#/components/schemas/Device"
-
-    Device:
-      description: |
-        End-user equipment able to connect to a mobile network. Examples of devices include smartphones or IoT sensors/actuators.
-            The developer can choose to provide the below specified device identifiers:
-            * `ipv4Address`
-            * `ipv6Address`
-            * `phoneNumber`
-            * `networkAccessIdentifier`
-            NOTE1: the network operator might support only a subset of these options. The API invoker can provide multiple identifiers to be compatible across different network operators. In this case the identifiers MUST belong to the same device.
-            NOTE2: as for this Commonalities release, we are enforcing that the networkAccessIdentifier is only part of the schema for future-proofing, and CAMARA does not currently allow its use. After the CAMARA meta-release work is concluded and the relevant issues are resolved, its use will need to be explicitly documented in the guidelines.
-      type: object
-      properties:
-        phoneNumber:
-          $ref: "#/components/schemas/PhoneNumber"
-        networkAccessIdentifier:
-          $ref: "#/components/schemas/NetworkAccessIdentifier"
-        ipv4Address:
-          $ref: "#/components/schemas/DeviceIpv4Addr"
-        ipv6Address:
-          $ref: "#/components/schemas/DeviceIpv6Address"
-      minProperties: 1
+        $ref: "../common/CAMARA_common.yaml#/components/schemas/Device"
 
     SerializedDevice:
       description: |
@@ -872,59 +832,6 @@ components:
       type: string
       example: 'phonenumber="+123456789"'
 
-    PhoneNumber:
-      description: A public identifier addressing a telephone subscription. In mobile networks it corresponds to the MSISDN (Mobile Station International Subscriber Directory Number). In order to be globally unique it has to be formatted in international format, according to E.164 standard, prefixed with '+'.
-      type: string
-      pattern: '^\+[1-9][0-9]{4,14}$'
-      example: "+123456789"
-
-    NetworkAccessIdentifier:
-      description: A public identifier addressing a subscription in a mobile network. In 3GPP terminology, it corresponds to the GPSI formatted with the External Identifier ({Local Identifier}@{Domain Identifier}). Unlike the telephone number, the network access identifier is not subjected to portability ruling in force, and is individually managed by each operator.
-      type: string
-      example: "123456789@domain.com"
-
-    DeviceIpv4Addr:
-      type: object
-      description: |
-        The device should be identified by either the public (observed) IP address and port as seen by the application server, or the private (local) and any public (observed) IP addresses in use by the device (this information can be obtained by various means, for example from some DNS servers).
-
-        If the allocated and observed IP addresses are the same (i.e. NAT is not in use) then  the same address should be specified for both publicAddress and privateAddress.
-
-        If NAT64 is in use, the device should be identified by its publicAddress and publicPort, or separately by its allocated IPv6 address (field ipv6Address of the Device object)
-
-        In all cases, publicAddress must be specified, along with at least one of either privateAddress or publicPort, dependent upon which is known. In general, mobile devices cannot be identified by their public IPv4 address alone.
-      properties:
-        publicAddress:
-          $ref: "#/components/schemas/SingleIpv4Addr"
-        privateAddress:
-          $ref: "#/components/schemas/SingleIpv4Addr"
-        publicPort:
-          $ref: "#/components/schemas/Port"
-      anyOf:
-        - required: [publicAddress, privateAddress]
-        - required: [publicAddress, publicPort]
-      example:
-        publicAddress: "84.125.93.10"
-        publicPort: 59765
-
-    SingleIpv4Addr:
-      description: A single IPv4 address with no subnet mask
-      type: string
-      format: ipv4
-      example: "84.125.93.10"
-
-    Port:
-      description: TCP or UDP port number
-      type: integer
-      minimum: 0
-      maximum: 65535
-
-    DeviceIpv6Address:
-      description: |
-        The device should be identified by the observed IPv6 address, or by any single IPv6 address from within the subnet allocated to the device (e.g. adding ::0 to the /64 prefix).
-      type: string
-      format: ipv6
-      example: 2001:db8:85a3:8d3:1319:8a2e:370:7344
 
     SinkCredential:
       description: A sink credential provides authentication or authorization information necessary to enable delivery of events to a target
@@ -1020,35 +927,17 @@ components:
         - refreshToken
         - refreshTokenEndpoint
 
-    ErrorInfo:
-      description: A structured error response providing details about a failed request, including the HTTP status code, an error code, and a human-readable message
-      type: object
-      required:
-        - status
-        - code
-        - message
-      properties:
-        status:
-          type: integer
-          description: HTTP response status code
-        code:
-          type: string
-          description: A human-readable code to describe the error
-        message:
-          type: string
-          description: A human-readable description of what the event represents
-
   responses:
     Generic400:
       description: Bad Request
       headers:
         x-correlator:
-          $ref: "#/components/headers/x-correlator"
+          $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
       content:
         application/json:
           schema:
             allOf:
-              - $ref: "#/components/schemas/ErrorInfo"
+              - $ref: "../common/CAMARA_common.yaml#/components/schemas/ErrorInfo"
               - type: object
                 properties:
                   status:
@@ -1076,12 +965,12 @@ components:
       description: Unauthorized
       headers:
         x-correlator:
-          $ref: "#/components/headers/x-correlator"
+          $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
       content:
         application/json:
           schema:
             allOf:
-              - $ref: "#/components/schemas/ErrorInfo"
+              - $ref: "../common/CAMARA_common.yaml#/components/schemas/ErrorInfo"
               - type: object
                 properties:
                   status:
@@ -1102,12 +991,12 @@ components:
       description: Forbidden
       headers:
         x-correlator:
-          $ref: "#/components/headers/x-correlator"
+          $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
       content:
         application/json:
           schema:
             allOf:
-              - $ref: "#/components/schemas/ErrorInfo"
+              - $ref: "../common/CAMARA_common.yaml#/components/schemas/ErrorInfo"
               - type: object
                 properties:
                   status:
@@ -1135,12 +1024,12 @@ components:
       description: Not found
       headers:
         x-correlator:
-          $ref: "#/components/headers/x-correlator"
+          $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
       content:
         application/json:
           schema:
             allOf:
-              - $ref: "#/components/schemas/ErrorInfo"
+              - $ref: "../common/CAMARA_common.yaml#/components/schemas/ErrorInfo"
               - type: object
                 properties:
                   status:
@@ -1168,12 +1057,12 @@ components:
       description: Conflict
       headers:
         x-correlator:
-          $ref: "#/components/headers/x-correlator"
+          $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
       content:
         application/json:
           schema:
             allOf:
-              - $ref: "#/components/schemas/ErrorInfo"
+              - $ref: "../common/CAMARA_common.yaml#/components/schemas/ErrorInfo"
               - type: object
                 properties:
                   status:
@@ -1215,12 +1104,12 @@ components:
       description: Gone
       headers:
         x-correlator:
-          $ref: "#/components/headers/x-correlator"
+          $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
       content:
         application/json:
           schema:
             allOf:
-              - $ref: "#/components/schemas/ErrorInfo"
+              - $ref: "../common/CAMARA_common.yaml#/components/schemas/ErrorInfo"
               - type: object
                 properties:
                   status:
@@ -1241,12 +1130,12 @@ components:
       description: Unprocessable Content
       headers:
         x-correlator:
-          $ref: "#/components/headers/x-correlator"
+          $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
       content:
         application/json:
           schema:
             allOf:
-              - $ref: "#/components/schemas/ErrorInfo"
+              - $ref: "../common/CAMARA_common.yaml#/components/schemas/ErrorInfo"
               - type: object
                 properties:
                   status:
@@ -1288,7 +1177,7 @@ components:
       description: Unprocessable Content due to that none of the requested devices could be processed successfully
       headers:
         x-correlator:
-          $ref: "#/components/headers/x-correlator"
+          $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
       content:
         application/json:
           schema:
