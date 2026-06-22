@@ -503,15 +503,6 @@ components:
       schema:
         $ref: "#/components/schemas/SerializedDevice"
 
-  headers:
-    X-Total-Count:
-      description: The total number of devices in the entire collection.
-      schema:
-        type: integer
-    Content-Last-Key:
-      description: The identifier of the last device provided in the current response. Use this value in the 'seek' query parameter for the next request.
-      schema:
-        $ref: "#/components/schemas/SerializedDevice"
   schemas:
     AccessId:
       description: Network access id in UUID format
