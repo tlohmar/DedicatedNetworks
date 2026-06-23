@@ -141,6 +141,7 @@ paths:
             - dedicated-network-areas:areas:read
       parameters:
         - name: areaId
+          description: Identifier of the service area
           in: path
           required: true
           schema:
@@ -165,6 +166,7 @@ paths:
 components:
   securitySchemes:
     openId:
+      description: OpenID Connect authentication
       type: openIdConnect
       openIdConnectUrl: https://example.com/.well-known/openid-configuration
 

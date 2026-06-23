@@ -494,7 +494,7 @@ paths:
 components:
   securitySchemes:
     openId:
-      description: OpenID Connect authentication via discovery metadata
+      description: OpenID Connect authentication
       type: openIdConnect
       openIdConnectUrl: https://example.com/.well-known/openid-configuration
     notificationsBearerAuth:
@@ -616,7 +616,6 @@ components:
             $ref: "#/components/schemas/QosProfileName"
           minItems: 1
         defaultQosProfile:
-          description: (Optional) The default QOS profile for all devices included in the access. When absent, the defaultQosProfile of the network is used
           $ref: "#/components/schemas/QosProfileName"
         sink:
           description: The address to which events shall be delivered using the selected protocol.

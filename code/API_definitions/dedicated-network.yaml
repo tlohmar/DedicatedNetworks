@@ -86,6 +86,7 @@ paths:
       tags:
         - Networks
       summary: Get a list of dedicated networks
+      description: List all available dedicated networks, optionally filtered by name.
       operationId: listNetworks
       security:
         - openId:
@@ -117,6 +118,7 @@ paths:
       tags:
         - Networks
       summary: Request to create a dedicated network
+      description: Create a dedicated network with the given configuration, including service time, service area, and a network profile or QoS profile.
       operationId: createNetwork
       security:
         - openId:
