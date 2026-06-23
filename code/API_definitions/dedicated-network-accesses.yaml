@@ -780,13 +780,18 @@ components:
           $ref: "../common/CAMARA_common.yaml#/components/schemas/Device"
         status:
           type: integer
+          format: int32
+          minimum: 100
+          maximum: 599
           description: The HTTP status code for this specific device operation (e.g., 201, 404, 409)
           example: 201
         code:
           type: string
+          maxLength: 96
           description: A human-readable code to describe the result
         message:
           type: string
+          maxLength: 512
           description: A human-readable description of what the result represents
         accessDevice:
           $ref: '#/components/schemas/AccessDevice'
@@ -838,7 +843,6 @@ components:
       description: A list of devices
       type: array
       maxItems: 100
-      # Aligned with CreateAccessRequest
       items:
         $ref: "../common/CAMARA_common.yaml#/components/schemas/Device"
 
