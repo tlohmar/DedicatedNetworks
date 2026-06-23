@@ -615,11 +615,9 @@ components:
           maxItems: 32
           items:
             type: string
-            maxLength: 256
         defaultQosProfile:
           description: (Optional) The default QOS profile for all devices included in the access. When absent, the defaultQosProfile of the network is used
           type: string
-          maxLength: 256
         sink:
           description: The address to which events shall be delivered using the selected protocol.
           type: string
