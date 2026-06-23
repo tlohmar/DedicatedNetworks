@@ -120,7 +120,6 @@ paths:
                 items:
                   $ref: '#/components/schemas/ServiceArea'
                 maxItems: 200
-                # We may need to add pagination support, https://github.com/camaraproject/Commonalities/blob/main/documentation/CAMARA-API-Design-Guide.md#41-pagination
         '400':
           $ref: "#/components/responses/Generic400"
         "401":
@@ -207,8 +206,7 @@ components:
           $ref: "../common/CAMARA_common.yaml#/components/schemas/Area"
         byName:
           type: string
-          maxLength: 200
-          # Is this too short?
+          maxLength: 256
         byNetworkProfileId:
           $ref: "#/components/schemas/NetworkProfileId"
         byQosProfileName:
@@ -221,12 +219,10 @@ components:
           $ref: '#/components/schemas/ServiceAreaId'
         name:
           type: string
-          maxLength: 200
-          # Is this too short?
+          maxLength: 256
         description:
           type: string
-          maxLength: 200
-          # Is this too short
+          maxLength: 512
         area:
           $ref: "../common/CAMARA_common.yaml#/components/schemas/Area"
         networkProfiles:
@@ -236,7 +232,6 @@ components:
             $ref: "#/components/schemas/NetworkProfileId"
           minItems: 1
           maxItems: 256
-          # The standard should not limit deployments here. Deployments may enforce a shorter array length
         qosProfiles:
           description: Qos Profiles which are supported in this area.
           type: array
@@ -244,7 +239,6 @@ components:
             $ref: '#/components/schemas/QosProfileName'
           minItems: 1
           maxItems: 256
-          # The standard should not limit deployments here. Deployments may enforce a shorter array length
       required:
         - id
         - area
