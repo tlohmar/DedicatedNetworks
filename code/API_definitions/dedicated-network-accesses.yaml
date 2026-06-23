@@ -364,11 +364,13 @@ paths:
             $ref: "../common/CAMARA_common.yaml#/components/schemas/PerPage"
         - name: page
           in: query
+          description: |
+            Number of the page of access devices to return
           schema:
             $ref: "../common/CAMARA_common.yaml#/components/schemas/Page"
         - name: deviceStatus
           in: query
-          description: only access devices with this status are to be returned
+          description: Only access devices with this status are to be returned
           schema:
             $ref: "#/components/schemas/DeviceStatus"
       responses:
@@ -495,6 +497,14 @@ components:
       description: OpenID Connect authentication via discovery metadata
       type: openIdConnect
       openIdConnectUrl: https://example.com/.well-known/openid-configuration
+    notificationsBearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: "{$request.body#/sinkCredential.credentialType}"
+      description: |
+        Bearer token for notification delivery. Token format is determined
+        by `sinkCredential.credentialType` in the subscription request.
+
   parameters:
     x-device:
       name: x-device
@@ -603,18 +613,18 @@ components:
           description: (Optional) List of supported QOS profiles usable for the device(s). When absent, all QosProfiles of the network are supported. Only a subset of the QOS profiles of the network is allowed
           type: array
           items:
-            type: string
+            $ref: "#/components/schemas/QosProfileName"
           minItems: 1
         defaultQosProfile:
           description: (Optional) The default QOS profile for all devices included in the access. When absent, the defaultQosProfile of the network is used
-          type: string
+          $ref: "#/components/schemas/QosProfileName"
         sink:
           description: The address to which events shall be delivered using the selected protocol.
           type: string
           format: uri
           pattern: ^https:\/\/.+$
         sinkCredential:
-          $ref: '#/components/schemas/SinkCredential'
+          $ref: '../common/CAMARA_event_common.yaml#/components/schemas/SinkCredential'
       required:
         - networkId
 
@@ -832,100 +842,21 @@ components:
       type: string
       example: 'phonenumber="+123456789"'
 
-
-    SinkCredential:
-      description: A sink credential provides authentication or authorization information necessary to enable delivery of events to a target
-      type: object
-      properties:
-        credentialType:
-          description: The type of the credential
-          type: string
-          enum:
-            - PLAIN
-            - ACCESSTOKEN
-            - REFRESHTOKEN
-      discriminator:
-        propertyName: credentialType
-        mapping:
-          PLAIN: '#/components/schemas/PlainCredential'
-          ACCESSTOKEN: '#/components/schemas/AccessTokenCredential'
-          REFRESHTOKEN: '#/components/schemas/RefreshTokenCredential'
-      required:
-        - credentialType
-
-    PlainCredential:
-      type: object
-      description: A plain credential as a combination of an identifier and a secret.
-      allOf:
-        - $ref: '#/components/schemas/SinkCredential'
-        - type: object
-          required:
-            - identifier
-            - secret
-          properties:
-            identifier:
-              description: The identifier might be an account or username.
-              type: string
-            secret:
-              description: The secret might be a password or passphrase.
-              type: string
-
-    AccessTokenCredential:
-      type: object
-      description: An access token credential.
-      allOf:
-        - $ref: '#/components/schemas/SinkCredential'
-        - type: object
-          properties:
-            accessToken:
-              description: REQUIRED. An access token is a previously acquired token granting access to the target resource.
-              type: string
-            accessTokenExpiresUtc:
-              type: string
-              format: date-time
-              description: REQUIRED. An absolute UTC instant at which the token shall be considered expired.
-            accessTokenType:
-              description: REQUIRED. Type of the access token (See [OAuth 2.0](https://tools.ietf.org/html/rfc6749#section-7.1)). For the current version of the API the type MUST be set to `Bearer`.
-              type: string
-              enum:
-                - bearer
-          required:
-            - accessToken
-            - accessTokenExpiresUtc
-            - accessTokenType
-
-    RefreshTokenCredential:
-      type: object
-      description: An access token credential with a refresh token.
-      allOf:
-        - $ref: '#/components/schemas/SinkCredential'
-        - type: object
-          properties:
-            accessToken:
-              description: REQUIRED. An access token is a previously acquired token granting access to the target resource.
-              type: string
-            accessTokenExpiresUtc:
-              type: string
-              format: date-time
-              description: REQUIRED. An absolute UTC instant at which the token shall be considered expired.
-            accessTokenType:
-              description: REQUIRED. Type of the access token (See [OAuth 2.0](https://tools.ietf.org/html/rfc6749#section-7.1)).
-              type: string
-              enum:
-                - bearer
-            refreshToken:
-              description: REQUIRED. An refresh token credential used to acquire access tokens.
-              type: string
-            refreshTokenEndpoint:
-              type: string
-              format: uri
-              description: REQUIRED. A URL at which the refresh token can be traded for an access token.
-      required:
-        - accessToken
-        - accessTokenExpiresUtc
-        - accessTokenType
-        - refreshToken
-        - refreshTokenEndpoint
+    QosProfileName:
+      description: |
+        A unique name for identifying a specific QoS profile.
+        This may follow different formats depending on the service providers implementation.
+        Some options addresses:
+          - A UUID style string
+          - Support for predefined profiles QOS_S, QOS_M, QOS_L, and QOS_E
+          - A searchable descriptive name
+        The set of QoS Profiles that an operator is offering can be retrieved by means of the QoS Profile API.
+      type: string
+      example: QCI_1_voice
+      minLength: 3
+      maxLength: 256
+      format: string
+      pattern: "^[a-zA-Z0-9_.-]+$"
 
   responses:
     Generic400:
