@@ -185,7 +185,6 @@ paths:
                 type: string
                 format: uri
                 maxLength: 2048
-                # This is typically a relative URL. Thus, 2048 characters can be enough.
         '400':
           $ref: "#/components/responses/Generic400"
         "401":
@@ -305,9 +304,7 @@ components:
           description: A human-readable name to describe the network
           type: string
           minLength: 1
-          # No empty string name allowed.
           maxLength: 256
-          # 256 characters should be enough for normal cases.
         networkProfileId:
           $ref: '#/components/schemas/NetworkProfileId'
         qosProfileName:
@@ -321,7 +318,6 @@ components:
           type: string
           format: uri
           maxLength: 2048
-          # Follows the recommendation from CAMARA_event_common.yaml
           pattern: ^https:\/\/.+$
         sinkCredential:
           $ref: '#/components/schemas/SinkCredential'
