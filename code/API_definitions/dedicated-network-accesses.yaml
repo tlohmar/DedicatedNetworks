@@ -858,6 +858,7 @@ components:
             - if the property value is a string and contains non-ASCII characters, the string must be serialized as Byte Sequence using UTF-8 encoding,
               as per section 3.3.5 of the RFC
       type: string
+      maxLength: 4096
       example: 'phonenumber="+123456789"'
 
 
