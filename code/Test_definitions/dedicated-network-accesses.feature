@@ -25,7 +25,7 @@ Feature: CAMARA Dedicated Network API, vwip - Network Accesses API Operations
     Then the response status code is 200
     And the response header "Content-Type" is "application/json"
     And the response header "x-correlator" has the same value as the request header "x-correlator"
-    And the response body is an array where each item complies with the OAS schema at "/components/schemas/NetworkAccessInfo"
+    And the response body is an array where each item complies with the OAS schema at "/components/schemas/AccessInfo"
 
   @dedicated_network_accesses_listNetworkAccesses_02_success_filtered_by_network
   Scenario: List network accesses filtered by network ID
@@ -36,7 +36,7 @@ Feature: CAMARA Dedicated Network API, vwip - Network Accesses API Operations
     Then the response status code is 200
     And the response header "Content-Type" is "application/json"
     And the response header "x-correlator" has the same value as the request header "x-correlator"
-    And the response body is an array where each item complies with the OAS schema at "/components/schemas/NetworkAccessInfo"
+    And the response body is an array where each item complies with the OAS schema at "/components/schemas/AccessInfo"
     And each item in the response array has property "networkId" equal to the query parameter "networkId"
 
   @dedicated_network_accesses_listNetworkAccesses_03_success_filtered_by_device
@@ -48,7 +48,7 @@ Feature: CAMARA Dedicated Network API, vwip - Network Accesses API Operations
     Then the response status code is 200
     And the response header "Content-Type" is "application/json"
     And the response header "x-correlator" has the same value as the request header "x-correlator"
-    And the response body is an array where each item complies with the OAS schema at "/components/schemas/NetworkAccessInfo"
+    And the response body is an array where each item complies with the OAS schema at "/components/schemas/AccessInfo"
     #And the response property "$.device" contains the same device identifier information as provided in the "x-device" header
     And each item in the response array has property "device" containing the device identifier information that corresponds to the device specified in the "x-device" header
 
@@ -67,10 +67,10 @@ Feature: CAMARA Dedicated Network API, vwip - Network Accesses API Operations
     And the response header "Content-Type" is "application/json"
     And the response header "x-correlator" has the same value as the request header "x-correlator"
     And the response header "Location" exists and contains a URL with the created access ID
-    And the response body complies with the OAS schema at "/components/schemas/NetworkAccessInfo"
+    And the response body complies with the OAS schema at "/components/schemas/AccessInfo"
     And the response property "$.networkId" has the same value as in the request body
     And the response property "$.id" exists and is a valid UUID
-    And the response property "$.status" exists and complies with the OAS schema at "/components/schemas/DeviceAccessStatus"
+    And the response property "$.stats" exists and complies with the OAS schema at "/components/schemas/AccessStats"
 
   # Success scenarios for GET /accesses/{accessId}
 
@@ -84,9 +84,9 @@ Feature: CAMARA Dedicated Network API, vwip - Network Accesses API Operations
     Then the response status code is 200
     And the response header "Content-Type" is "application/json"
     And the response header "x-correlator" has the same value as the request header "x-correlator"
-    And the response body complies with the OAS schema at "/components/schemas/NetworkAccessInfo"
+    And the response body complies with the OAS schema at "/components/schemas/AccessInfo"
     And the response property "$.id" is equal to the path parameter "accessId"
-    And the response property "$.status" complies with the OAS schema at "/components/schemas/DeviceAccessStatus"
+    And the response property "$.stats" complies with the OAS schema at "/components/schemas/AccessStats"
 
   # Success scenarios for DELETE /accesses/{accessId}
 
