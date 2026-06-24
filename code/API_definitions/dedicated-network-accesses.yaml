@@ -556,7 +556,7 @@ components:
           description: A human-readable code to describe the reason
         message:
           type: string
-          maxLength: 512
+          maxLength: 4096
           description: A human-readable description of what the reason represents
 
     DeviceStatusInfo:
@@ -594,7 +594,7 @@ components:
       description: A list of access devices
       type: array
       minItems: 0
-      maxItems: 1000
+      maxItems: 9007199254740991
       items:
         $ref: "#/components/schemas/AccessDevice"
 
@@ -798,7 +798,7 @@ components:
           description: A human-readable code to describe the result
         message:
           type: string
-          maxLength: 512
+          maxLength: 4096
           description: A human-readable description of what the result represents
         accessDevice:
           $ref: '#/components/schemas/AccessDevice'
@@ -849,7 +849,7 @@ components:
     Devices:
       description: A list of devices
       type: array
-      maxItems: 100
+      maxItems: 9007199254740991
       items:
         $ref: "../common/CAMARA_common.yaml#/components/schemas/Device"
 

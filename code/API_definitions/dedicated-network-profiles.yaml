@@ -108,7 +108,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/NetworkProfile'
-                maxItems: 200
+                maxItems: 100000000
         '400':
           $ref: "#/components/responses/Generic400"
         "401":
@@ -173,7 +173,7 @@ components:
         name:
           description: A human-readable name to describe the network profile
           type: string
-          maxLength: 256
+          maxLength: 1024
         maxNumberOfDevices:
           description: The maximum number of devices that can simultaneously use and share the dedicated network under this profile up to the limits set by the profile's performance characteristics
           type: integer
@@ -191,7 +191,7 @@ components:
           items:
             $ref: '#/components/schemas/QosProfileName'
           minItems: 1
-          maxItems: 32
+          maxItems: 256
         defaultQosProfile:
           $ref: '#/components/schemas/QosProfileName'
       required:

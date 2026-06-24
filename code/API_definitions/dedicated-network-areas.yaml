@@ -120,7 +120,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ServiceArea'
-                maxItems: 200
+                maxItems: 100000000
         '400':
           $ref: "#/components/responses/Generic400"
         "401":
@@ -214,7 +214,7 @@ components:
         byName:
           description: Only service areas with a name matching exactly this parameter are to be returned
           type: string
-          maxLength: 256
+          maxLength: 1024
         byNetworkProfileId:
           $ref: "#/components/schemas/NetworkProfileId"
         byQosProfileName:
@@ -228,11 +228,11 @@ components:
         name:
           description: A readable name of the service area (need not be unique)
           type: string
-          maxLength: 256
+          maxLength: 1024
         description:
           description: A readable description of the service area
           type: string
-          maxLength: 512
+          maxLength: 4096
         area:
           $ref: "../common/CAMARA_common.yaml#/components/schemas/Area"
         networkProfiles:
@@ -241,14 +241,14 @@ components:
           items:
             $ref: "#/components/schemas/NetworkProfileId"
           minItems: 1
-          maxItems: 256
+          maxItems: 1024
         qosProfiles:
           description: Qos Profiles which are supported in this area.
           type: array
           items:
             $ref: '#/components/schemas/QosProfileName'
           minItems: 1
-          maxItems: 256
+          maxItems: 1024
       required:
         - id
         - area
