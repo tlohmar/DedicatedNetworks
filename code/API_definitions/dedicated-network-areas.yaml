@@ -98,7 +98,8 @@ paths:
     post:
       tags:
         - Areas
-      summary: Retrieve dedicated network service areas, filtered by additional search criteria
+      summary: Retrieve network service areas, filtered by additional search criteria
+      description: Retrieve all network service areas matching the provided search criteria such as location, area overlap, name, or supported profiles.
       operationId: retrieveNetworkServiceAreas
       security:
         - openId:
@@ -112,7 +113,7 @@ paths:
         required: true
       responses:
         '200':
-          description: List of available dedicated network service areas
+          description: List of available network service areas
           content:
             application/json:
               schema:
@@ -133,13 +134,15 @@ paths:
     get:
       tags:
         - Areas
-      summary: Read a dedicated network service area
+      summary: Read a network service area
+      description: Read detailed information about a specific network service area identified by its areaId.
       operationId: readNetworkServiceArea
       security:
         - openId:
             - dedicated-network-areas:areas:read
       parameters:
         - name: areaId
+          description: Identifier of the service area
           in: path
           required: true
           schema:
@@ -147,7 +150,7 @@ paths:
         - $ref: "../common/CAMARA_common.yaml#/components/parameters/x-correlator"
       responses:
         '200':
-          description: Information about the dedicated network service area
+          description: Information about the network service area
           content:
             application/json:
               schema:
@@ -164,13 +167,16 @@ paths:
 components:
   securitySchemes:
     openId:
+      description: OpenID Connect authentication
       type: openIdConnect
       openIdConnectUrl: https://example.com/.well-known/openid-configuration
 
   schemas:
 
     NetworkProfileId:
+      description: Network profile id in UUID format
       type: string
+      format: uuid
       maxLength: 36
 
     QosProfileName:
@@ -190,6 +196,7 @@ components:
       pattern: "^[a-zA-Z0-9_.-]+$"
 
     ServiceAreaId:
+      description: Unique identifier of a network service area
       type: string
       format: uuid
       maxLength: 36
@@ -205,6 +212,7 @@ components:
         coveringArea:
           $ref: "../common/CAMARA_common.yaml#/components/schemas/Area"
         byName:
+          description: Only service areas with a name matching exactly this parameter are to be returned
           type: string
           maxLength: 256
         byNetworkProfileId:
@@ -213,14 +221,16 @@ components:
           $ref: "#/components/schemas/QosProfileName"
 
     ServiceArea:
-      description: Common attributes of a service area, i.e. where the dedicated network service is supported
+      description: Common attributes of a service area, i.e. where the network service is supported
       properties:
         id:
           $ref: '#/components/schemas/ServiceAreaId'
         name:
+          description: A readable name of the service area (need not be unique)
           type: string
           maxLength: 256
         description:
+          description: A readable description of the service area
           type: string
           maxLength: 512
         area:
@@ -331,20 +341,3 @@ components:
                 status: 404
                 code: NOT_FOUND
                 message: The specified resource is not found.
-
-    Generic410:
-      description: Gone
-      headers:
-        x-correlator:
-          $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
-      content:
-        application/json:
-          schema:
-            $ref: "../common/CAMARA_common.yaml#/components/schemas/ErrorInfo"
-          examples:
-            GENERIC_410_GONE:
-              description: Use in notifications flow to allow API Consumer to indicate that its callback is no longer available
-              value:
-                status: 410
-                code: GONE
-                message: Access to the target resource is no longer available.

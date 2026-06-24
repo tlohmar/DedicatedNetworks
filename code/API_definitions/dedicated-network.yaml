@@ -86,6 +86,7 @@ paths:
       tags:
         - Networks
       summary: Get a list of dedicated networks
+      description: List all available dedicated networks, optionally filtered by name.
       operationId: listNetworks
       security:
         - openId:
@@ -118,6 +119,7 @@ paths:
       tags:
         - Networks
       summary: Request to create a dedicated network
+      description: Create a dedicated network with the given configuration, including service time, service area, and a network profile or QoS profile.
       operationId: createNetwork
       security:
         - openId:
@@ -197,12 +199,14 @@ paths:
       tags:
         - Networks
       summary: Get the current information about a dedicated network
+      description: Read the current status and configuration of a specific dedicated network identified by its networkId.
       operationId: readNetwork
       security:
         - openId:
             - dedicated-network:networks:read
       parameters:
         - name: networkId
+          description: Identifier of the dedicated network
           in: path
           required: true
           schema:
@@ -227,12 +231,14 @@ paths:
       tags:
         - Networks
       summary: Delete a dedicated network
+      description: Delete a dedicated network identified by its networkId.
       operationId: deleteNetwork
       security:
         - openId:
             - dedicated-network:networks:delete
       parameters:
         - name: networkId
+          description: Identifier of the dedicated network
           in: path
           required: true
           schema:
@@ -253,13 +259,16 @@ paths:
 components:
   securitySchemes:
     openId:
+      description: OpenID Connect authentication
       type: openIdConnect
       openIdConnectUrl: https://example.com/.well-known/openid-configuration
     notificationsBearerAuth:
-      description: Bearer authentication for notifications
       type: http
       scheme: bearer
-      bearerFormat: "{$request.body#sinkCredential.credentialType}"
+      bearerFormat: "{$request.body#/sinkCredential.credentialType}"
+      description: |
+        Bearer token for notification delivery. Token format is determined
+        by `sinkCredential.credentialType` in the subscription request.
 
   schemas:
 
@@ -292,6 +301,7 @@ components:
       pattern: "^[a-zA-Z0-9_.-]+$"
 
     ServiceAreaId:
+      description: Unique identifier of a network service area
       type: string
       format: uuid
       maxLength: 36
@@ -320,7 +330,7 @@ components:
           maxLength: 2048
           pattern: ^https:\/\/.+$
         sinkCredential:
-          $ref: '#/components/schemas/SinkCredential'
+          $ref: '../common/CAMARA_event_common.yaml#/components/schemas/SinkCredential'
       required:
         - serviceTime
         - serviceAreaId
@@ -406,6 +416,7 @@ components:
             - data
 
     ServiceTime:
+      description: The time window during which the dedicated network shall be available
       type: object
       properties:
         start:
@@ -419,83 +430,6 @@ components:
       required:
         - start
         - end
-
-    SinkCredential:
-      type: object
-      description: A sink credential provides authentication or authorization information necessary to enable delivery of events to a target.
-      properties:
-        credentialType:
-          type: string
-          enum:
-            # - PLAIN
-            - ACCESSTOKEN
-            - PRIVATE_KEY_JWT
-          description: |
-            The type of the credential - MUST be set to ACCESSTOKEN or PRIVATE_KEY_JWT for now
-      discriminator:
-        propertyName: credentialType
-        mapping:
-          # PLAIN: '#/components/schemas/PlainCredential'
-          ACCESSTOKEN: '#/components/schemas/AccessTokenCredential'
-          PRIVATE_KEY_JWT: '#/components/schemas/PrivateKeyJWTCredential'
-      required:
-        - credentialType
-
-    # PlainCredential:  # not used in CAMARA
-    #   type: object
-    #   description: A plain credential as a combination of an identifier and a secret.
-    #   allOf:
-    #     - $ref: "#/components/schemas/SinkCredential"
-    #     - type: object
-    #       required:
-    #         - identifier
-    #         - secret
-    #       properties:
-    #         identifier:
-    #           description: The identifier might be an account or username.
-    #           type: string
-    #           maxLength: 256
-    #         secret:
-    #           description: The secret might be a password or passphrase.
-    #           type: string
-    #           maxLength: 512
-
-    AccessTokenCredential:
-      type: object
-      description: An access token credential. This type of credential is meant to be used by API Consumers that have limited capabilities to handle authorization requests.
-      allOf:
-        - $ref: '#/components/schemas/SinkCredential'
-        - type: object
-          properties:
-            accessToken:
-              description: REQUIRED. An access token is a previously acquired token granting access to the target resource.
-              type: string
-              maxLength: 4096
-            accessTokenExpiresUtc:
-              type: string
-              format: date-time
-              maxLength: 64
-              description: |
-                REQUIRED. An absolute (UTC) timestamp at which the token shall be considered expired.
-                In the case of an ACCESS_TOKEN_EXPIRED termination reason, implementation should notify the client before the expiration date.
-                If the access token is a JWT and registered "exp" (Expiration Time) claim is present, the two expiry times should match.
-                It must follow [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) and must have time zone.
-              example: "2023-07-03T12:27:08.312Z"
-            accessTokenType:
-              description: REQUIRED. Type of the access token (See [OAuth 2.0](https://tools.ietf.org/html/rfc6749#section-7.1)). For the current version of the API the type MUST be set to `Bearer`.
-              type: string
-              enum:
-                - bearer
-          required:
-            - accessToken
-            - accessTokenExpiresUtc
-            - accessTokenType
-
-    PrivateKeyJWTCredential:
-      type: object
-      description: Use PRIVATE_KEY_JWT to get an access token. The authorization server information needed for this type of sink credential (token endpoint, client ID, JWKS URL) is shared upfront between the client and the CAMARA entity. This type of credential is to be used by clients that have an authorization server.
-      allOf:
-        - $ref: "#/components/schemas/SinkCredential"
 
   responses:
     Generic400:
