@@ -625,7 +625,6 @@ components:
           maxItems: 32
           items:
             $ref: "#/components/schemas/QosProfileName"
-          minItems: 1
         defaultQosProfile:
           $ref: "#/components/schemas/QosProfileName"
         sink:
