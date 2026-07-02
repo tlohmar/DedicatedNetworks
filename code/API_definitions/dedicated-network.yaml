@@ -97,6 +97,7 @@ paths:
           description: name of a network
           schema:
             type: string
+            maxLength: 1024
         - $ref: "../common/CAMARA_common.yaml#/components/parameters/x-correlator"
       responses:
         '200':
