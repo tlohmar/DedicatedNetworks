@@ -83,7 +83,7 @@ info:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   version: wip
-  x-camara-commonalities: 0.6
+  x-camara-commonalities: 0.8
 servers:
   - url: "{apiRoot}/dedicated-network-areas/vwip"
     variables:
@@ -120,6 +120,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ServiceArea'
+                maxItems: 100000000
         '400':
           $ref: "#/components/responses/Generic400"
         "401":
@@ -176,6 +177,7 @@ components:
       description: Network profile id in UUID format
       type: string
       format: uuid
+      maxLength: 36
 
     QosProfileName:
       description: |
@@ -197,6 +199,7 @@ components:
       description: Unique identifier of a network service area
       type: string
       format: uuid
+      maxLength: 36
 
     RetrieveServiceAreasRequest:
       description: Request object to retrieve service areas that match all the given properties
@@ -211,6 +214,7 @@ components:
         byName:
           description: Only service areas with a name matching exactly this parameter are to be returned
           type: string
+          maxLength: 1024
         byNetworkProfileId:
           $ref: "#/components/schemas/NetworkProfileId"
         byQosProfileName:
@@ -224,9 +228,11 @@ components:
         name:
           description: A readable name of the service area (need not be unique)
           type: string
+          maxLength: 1024
         description:
           description: A readable description of the service area
           type: string
+          maxLength: 4096
         area:
           $ref: "../common/CAMARA_common.yaml#/components/schemas/Area"
         networkProfiles:
@@ -235,12 +241,14 @@ components:
           items:
             $ref: "#/components/schemas/NetworkProfileId"
           minItems: 1
+          maxItems: 1024
         qosProfiles:
           description: Qos Profiles which are supported in this area.
           type: array
           items:
             $ref: '#/components/schemas/QosProfileName'
           minItems: 1
+          maxItems: 1024
       required:
         - id
         - area
