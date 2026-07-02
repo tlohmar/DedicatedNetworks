@@ -92,7 +92,6 @@ Feature: CAMARA Dedicated Network API, vwip - Areas API Operations
     And the response header "Content-Type" is "application/json"
     And the response body is an array where each item complies with the OAS schema at "/components/schemas/ServiceArea"
 
-
   # Success scenarios for GET /areas/{areaId}
 
   @dedicated_network_areas_readServiceAreas_01_success
