@@ -93,22 +93,38 @@ paths:
         - openId:
             - dedicated-network-profiles:profiles:read
       parameters:
+        - name: perPage
+          in: query
+          description: |
+            Number of network profiles to return per page
+          schema:
+            $ref: "../common/CAMARA_common.yaml#/components/schemas/PerPage"
+        - name: page
+          in: query
+          description: |
+            Number of the page of network profiles to return
+          schema:
+            $ref: "../common/CAMARA_common.yaml#/components/schemas/Page"
         - name: name
           in: query
-          description: name of a network profile
+          description: Only network profiles with this name are to be returned
           schema:
             type: string
         - $ref: "../common/CAMARA_common.yaml#/components/parameters/x-correlator"
       responses:
         '200':
           description: List of available network profiles
+          headers:
+            X-Total-Count:
+              $ref: '../common/CAMARA_common.yaml#/components/headers/x-total-count'
+            X-Total-Pages:
+              $ref: '../common/CAMARA_common.yaml#/components/headers/x-total-pages'
+            Link:
+              $ref: '../common/CAMARA_common.yaml#/components/headers/link'
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/NetworkProfile'
-                maxItems: 100000000
+                $ref: '#/components/schemas/NetworkProfilesPage'
         '400':
           $ref: "#/components/responses/Generic400"
         "401":
@@ -163,6 +179,22 @@ components:
       type: string
       format: uuid
       maxLength: 36
+
+    NetworkProfilesPage:
+      description: A page of network profiles
+      type: object
+      required:
+        - items
+        - pagination
+      properties:
+        items:
+          type: array
+          description: A list of network profiles in a page
+          items:
+            $ref: "#/components/schemas/NetworkProfile"
+          maxItems: 100
+        pagination:
+          $ref: "../common/CAMARA_common.yaml#/components/schemas/Pagination"
 
     NetworkProfile:
       description: A predefined set of network capabilities and performance characteristics for a dedicated network
