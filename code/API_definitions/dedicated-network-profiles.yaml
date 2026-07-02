@@ -104,7 +104,7 @@ paths:
           description: |
             Number of the page of network profiles to return
           schema:
-            $ref: "../common/CAMARA_common.yaml#/components/schemas/Page"      
+            $ref: "../common/CAMARA_common.yaml#/components/schemas/Page"
         - name: name
           in: query
           description: Only network profiles with this name are to be returned
