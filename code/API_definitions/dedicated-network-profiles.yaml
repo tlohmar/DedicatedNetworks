@@ -68,7 +68,7 @@ info:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   version: wip
-  x-camara-commonalities: 0.6
+  x-camara-commonalities: 0.8
 externalDocs:
   description: Product documentation at CAMARA
   url: https://github.com/camaraproject/DedicatedNetworks
@@ -178,6 +178,7 @@ components:
       description: Network profile id in UUID format
       type: string
       format: uuid
+      maxLength: 36
 
     NetworkProfilesPage:
       description: A page of network profiles
@@ -204,9 +205,14 @@ components:
         name:
           description: A human-readable name to describe the network profile
           type: string
+          maxLength: 1024
         maxNumberOfDevices:
           description: The maximum number of devices that can simultaneously use and share the dedicated network under this profile up to the limits set by the profile's performance characteristics
           type: integer
+          example: 5
+          format: int64
+          minimum: 1
+          maximum: 9007199254740991
         aggregatedUlThroughput:
           $ref: "#/components/schemas/BitRate"
         aggregatedDlThroughput:
@@ -217,6 +223,7 @@ components:
           items:
             $ref: '#/components/schemas/QosProfileName'
           minItems: 1
+          maxItems: 256
         defaultQosProfile:
           $ref: '#/components/schemas/QosProfileName'
       required:

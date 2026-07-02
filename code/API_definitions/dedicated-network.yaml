@@ -67,7 +67,7 @@ info:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   version: wip
-  x-camara-commonalities: 0.6
+  x-camara-commonalities: 0.8
 externalDocs:
   description: Product documentation at CAMARA
   url: https://github.com/camaraproject/DedicatedNetworks
@@ -107,6 +107,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/NetworkInfo'
+                maxItems: 100000000
         "400":
           $ref: "#/components/responses/Generic400"
         "401":
@@ -185,6 +186,7 @@ paths:
               schema:
                 type: string
                 format: uri
+                maxLength: 2048
         '400':
           $ref: "#/components/responses/Generic400"
         "401":
@@ -274,11 +276,13 @@ components:
       description: Network id in UUID format
       type: string
       format: uuid
+      maxLength: 36
 
     NetworkProfileId:
       description: Network profile id in UUID format
       type: string
       format: uuid
+      maxLength: 36
 
     QosProfileName:
       description: |
@@ -300,6 +304,7 @@ components:
       description: Unique identifier of a network service area
       type: string
       format: uuid
+      maxLength: 36
 
     BaseNetworkInfo:
       description: Common attributes of a dedicated network
@@ -308,6 +313,8 @@ components:
         name:
           description: A human-readable name to describe the network
           type: string
+          minLength: 1
+          maxLength: 1024
         networkProfileId:
           $ref: '#/components/schemas/NetworkProfileId'
         qosProfileName:
@@ -320,6 +327,7 @@ components:
           description: The address to which events shall be delivered using the selected protocol.
           type: string
           format: uri
+          maxLength: 2048
           pattern: ^https:\/\/.+$
         sinkCredential:
           $ref: '../common/CAMARA_event_common.yaml#/components/schemas/SinkCredential'
@@ -386,6 +394,7 @@ components:
         mapping:
           org.camaraproject.dedicated-network.v0.network-status-changed: "#/components/schemas/EventNetworkStatusChanged"
 
+
     EventNetworkStatusChanged:
       description: Event to notify a network status change
       allOf:
@@ -413,10 +422,12 @@ components:
         start:
           type: string
           format: date-time
+          maxLength: 64
           description: It must follow [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) and must have time zone. Recommended format is yyyy-MM-dd'T'HH:mm:ss.SSSZ (i.e. which allows 2023-07-03T14:27:08.312+02:00 or 2023-07-03T12:27:08.312Z)
         end:
           type: string
           format: date-time
+          maxLength: 64
           description: It must follow [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) and must have time zone. Recommended format is yyyy-MM-dd'T'HH:mm:ss.SSSZ (i.e. which allows 2023-07-03T14:27:08.312+02:00 or 2023-07-03T12:27:08.312Z)
       required:
         - start
