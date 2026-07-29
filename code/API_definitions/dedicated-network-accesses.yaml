@@ -182,8 +182,6 @@ paths:
       summary: Create an access to a dedicated network with given configuration, optionally including devices
       description: |
         Create an access to a dedicated network with given configuration, optionally including devices
-        **NOTE:**
-          - This API recommends usage of a two-legged access token, but if the invoker uses a three-legged token, the corresponding `device` identifier MUST be provided and must match the identifier in the access token.
       operationId: createAccess
       security:
         - openId:
