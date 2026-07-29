@@ -104,6 +104,8 @@ paths:
       security:
         - openId:
             - dedicated-network-areas:areas:read
+      parameters:
+        - $ref: "../common/CAMARA_common.yaml#/components/parameters/x-correlator"
       requestBody:
         description: Parameters to query service areas
         content:
@@ -114,6 +116,9 @@ paths:
       responses:
         '200':
           description: List of available network service areas
+          headers:
+            x-correlator:
+              $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
           content:
             application/json:
               schema:
@@ -151,6 +156,9 @@ paths:
       responses:
         '200':
           description: Information about the network service area
+          headers:
+            x-correlator:
+              $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
           content:
             application/json:
               schema:
@@ -260,6 +268,9 @@ components:
   responses:
     Generic400:
       description: Bad Request
+      headers:
+        x-correlator:
+          $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
       content:
         application/json:
           schema:

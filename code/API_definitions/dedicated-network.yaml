@@ -102,6 +102,9 @@ paths:
       responses:
         '200':
           description: List of dedicated networks (the list can be empty)
+          headers:
+            x-correlator:
+              $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
           content:
             application/json:
               schema:
@@ -176,11 +179,9 @@ paths:
       responses:
         '201':
           description: Reception acknowlegement a dedicated network request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NetworkInfo'
           headers:
+            x-correlator:
+              $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
             Location:
               description: 'URL including the resource identifier of the newly created dedicated network.'
               required: true
@@ -188,6 +189,10 @@ paths:
                 type: string
                 format: uri
                 maxLength: 2048
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NetworkInfo'
         '400':
           $ref: "#/components/responses/Generic400"
         "401":
@@ -216,6 +221,9 @@ paths:
       responses:
         '200':
           description: Current dedicated network information
+          headers:
+            x-correlator:
+              $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
           content:
             application/json:
               schema:
@@ -248,6 +256,9 @@ paths:
       responses:
         '204':
           description: Successful deletion of a dedicated network
+          headers:
+            x-correlator:
+              $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
         "400":
           $ref: "#/components/responses/Generic400"
         "401":

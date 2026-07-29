@@ -116,6 +116,8 @@ paths:
         '200':
           description: List of available network profiles
           headers:
+            x-correlator:
+              $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
             X-Total-Count:
               $ref: '../common/CAMARA_common.yaml#/components/headers/x-total-count'
             X-Total-Pages:
@@ -154,6 +156,9 @@ paths:
       responses:
         '200':
           description: List of available network profiles
+          headers:
+            x-correlator:
+              $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
           content:
             application/json:
               schema:

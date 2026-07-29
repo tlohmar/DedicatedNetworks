@@ -161,6 +161,9 @@ paths:
       responses:
         '200':
           description: List of existing accesses to dedicated networks, optionally filtered for a given device and/or for a dedicated network (the list can be empty)
+          headers:
+            x-correlator:
+              $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
           content:
             application/json:
               schema:
@@ -186,6 +189,8 @@ paths:
       security:
         - openId:
             - dedicated-network-accesses:accesses:create
+      parameters:
+        - $ref: "../common/CAMARA_common.yaml#/components/parameters/x-correlator"
       requestBody:
         content:
           application/json:
@@ -234,30 +239,34 @@ paths:
       responses:
         '201':
           description: Successful creation of the access for all devices (if any)
+          headers:
+            x-correlator:
+              $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
+            Location:
+              description: 'URL including the resource identifier of the newly created network access.'
+              required: true
+              schema:
+                type: string
+                maxLength: 2048
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CreateAccessSuccess'
+        '207':
+          description: Successful creation of the access for some devices
           headers:
+            x-correlator:
+              $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
             Location:
               description: 'URL including the resource identifier of the newly created network access.'
               required: true
               schema:
                 type: string
                 maxLength: 2048
-        '207':
-          description: Successful creation of the access for some devices
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CreateAccessPartialSuccess'
-          headers:
-            Location:
-              description: 'URL including the resource identifier of the newly created network access.'
-              required: true
-              schema:
-                type: string
-                maxLength: 2048
         '400':
           $ref: "#/components/responses/Generic400"
         "401":
@@ -293,6 +302,9 @@ paths:
       responses:
         '200':
           description: Access information
+          headers:
+            x-correlator:
+              $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
           content:
             application/json:
               schema:
@@ -327,6 +339,9 @@ paths:
       responses:
         '204':
           description: Successful deletion of the access
+          headers:
+            x-correlator:
+              $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
         '400':
           $ref: "#/components/responses/Generic400"
         "401":
@@ -377,6 +392,8 @@ paths:
         '200':
           description: A list of devices matching the given criteria and in the requested page (can be empty).
           headers:
+            x-correlator:
+              $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
             X-Total-Count:
               $ref: '../common/CAMARA_common.yaml#/components/headers/x-total-count'
             X-Total-Pages:
@@ -423,12 +440,18 @@ paths:
       responses:
         '201':
           description: Successful addition of all the given devices
+          headers:
+            x-correlator:
+              $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/AddDevicesSuccess"
         '207':
           description: Partially successful addition of devices, success for at least one of the given devices
+          headers:
+            x-correlator:
+              $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
           content:
             application/json:
               schema:
@@ -472,8 +495,14 @@ paths:
       responses:
         '204':
           description: Successful removal of all the given devices
+          headers:
+            x-correlator:
+              $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
         '207':
           description: Partially successful removal of devices, success for at least one of the given devices
+          headers:
+            x-correlator:
+              $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
           content:
             application/json:
               schema:
