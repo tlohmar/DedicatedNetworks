@@ -27,12 +27,15 @@ info:
     # Identifying the device from the access token
 
     This API requires the API consumer to identify a device as the subject of the API as follows:
-    - Since this API can handle multiple devices in one request it is strongly recommended to use a two-legged access token
-    - When the API is invoked using a two-legged access token, each device will be identified by the respective `device` identifier, which therefore MUST be provided.
+    - When the API is invoked using a two-legged access token, each device MUST be explicitly identified by the `device` object provided in the request.
+    - When the API is invoked using a three-legged access token, the device is identified from the access token and MUST NOT be provided explicitly in the request.
+
+    Since this API can handle multiple devices in one request, it is strongly recommended to use a two-legged access token.
 
     ## Error handling:
 
-    - If the subject can be identified from the access token and there is no matching `device` object, then the server will return an error with the `422 MISSING_IDENTIFIER` error code.
+    - If a `device` identifier is not included in the request and cannot be derived from the access token, the server will return a `422 MISSING_IDENTIFIER` error.
+    - If a `device` identifier is explicitly provided in the request and a device has already been identified from the access token, the server will return a `422 UNNECESSARY_IDENTIFIER` error.
     - If the number of devices with access to the network is equal to or exceeds the 'maxNumberOfDevices', the API provider will provide a `429 QUOTA_EXCEEDED` error code.
 
     # Creating a network access for devices
