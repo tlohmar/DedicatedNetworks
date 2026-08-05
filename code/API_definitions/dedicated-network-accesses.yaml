@@ -34,8 +34,9 @@ info:
 
     ## Error handling:
 
-    - If a `device` identifier is not included in the request and cannot be derived from the access token, the server will return a `422 MISSING_IDENTIFIER` error.
-    - If a `device` identifier is explicitly provided in the request and a device has already been identified from the access token, the server will return a `422 UNNECESSARY_IDENTIFIER` error.
+    - If the subject cannot be identified from the access token and the optional `device` object is not included in the request, then the server will return an error with the `422 MISSING_IDENTIFIER` error code.
+
+    - If the subject can be identified from the access token and the optional `device` object is also included in the request, then the server will return an error with the `422 UNNECESSARY_IDENTIFIER` error code. This will be the case even if the same device is identified by these two methods, as the server is unable to make this comparison.
     - If the number of devices with access to the network is equal to or exceeds the 'maxNumberOfDevices', the API provider will provide a `429 QUOTA_EXCEEDED` error code.
 
     # Creating a network access for devices
