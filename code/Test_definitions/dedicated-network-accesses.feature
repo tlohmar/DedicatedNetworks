@@ -18,33 +18,33 @@ Feature: CAMARA Dedicated Network API, vwip - Network Accesses API Operations
 
   # Success scenarios for GET /accesses
 
-  @dedicated_network_accesses_listNetworkAccesses_01_success_all
+  @dedicated_network_accesses_listAccesses_01_success_all
   Scenario: List all network accesses
     Given the resource "/dedicated-network-accesses/vwip/accesses"
-    When the request "listNetworkAccesses" is sent
+    When the request "listAccesses" is sent
     Then the response status code is 200
     And the response header "Content-Type" is "application/json"
     And the response header "x-correlator" has the same value as the request header "x-correlator"
     And the response body is an array where each item complies with the OAS schema at "/components/schemas/AccessInfo"
 
-  @dedicated_network_accesses_listNetworkAccesses_02_success_filtered_by_network
+  @dedicated_network_accesses_listAccesses_02_success_filtered_by_network
   Scenario: List network accesses filtered by network ID
     Given an existing dedicated network
     And the resource "/dedicated-network-accesses/vwip/accesses"
     And the query parameter "networkId" is set to the ID of the existing network
-    When the request "listNetworkAccesses" is sent
+    When the request "listAccesses" is sent
     Then the response status code is 200
     And the response header "Content-Type" is "application/json"
     And the response header "x-correlator" has the same value as the request header "x-correlator"
     And the response body is an array where each item complies with the OAS schema at "/components/schemas/AccessInfo"
     And each item in the response array has property "networkId" equal to the query parameter "networkId"
 
-  @dedicated_network_accesses_listNetworkAccesses_03_success_filtered_by_device
+  @dedicated_network_accesses_listAccesses_03_success_filtered_by_device
   Scenario: List network accesses filtered by device
     Given a valid device identifier
     And the resource "/dedicated-network-accesses/vwip/accesses"
     And the header "x-device" is set to a RFC 8941 structured field value representing the Device schema (#/components/schemas/Device) (e.g., 'phonenumber="+123456789"')
-    When the request "listNetworkAccesses" is sent
+    When the request "listAccesses" is sent
     Then the response status code is 200
     And the response header "Content-Type" is "application/json"
     And the response header "x-correlator" has the same value as the request header "x-correlator"
@@ -54,15 +54,15 @@ Feature: CAMARA Dedicated Network API, vwip - Network Accesses API Operations
 
   # Success scenarios for POST /accesses
 
-  @dedicated_network_accesses_createNetworkAccess_01_success
+  @dedicated_network_accesses_createAccess_01_success
   Scenario: Create a network access with valid parameters
     Given an existing dedicated network
     And the resource "/dedicated-network-accesses/vwip/accesses"
     And the header "Content-Type" is set to "application/json"
-    And the request body is set to a request body compliant with the schema at "/components/schemas/CreateNetworkAccess"
+    And the request body is set to a request body compliant with the schema at "/components/schemas/CreateAccessRequest"
     And the request body property "$.networkId" is set to the ID of the existing network
     And the request body property "$.devices" array contains one or more (up to 100) valid device objects
-    When the request "createNetworkAccess" is sent
+    When the request "createAccess" is sent
     Then the response status code is 201
     And the response header "Content-Type" is "application/json"
     And the response header "x-correlator" has the same value as the request header "x-correlator"
@@ -74,13 +74,13 @@ Feature: CAMARA Dedicated Network API, vwip - Network Accesses API Operations
 
   # Success scenarios for GET /accesses/{accessId}
 
-  @dedicated_network_accesses_readNetworkAccess_01_success
+  @dedicated_network_accesses_readAccess_01_success
   Scenario: Get details of a specific network access
     Given an existing dedicated network
     And an existing network access
     And the resource "/dedicated-network-accesses/vwip/accesses/{accessId}"
     And the path parameter "accessId" is set to the ID of the existing access
-    When the request "readNetworkAccess" is sent
+    When the request "readAccess" is sent
     Then the response status code is 200
     And the response header "Content-Type" is "application/json"
     And the response header "x-correlator" has the same value as the request header "x-correlator"
@@ -90,19 +90,34 @@ Feature: CAMARA Dedicated Network API, vwip - Network Accesses API Operations
 
   # Success scenarios for DELETE /accesses/{accessId}
 
-  @dedicated_network_accesses_deleteNetworkAccess_01_success
+  @dedicated_network_accesses_deleteAccess_01_success
   Scenario: Delete a network access
     Given an existing dedicated network
     And an existing network access
     And the resource "/dedicated-network-accesses/vwip/accesses/{accessId}"
     And the path parameter "accessId" is set to the ID of the existing access
-    When the request "deleteNetworkAccess" is sent
+    When the request "deleteAccess" is sent
     Then the response status code is 204
     And the response header "x-correlator" has the same value as the request header "x-correlator"
 
-  # Success scenarios for POST /devices/add
+  # Success scenarios for GET /accesses/{accessId}/devices
 
-  @dedicated_network_accesses_addNetworkaccess_01_success
+  @dedicated_network_accesses_listDevices_01_success
+  Scenario: List devices of a specific network access
+    Given an existing dedicated network
+    And an existing network access
+    And the resource "/dedicated-network-accesses/vwip/accesses/{accessId}/devices"
+    And the path parameter "accessId" is set to the ID of the existing access
+    When the request "listDevices" is sent
+    Then the response status code is 200
+    And the response header "Content-Type" is "application/json"
+    And the response header "x-correlator" has the same value as the request header "x-correlator"
+    And the response body complies with the OAS schema at "/components/schemas/AccessDevicesPage"
+    And the response property "$.items" complies with the OAS schema at "/components/schemas/AccessDevices"
+
+  # Success scenarios for POST /accesses/{accessId}/devices/add
+
+  @dedicated_network_accesses_addDevicesToAccess_01_success
   Scenario: Add a device to an existing network access
     Given an existing dedicated network
     And an existing network access
@@ -111,13 +126,13 @@ Feature: CAMARA Dedicated Network API, vwip - Network Accesses API Operations
     And the header "Content-Type" is set to "application/json"
     And the request body is set to a request body compliant with the schema at "/components/schemas/AddDevicesRequest"
     And the request body array contains one or more (up to 100) valid device objects
-    When the request "addDevicesRequest" is sent
+    When the request "addDevicesToAccess" is sent
     Then the response status code is 201
-    And the response body complies with the OAS schema at "/components/schemas/AddDevicessSuccess"
+    And the response body complies with the OAS schema at "/components/schemas/AddDevicesSuccess"
 
-  # Success scenarios for POST /devices/remove
+  # Success scenarios for POST /accesses/{accessId}/devices/remove
 
-  @dedicated_network_accesses_removeNetworkaccess_01_success
+  @dedicated_network_accesses_removeDevicesFromAccess_01_success
   Scenario: Remove a device from an existing network access
     Given an existing dedicated network
     And an existing network access
@@ -126,5 +141,5 @@ Feature: CAMARA Dedicated Network API, vwip - Network Accesses API Operations
     And the header "Content-Type" is set to "application/json"
     And the request body is set to a request body compliant with the schema at "/components/schemas/RemoveDevicesRequest"
     And the request body array contains one or more (up to 100) valid device objects
-    When the request "removeDevicesRequest" is sent
+    When the request "removeDevicesFromAccess" is sent
     Then the response status code is 204
