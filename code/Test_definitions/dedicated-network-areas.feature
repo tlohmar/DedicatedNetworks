@@ -124,7 +124,7 @@ Feature: CAMARA Dedicated Network API, vwip - Areas API Operations
     When the request "retrieveNetworkServiceAreas" is sent
     Then the response status code is 400
     And the response header "x-correlator" has the same value as the request header "x-correlator"
-    And the response property "$.code" is "INVALID_ARGUMENT"
+    And the response property "$.code" is "OUT_OF_RANGE"
 
   @dedicated_network_areas_readNetworkServiceArea_02_error_invalid_uuid
   Scenario: Read service area with invalid UUID
