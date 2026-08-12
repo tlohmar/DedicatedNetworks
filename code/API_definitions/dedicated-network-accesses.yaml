@@ -757,14 +757,6 @@ components:
             - id
             - stats
 
-    AccessInfos:
-      description: A list of accesses with information
-      type: array
-      minItems: 0
-      maxItems: 9007199254740991
-      items:
-        $ref: "#/components/schemas/AccessInfo"
-
     AccessInfosPage:
       description: A page of accesses with information
       type: object
@@ -773,7 +765,11 @@ components:
         - pagination
       properties:
         items:
-          $ref: "#/components/schemas/AccessInfos"
+          type: array
+          description: A list of accesses with information
+          items:
+            $ref: "#/components/schemas/AccessInfo"
+          maxItems: 100
         pagination:
           $ref: "../common/CAMARA_common.yaml#/components/schemas/Pagination"
 
