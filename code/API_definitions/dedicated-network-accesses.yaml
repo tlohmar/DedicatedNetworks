@@ -27,7 +27,6 @@ info:
     # Identifying the device from the access token
 
     This API handles multiple devices in one request and therefore does not support identifying the device from the access token. Only the `device` object is used for identifying a device.
-    
     ## Error handling:
 
     - If there is no `device` object, then the server will return an error with the `422 MISSING_IDENTIFIER` error code.
