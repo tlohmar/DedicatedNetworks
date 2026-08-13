@@ -18,14 +18,15 @@ Feature: CAMARA Dedicated Network API, vwip - Networks API Operations
 
   # Success scenarios for GET /networks
 
-  @dedicated_network_listNetworks_01_success
-  Scenario: List all dedicated networks
+  @dedicated_network_listNetworks_01_success_all_first_page
+  Scenario: List first page of all dedicated networks
     Given the resource "/dedicated-network/vwip/networks"
     When the request "listNetworks" is sent
     Then the response status code is 200
     And the response header "Content-Type" is "application/json"
     And the response header "x-correlator" has the same value as the request header "x-correlator"
-    And the response body is an array where each item complies with the OAS schema at "/components/schemas/NetworkInfo"
+    And the response body complies with the OAS schema at "/components/schemas/NetworkInfosPage"
+    And the response property "$.items" is an array where each item complies with the OAS schema at "/components/schemas/NetworkInfo"
 
   # Success scenarios for POST /networks
 

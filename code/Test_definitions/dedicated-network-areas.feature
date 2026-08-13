@@ -16,8 +16,8 @@ Feature: CAMARA Dedicated Network API, vwip - Areas API Operations
 
   # Success scenarios for POST /retrieve-service-areas
 
-  @dedicated_network_areas_retrieveNetworkServiceAreas_01_success
-  Scenario: Retrieve all service areas (basic success)
+  @dedicated_network_areas_retrieveNetworkServiceAreas_01_success_all_first_page
+  Scenario: Retrieve first page of all service areas (basic success)
     Given the resource "/dedicated-network-areas/vwip/retrieve-service-areas"
     And the header "Content-Type" is set to "application/json"
     And the request body is set to a request body compliant with the schema at "/components/schemas/RetrieveServiceAreasRequest"
@@ -25,10 +25,11 @@ Feature: CAMARA Dedicated Network API, vwip - Areas API Operations
     Then the response status code is 200
     And the response header "Content-Type" is "application/json"
     And the response header "x-correlator" has the same value as the request header "x-correlator"
-    And the response body is an array where each item complies with the OAS schema at "/components/schemas/ServiceArea"
+    And the response body complies with the OAS schema at "/components/schemas/ServiceAreasPage"
+    And the response property "$.items" is an array where each item complies with the OAS schema at "/components/schemas/ServiceArea"
 
-  @dedicated_network_areas_retrieveNetworkServiceAreas_02_success_filtered_by_atLocation
-  Scenario: List areas filtered by atLocation
+  @dedicated_network_areas_retrieveNetworkServiceAreas_02_success_filtered_by_atLocation_first_page
+  Scenario: List first page of areas filtered by atLocation
     Given the resource "/dedicated-network-areas/vwip/retrieve-service-areas"
     And the header "Content-Type" is set to "application/json"
     And the request body is set to a request body compliant with the schema at "/components/schemas/RetrieveServiceAreasRequest"
@@ -37,10 +38,11 @@ Feature: CAMARA Dedicated Network API, vwip - Areas API Operations
     Then the response status code is 200
     And the response header "Content-Type" is "application/json"
     And the response header "x-correlator" has the same value as the request header "x-correlator"
-    And the response body is an array where each item complies with the OAS schema at "/components/schemas/ServiceArea"
+    And the response body complies with the OAS schema at "/components/schemas/ServiceAreasPage"
+    And the response property "$.items" is an array where each item complies with the OAS schema at "/components/schemas/ServiceArea"
 
-  @dedicated_network_areas_retrieveNetworkServiceAreas_03_success_filtered_by_overlappingArea
-  Scenario: List areas filtered by overlappingArea
+  @dedicated_network_areas_retrieveNetworkServiceAreas_03_success_filtered_by_overlappingArea_first_page
+  Scenario: List first page of areas filtered by overlappingArea
     Given the resource "/dedicated-network-areas/vwip/retrieve-service-areas"
     And the header "Content-Type" is set to "application/json"
     And the request body is set to a request body compliant with the schema at "/components/schemas/RetrieveServiceAreasRequest"
@@ -49,10 +51,11 @@ Feature: CAMARA Dedicated Network API, vwip - Areas API Operations
     Then the response status code is 200
     And the response header "Content-Type" is "application/json"
     And the response header "x-correlator" has the same value as the request header "x-correlator"
-    And the response body is an array where each item complies with the OAS schema at "/components/schemas/ServiceArea"
+    And the response body complies with the OAS schema at "/components/schemas/ServiceAreasPage"
+    And the response property "$.items" is an array where each item complies with the OAS schema at "/components/schemas/ServiceArea"
 
-  @dedicated_network_areas_retrieveNetworkServiceAreas_04_success_filtered_by_coveringArea
-  Scenario: List areas filtered by coveringArea
+  @dedicated_network_areas_retrieveNetworkServiceAreas_04_success_filtered_by_coveringArea_first_page
+  Scenario: List first page of areas filtered by coveringArea
     Given the resource "/dedicated-network-areas/vwip/retrieve-service-areas"
     And the header "Content-Type" is set to "application/json"
     And the request body is set to a request body compliant with the schema at "/components/schemas/RetrieveServiceAreasRequest"
@@ -61,10 +64,11 @@ Feature: CAMARA Dedicated Network API, vwip - Areas API Operations
     Then the response status code is 200
     And the response header "Content-Type" is "application/json"
     And the response header "x-correlator" has the same value as the request header "x-correlator"
-    And the response body is an array where each item complies with the OAS schema at "/components/schemas/ServiceArea"
+    And the response body complies with the OAS schema at "/components/schemas/ServiceAreasPage"
+    And the response property "$.items" is an array where each item complies with the OAS schema at "/components/schemas/ServiceArea"
 
-  @dedicated_network_areas_retrieveNetworkServiceAreas_05_success_filtered_by_byName
-  Scenario: List areas filtered by byName
+  @dedicated_network_areas_retrieveNetworkServiceAreas_05_success_filtered_by_byName_first_page
+  Scenario: List first page of areas filtered by byName
     Given the resource "/dedicated-network-areas/vwip/retrieve-service-areas"
     And the header "Content-Type" is set to "application/json"
     And the request body is set to a request body compliant with the schema at "/components/schemas/RetrieveServiceAreasRequest"
@@ -73,10 +77,11 @@ Feature: CAMARA Dedicated Network API, vwip - Areas API Operations
     Then the response status code is 200
     And the response header "Content-Type" is "application/json"
     And the response header "x-correlator" has the same value as the request header "x-correlator"
-    And the response body is an array where each item complies with the OAS schema at "/components/schemas/ServiceArea"
+    And the response body complies with the OAS schema at "/components/schemas/ServiceAreasPage"
+    And the response property "$.items" is an array where each item complies with the OAS schema at "/components/schemas/ServiceArea"
 
-  @dedicated_network_areas_retrieveNetworkServiceAreas_06_success_filtered_by_byNetworkProfileId
-  Scenario: List areas filtered by byNetworkProfileId
+  @dedicated_network_areas_retrieveNetworkServiceAreas_06_success_filtered_by_byNetworkProfileId_first_page
+  Scenario: List first page of areas filtered by byNetworkProfileId
     Given the resource "/dedicated-network-areas/vwip/retrieve-service-areas"
     And the header "Content-Type" is set to "application/json"
     And the request body is set to a request body compliant with the schema at "/components/schemas/RetrieveServiceAreasRequest"
@@ -85,10 +90,11 @@ Feature: CAMARA Dedicated Network API, vwip - Areas API Operations
     Then the response status code is 200
     And the response header "Content-Type" is "application/json"
     And the response header "x-correlator" has the same value as the request header "x-correlator"
-    And the response body is an array where each item complies with the OAS schema at "/components/schemas/ServiceArea"
+    And the response body complies with the OAS schema at "/components/schemas/ServiceAreasPage"
+    And the response property "$.items" is an array where each item complies with the OAS schema at "/components/schemas/ServiceArea"
 
-  @dedicated_network_areas_retrieveNetworkServiceAreas_07_success_filtered_by_byQosProfileName
-  Scenario: List areas filtered by byQosProfileName
+  @dedicated_network_areas_retrieveNetworkServiceAreas_07_success_filtered_by_byQosProfileName_first_page
+  Scenario: List first page of areas filtered by byQosProfileName
     Given the resource "/dedicated-network-areas/vwip/retrieve-service-areas"
     And the header "Content-Type" is set to "application/json"
     And the request body is set to a request body compliant with the schema at "/components/schemas/RetrieveServiceAreasRequest"
@@ -97,7 +103,8 @@ Feature: CAMARA Dedicated Network API, vwip - Areas API Operations
     Then the response status code is 200
     And the response header "Content-Type" is "application/json"
     And the response header "x-correlator" has the same value as the request header "x-correlator"
-    And the response body is an array where each item complies with the OAS schema at "/components/schemas/ServiceArea"
+    And the response body complies with the OAS schema at "/components/schemas/ServiceAreasPage"
+    And the response property "$.items" is an array where each item complies with the OAS schema at "/components/schemas/ServiceArea"
 
   # Success scenarios for GET /areas/{areaId}
 

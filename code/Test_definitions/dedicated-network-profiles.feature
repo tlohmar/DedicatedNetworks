@@ -16,14 +16,15 @@ Feature: CAMARA Dedicated Network API, vwip - Network Profiles API Operations
 
   # Success scenarios for GET /profiles
 
-  @dedicated_network_profiles_readNetworkProfiles_01_success
-  Scenario: List all available network profiles
+  @dedicated_network_profiles_readNetworkProfiles_01_success_all_first_page
+  Scenario: List first page of all available network profiles
     Given the resource "/dedicated-network-profiles/vwip/profiles"
     When the request "readNetworkProfiles" is sent
     Then the response status code is 200
     And the response header "Content-Type" is "application/json"
     And the response header "x-correlator" has the same value as the request header "x-correlator"
-    And the response body is an array where each item complies with the OAS schema at "/components/schemas/NetworkProfile"
+    And the response body complies with the OAS schema at "/components/schemas/NetworkProfilesPage"
+    And the response property "$.items" is an array where each item complies with the OAS schema at "/components/schemas/NetworkProfile"
     And each item in the response array has properties "id", "maxNumberOfDevices", "aggregatedUlThroughput", "aggregatedDlThroughput", "qosProfiles", "defaultQosProfile"
 
   # Success scenarios for GET /profiles/{profileId}
