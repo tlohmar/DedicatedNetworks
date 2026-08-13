@@ -30,7 +30,7 @@ info:
     
     ## Error handling:
 
-    - If there is no `device` object, then the server will return an error with the `422 MISSING_IDENTIFIER` error code.  
+    - If there is no `device` object, then the server will return an error with the `422 MISSING_IDENTIFIER` error code.
 
 
     # Creating a network access for devices
