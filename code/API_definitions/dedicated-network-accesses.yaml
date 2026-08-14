@@ -143,14 +143,26 @@ paths:
     get:
       tags:
         - Accesses
-      summary: Get a list of accesses to dedicated networks, optionally filtered for a given device and/or for a given dedicated network
+      summary: Get a paged list of accesses to dedicated networks, optionally filtered for a given device and/or for a given dedicated network
       description: |
-        Get a list of accesses to dedicated networks, optionally filtered for a given device and/or for a given dedicated network
+        Get a paged list of accesses to dedicated networks, optionally filtered for a given device and/or for a given dedicated network
       operationId: listAccesses
       security:
         - openId:
             - dedicated-network-accesses:accesses:read
       parameters:
+        - name: perPage
+          in: query
+          description: |
+            Number of accesses to return per page
+          schema:
+            $ref: "../common/CAMARA_common.yaml#/components/schemas/PerPage"
+        - name: page
+          in: query
+          description: |
+            Number of the page of accesses to return
+          schema:
+            $ref: "../common/CAMARA_common.yaml#/components/schemas/Page"
         - name: networkId
           in: query
           description: Dedicated network id
@@ -160,17 +172,20 @@ paths:
         - $ref: "../common/CAMARA_common.yaml#/components/parameters/x-correlator"
       responses:
         '200':
-          description: List of existing accesses to dedicated networks, optionally filtered for a given device and/or for a dedicated network (the list can be empty)
+          description: A list of existing accesses to dedicated networks matching the given criteria and in the requested page (can be empty).
           headers:
             x-correlator:
               $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
+            X-Total-Count:
+              $ref: '../common/CAMARA_common.yaml#/components/headers/x-total-count'
+            X-Total-Pages:
+              $ref: '../common/CAMARA_common.yaml#/components/headers/x-total-pages'
+            Link:
+              $ref: '../common/CAMARA_common.yaml#/components/headers/link'
           content:
             application/json:
               schema:
-                type: array
-                maxItems: 1000000
-                items:
-                  $ref: '#/components/schemas/AccessInfo'
+                $ref: '#/components/schemas/AccessInfosPage'
         "400":
           $ref: "#/components/responses/Generic400"
         "401":
@@ -741,6 +756,22 @@ components:
           required:
             - id
             - stats
+
+    AccessInfosPage:
+      description: A page of accesses with information
+      type: object
+      required:
+        - items
+        - pagination
+      properties:
+        items:
+          type: array
+          description: A list of accesses with information
+          items:
+            $ref: "#/components/schemas/AccessInfo"
+          maxItems: 100
+        pagination:
+          $ref: "../common/CAMARA_common.yaml#/components/schemas/Pagination"
 
     AddDevicesRequest:
       description: Request body used to add devices to an access

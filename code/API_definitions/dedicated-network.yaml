@@ -85,13 +85,25 @@ paths:
     get:
       tags:
         - Networks
-      summary: Get a list of dedicated networks
-      description: List all available dedicated networks, optionally filtered by name.
+      summary: Get a paged list of dedicated networks
+      description: A paged list of all available dedicated networks, optionally filtered by name.
       operationId: listNetworks
       security:
         - openId:
             - dedicated-network:networks:read
       parameters:
+        - name: perPage
+          in: query
+          description: |
+            Number of networks to return per page
+          schema:
+            $ref: "../common/CAMARA_common.yaml#/components/schemas/PerPage"
+        - name: page
+          in: query
+          description: |
+            Number of the page of networks to return
+          schema:
+            $ref: "../common/CAMARA_common.yaml#/components/schemas/Page"
         - name: name
           in: query
           description: name of a network
@@ -101,17 +113,20 @@ paths:
         - $ref: "../common/CAMARA_common.yaml#/components/parameters/x-correlator"
       responses:
         '200':
-          description: List of dedicated networks (the list can be empty)
+          description: A list of dedicated networks matching the given criteria and in the requested page (can be empty)
           headers:
             x-correlator:
               $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
+            X-Total-Count:
+              $ref: '../common/CAMARA_common.yaml#/components/headers/x-total-count'
+            X-Total-Pages:
+              $ref: '../common/CAMARA_common.yaml#/components/headers/x-total-pages'
+            Link:
+              $ref: '../common/CAMARA_common.yaml#/components/headers/link'
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/NetworkInfo'
-                maxItems: 100000000
+                $ref: '#/components/schemas/NetworkInfosPage'
         "400":
           $ref: "#/components/responses/Generic400"
         "401":
@@ -364,6 +379,22 @@ components:
           required:
             - id
             - status
+
+    NetworkInfosPage:
+      description: A page of dedicated networks with information
+      type: object
+      required:
+        - items
+        - pagination
+      properties:
+        items:
+          type: array
+          description: A list of dedicated networks with information
+          items:
+            $ref: "#/components/schemas/NetworkInfo"
+          maxItems: 100
+        pagination:
+          $ref: "../common/CAMARA_common.yaml#/components/schemas/Pagination"
 
     CreateNetwork:
       description: Attributes required to create a dedicated network
