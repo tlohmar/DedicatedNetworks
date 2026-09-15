@@ -173,7 +173,7 @@ Feature: CAMARA Dedicated Network API, vwip - Networks API Operations
   # Syntax Error scenarios
 
   @dedicated_network_listNetworks_400.06_invalid_x-correlator
-  Scenario: Invalid x-correlator header
+  Scenario: List networks with invalid x-correlator header
     Given the header "x-correlator" does not comply with the schema at "#/components/schemas/XCorrelator"
     When the request "listNetworks" is sent
     Then the response status code is 400
@@ -206,7 +206,7 @@ Feature: CAMARA Dedicated Network API, vwip - Networks API Operations
     # Generic 401 errors
 
   @dedicated_network_listNetworks_401.01_no_authorization_header
-  Scenario: Error response for no header "Authorization"
+  Scenario: List networks without "Authorization" header
     Given the header "Authorization" is not sent
     When the request "listNetworks" is sent
     Then the response status code is 401
@@ -217,7 +217,7 @@ Feature: CAMARA Dedicated Network API, vwip - Networks API Operations
     And the response property "$.message" contains a user friendly text
 
   @dedicated_network_listNetworks_401.02_expired_access_token
-  Scenario: Error response for expired access token
+  Scenario: List networks with expired access token
     Given the header "Authorization" is set to an expired access token
     When the request "listNetworks" is sent
     Then the response status code is 401
@@ -228,7 +228,7 @@ Feature: CAMARA Dedicated Network API, vwip - Networks API Operations
     And the response property "$.message" contains a user friendly text
 
   @dedicated_network_listNetworks_401.03_invalid_access_token
-  Scenario: Error response for invalid access token
+  Scenario: List networks with invalid access token
     Given the header "Authorization" is set to an invalid access token
     When the request "listNetworks" is sent
     Then the response status code is 401
@@ -241,7 +241,7 @@ Feature: CAMARA Dedicated Network API, vwip - Networks API Operations
   # Generic 403 errors
 
   @dedicated_network_listNetworks_403.01_missing_access_token_scope
-  Scenario: Missing access token scope
+  Scenario: List networks with missing access token scope
     Given the header "Authorization" is set to an access token that does not include scope "dedicated-network:networks:read"
     When the request "listNetworks" is sent
     Then the response status code is 403
@@ -322,7 +322,7 @@ Feature: CAMARA Dedicated Network API, vwip - Networks API Operations
       | oneOf networkProfileId or qosProfileName |
 
   @dedicated_network_createNetwork_400.06_invalid_x-correlator
-  Scenario: Invalid x-correlator header
+  Scenario: Create network with invalid x-correlator header
     Given the header "x-correlator" does not comply with the schema at "#/components/schemas/XCorrelator"
     When the request "createNetwork" is sent
     Then the response status code is 400
@@ -364,7 +364,7 @@ Feature: CAMARA Dedicated Network API, vwip - Networks API Operations
     # Generic 401 errors
 
   @dedicated_network_createNetwork_401.01_no_authorization_header
-  Scenario: Error response for no header "Authorization"
+  Scenario: Create network without "Authorization" header
     Given the header "Authorization" is not sent
     When the request "createNetwork" is sent
     Then the response status code is 401
@@ -375,7 +375,7 @@ Feature: CAMARA Dedicated Network API, vwip - Networks API Operations
     And the response property "$.message" contains a user friendly text
 
   @dedicated_network_createNetwork_401.02_expired_access_token
-  Scenario: Error response for expired access token
+  Scenario: Create network with expired access token
     Given the header "Authorization" is set to an expired access token
     When the request "createNetwork" is sent
     Then the response status code is 401
@@ -386,7 +386,7 @@ Feature: CAMARA Dedicated Network API, vwip - Networks API Operations
     And the response property "$.message" contains a user friendly text
 
   @dedicated_network_createNetwork_401.03_invalid_access_token
-  Scenario: Error response for invalid access token
+  Scenario: Create network with invalid access token
     Given the header "Authorization" is set to an invalid access token
     When the request "createNetwork" is sent
     Then the response status code is 401
@@ -399,7 +399,7 @@ Feature: CAMARA Dedicated Network API, vwip - Networks API Operations
   # Generic 403 errors
 
   @dedicated_network_createNetwork_403.01_missing_access_token_scope
-  Scenario: Missing access token scope
+  Scenario: Create network with missing access token scope
     Given the header "Authorization" is set to an access token that does not include scope "dedicated-network:networks:create"
     When the request "createNetwork" is sent
     Then the response status code is 403
@@ -476,7 +476,7 @@ Feature: CAMARA Dedicated Network API, vwip - Networks API Operations
 ############################ Error Scenarios - readNetwork #############################################
 
   @dedicated_network_readNetwork_400.06_invalid_x-correlator
-  Scenario: Invalid x-correlator header
+  Scenario: Read network with invalid x-correlator header
     Given the header "x-correlator" does not comply with the schema at "#/components/schemas/XCorrelator"
     When the request "readNetwork" is sent
     Then the response status code is 400
@@ -491,7 +491,7 @@ Feature: CAMARA Dedicated Network API, vwip - Networks API Operations
     # Generic 401 errors
 
   @dedicated_network_readNetwork_401.01_no_authorization_header
-  Scenario: Error response for no header "Authorization"
+  Scenario: Read network without "Authorization" header
     Given the header "Authorization" is not sent
     When the request "readNetwork" is sent
     Then the response status code is 401
@@ -502,7 +502,7 @@ Feature: CAMARA Dedicated Network API, vwip - Networks API Operations
     And the response property "$.message" contains a user friendly text
 
   @dedicated_network_readNetwork_401.02_expired_access_token
-  Scenario: Error response for expired access token
+  Scenario: Read network with expired access token
     Given the header "Authorization" is set to an expired access token
     When the request "readNetwork" is sent
     Then the response status code is 401
@@ -513,7 +513,7 @@ Feature: CAMARA Dedicated Network API, vwip - Networks API Operations
     And the response property "$.message" contains a user friendly text
 
   @dedicated_network_readNetwork_401.03_invalid_access_token
-  Scenario: Error response for invalid access token
+  Scenario: Read network with invalid access token
     Given the header "Authorization" is set to an invalid access token
     When the request "readNetwork" is sent
     Then the response status code is 401
@@ -526,7 +526,7 @@ Feature: CAMARA Dedicated Network API, vwip - Networks API Operations
   # Generic 403 errors
 
   @dedicated_network_readNetwork_403.01_missing_access_token_scope
-  Scenario: Missing access token scope
+  Scenario: Read network with missing access token scope
     Given the header "Authorization" is set to an access token that does not include scope "dedicated-network:networks:read"
     When the request "readNetwork" is sent
     Then the response status code is 403
@@ -537,7 +537,7 @@ Feature: CAMARA Dedicated Network API, vwip - Networks API Operations
     And the response property "$.message" contains a user friendly text
 
   @dedicated_network_readNetwork_403.02_api_client_token_mismatch
-  Scenario: "{networkId}" not created by the API client given in the access token
+  Scenario: Read network not created by the API client given in the access token
     # To test this, a token has to be obtained for a different client
     Given the header "Authorization" is set to a valid access token emitted to an API client which did not have rights to access/manage the "{networkId}"
     When the request "readNetwork" is sent
@@ -551,7 +551,7 @@ Feature: CAMARA Dedicated Network API, vwip - Networks API Operations
   # Generic 404 Errors
 
   @dedicated_network_readNetwork_404.01_not_found
-  Scenario: non-existing "{networkId}"
+  Scenario: Read network with non-existing networkId
     Given the resource "/dedicated-network/vwip/networks/{networkId}"
     And the path parameter "networkId" is set to a random network ID
     When the request "readNetwork" is sent
@@ -567,7 +567,7 @@ Feature: CAMARA Dedicated Network API, vwip - Networks API Operations
   # Syntax Error scenarios
 
   @dedicated_network_deleteNetwork_400.06_invalid_x-correlator
-  Scenario: Invalid x-correlator header
+  Scenario: Delete network with invalid x-correlator header
     Given the header "x-correlator" does not comply with the schema at "#/components/schemas/XCorrelator"
     When the request "deleteNetwork" is sent
     Then the response status code is 400
@@ -580,7 +580,7 @@ Feature: CAMARA Dedicated Network API, vwip - Networks API Operations
     # Generic 401 errors
 
   @dedicated_network_deleteNetwork_401.01_no_authorization_header
-  Scenario: Error response for no header "Authorization"
+  Scenario: Delete network without "Authorization" header
     Given the header "Authorization" is not sent
     When the request "deleteNetwork" is sent
     Then the response status code is 401
@@ -591,7 +591,7 @@ Feature: CAMARA Dedicated Network API, vwip - Networks API Operations
     And the response property "$.message" contains a user friendly text
 
   @dedicated_network_deleteNetwork_401.02_expired_access_token
-  Scenario: Error response for expired access token
+  Scenario: Delete network with expired access token
     Given the header "Authorization" is set to an expired access token
     When the request "deleteNetwork" is sent
     Then the response status code is 401
@@ -602,7 +602,7 @@ Feature: CAMARA Dedicated Network API, vwip - Networks API Operations
     And the response property "$.message" contains a user friendly text
 
   @dedicated_network_deleteNetwork_401.03_invalid_access_token
-  Scenario: Error response for invalid access token
+  Scenario: Delete network with invalid access token
     Given the header "Authorization" is set to an invalid access token
     When the request "deleteNetwork" is sent
     Then the response status code is 401
@@ -615,7 +615,7 @@ Feature: CAMARA Dedicated Network API, vwip - Networks API Operations
   # Generic 403 errors
 
   @dedicated_network_deleteNetwork_403.01_missing_access_token_scope
-  Scenario: Missing access token scope
+  Scenario: Delete network with missing access token scope
     Given the header "Authorization" is set to an access token that does not include scope "dedicated-network:networks:delete"
     When the request "deleteNetwork" is sent
     Then the response status code is 403
@@ -626,7 +626,7 @@ Feature: CAMARA Dedicated Network API, vwip - Networks API Operations
     And the response property "$.message" contains a user friendly text
 
   @dedicated_network_deleteNetwork_403.02_api_client_token_mismatch
-  Scenario: "{networkId}" not created by the API client given in the access token
+  Scenario: Delete network not created by the API client given in the access token
     # To test this, a token has to be obtained for a different client
     Given the header "Authorization" is set to a valid access token emitted to an API client which did not have rights to access/manage the "{networkId}"
     When the request "deleteNetwork" is sent
@@ -640,7 +640,7 @@ Feature: CAMARA Dedicated Network API, vwip - Networks API Operations
   # Generic 404 Errors
 
   @dedicated_network_deleteNetwork_404.01_not_found
-  Scenario: non-existing "{networkId}"
+  Scenario: Delete network with non-existing networkId
     Given the resource "/dedicated-network/vwip/networks/{networkId}"
     And the path parameter "networkId" is set to a random network ID
     When the request "deleteNetwork" is sent

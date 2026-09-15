@@ -120,7 +120,7 @@ Feature: CAMARA Dedicated Network API, vwip - Areas API Operations
     And the response property "$.items" is an array where each item complies with the OAS schema at "/components/schemas/ServiceArea"
     And each item in the response array has property "$.qosProfiles" containing the value specified in "$.byQosProfileName"
 
-  @dedicated_network_areas_retrieveNetworkServiceAreas_09_success_filtered_by_several_properties_first_page
+  @dedicated_network_areas_retrieveNetworkServiceAreas_08_success_filtered_by_several_properties_first_page
   Scenario: List first page of areas matching all of several given filters
     Given the resource "/dedicated-network-areas/vwip/retrieve-service-areas"
     And the header "Content-Type" is set to "application/json"
@@ -139,7 +139,7 @@ Feature: CAMARA Dedicated Network API, vwip - Areas API Operations
     And each item in the response array has property "$.networkProfiles" containing the value specified in "$.byNetworkProfileId"
     And each item in the response array has property "$.qosProfiles" containing the value specified in "$.byQosProfileName"
 
-  @dedicated_network_areas_retrieveNetworkServiceAreas_10_success_pagination
+  @dedicated_network_areas_retrieveNetworkServiceAreas_09_success_pagination
   Scenario: Retrieve a specific page of service areas with an explicit page size
     Given there are at least 2 service areas
     And the resource "/dedicated-network-areas/vwip/retrieve-service-areas"
@@ -201,7 +201,7 @@ Feature: CAMARA Dedicated Network API, vwip - Areas API Operations
     And the response property "$.message" contains a user friendly text
 
   @dedicated_network_areas_retrieveNetworkServiceAreas_400.06_invalid_x-correlator
-  Scenario: Invalid x-correlator header
+  Scenario: Retrieve service areas with invalid x-correlator header
     Given the header "x-correlator" does not comply with the schema at "#/components/schemas/XCorrelator"
     When the request "retrieveNetworkServiceAreas" is sent
     Then the response status code is 400
@@ -221,7 +221,7 @@ Feature: CAMARA Dedicated Network API, vwip - Areas API Operations
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response property "$.code" is "OUT_OF_RANGE"
 
-  @dedicated_network_areas_retrieveNetworkServiceAreas_400.09_out_of_range_pagination
+  @dedicated_network_areas_retrieveNetworkServiceAreas_400.08_out_of_range_pagination
   Scenario Outline: Error response for out of range pagination parameters
     Given the resource "/dedicated-network-areas/vwip/retrieve-service-areas"
     And the header "Content-Type" is set to "application/json"
@@ -248,7 +248,7 @@ Feature: CAMARA Dedicated Network API, vwip - Areas API Operations
     # Generic 401 errors
 
   @dedicated_network_areas_retrieveNetworkServiceAreas_401.01_no_authorization_header
-  Scenario: Error response for no header "Authorization"
+  Scenario: Retrieve service areas without "Authorization" header
     Given the header "Authorization" is not sent
     When the request "retrieveNetworkServiceAreas" is sent
     Then the response status code is 401
@@ -259,7 +259,7 @@ Feature: CAMARA Dedicated Network API, vwip - Areas API Operations
     And the response property "$.message" contains a user friendly text
 
   @dedicated_network_areas_retrieveNetworkServiceAreas_401.02_expired_access_token
-  Scenario: Error response for expired access token
+  Scenario: Retrieve service areas with expired access token
     Given the header "Authorization" is set to an expired access token
     When the request "retrieveNetworkServiceAreas" is sent
     Then the response status code is 401
@@ -270,7 +270,7 @@ Feature: CAMARA Dedicated Network API, vwip - Areas API Operations
     And the response property "$.message" contains a user friendly text
 
   @dedicated_network_areas_retrieveNetworkServiceAreas_401.03_invalid_access_token
-  Scenario: Error response for invalid access token
+  Scenario: Retrieve service areas with invalid access token
     Given the header "Authorization" is set to an invalid access token
     When the request "retrieveNetworkServiceAreas" is sent
     Then the response status code is 401
@@ -283,7 +283,7 @@ Feature: CAMARA Dedicated Network API, vwip - Areas API Operations
   # Generic 403 errors
 
   @dedicated_network_areas_retrieveNetworkServiceAreas_403.01_missing_access_token_scope
-  Scenario: Missing access token scope
+  Scenario: Retrieve service areas with missing access token scope
     Given the header "Authorization" is set to an access token that does not include scope "dedicated-network-areas:areas:read"
     When the request "retrieveNetworkServiceAreas" is sent
     Then the response status code is 403
@@ -297,7 +297,7 @@ Feature: CAMARA Dedicated Network API, vwip - Areas API Operations
   # Syntax Error scenarios
 
   @dedicated_network_areas_readNetworkServiceArea_400.06_invalid_x-correlator
-  Scenario: Invalid x-correlator header
+  Scenario: Read service area with invalid x-correlator header
     Given the header "x-correlator" does not comply with the schema at "#/components/schemas/XCorrelator"
     When the request "readNetworkServiceArea" is sent
     Then the response status code is 400
@@ -321,7 +321,7 @@ Feature: CAMARA Dedicated Network API, vwip - Areas API Operations
     # Generic 401 errors
 
   @dedicated_network_areas_readNetworkServiceArea_401.01_no_authorization_header
-  Scenario: Error response for no header "Authorization"
+  Scenario: Read service area without "Authorization" header
     Given the header "Authorization" is not sent
     When the request "readNetworkServiceArea" is sent
     Then the response status code is 401
@@ -332,7 +332,7 @@ Feature: CAMARA Dedicated Network API, vwip - Areas API Operations
     And the response property "$.message" contains a user friendly text
 
   @dedicated_network_areas_readNetworkServiceArea_401.02_expired_access_token
-  Scenario: Error response for expired access token
+  Scenario: Read service area with expired access token
     Given the header "Authorization" is set to an expired access token
     When the request "readNetworkServiceArea" is sent
     Then the response status code is 401
@@ -343,7 +343,7 @@ Feature: CAMARA Dedicated Network API, vwip - Areas API Operations
     And the response property "$.message" contains a user friendly text
 
   @dedicated_network_areas_readNetworkServiceArea_401.03_invalid_access_token
-  Scenario: Error response for invalid access token
+  Scenario: Read service area with invalid access token
     Given the header "Authorization" is set to an invalid access token
     When the request "readNetworkServiceArea" is sent
     Then the response status code is 401
@@ -356,7 +356,7 @@ Feature: CAMARA Dedicated Network API, vwip - Areas API Operations
   # Generic 403 errors
 
   @dedicated_network_areas_readNetworkServiceArea_403.01_missing_access_token_scope
-  Scenario: Missing access token scope
+  Scenario: Read service area with missing access token scope
     Given the header "Authorization" is set to an access token that does not include scope "dedicated-network-areas:areas:read"
     When the request "readNetworkServiceArea" is sent
     Then the response status code is 403
