@@ -82,7 +82,7 @@ Feature: CAMARA Dedicated Network API, vwip - Network Profiles API Operations
   # Syntax Error scenarios
 
   @dedicated_network_profiles_readNetworkProfiles_400.06_invalid_x-correlator
-  Scenario: Invalid x-correlator header
+  Scenario: Read network profiles with invalid x-correlator header
     Given the header "x-correlator" does not comply with the schema at "#/components/schemas/XCorrelator"
     When the request "readNetworkProfiles" is sent
     Then the response status code is 400
@@ -115,7 +115,7 @@ Feature: CAMARA Dedicated Network API, vwip - Network Profiles API Operations
     # Generic 401 errors
 
   @dedicated_network_profiles_readNetworkProfiles_401.01_no_authorization_header
-  Scenario: Error response for no header "Authorization"
+  Scenario: Read network profiles without "Authorization" header
     Given the header "Authorization" is not sent
     When the request "readNetworkProfiles" is sent
     Then the response status code is 401
@@ -126,7 +126,7 @@ Feature: CAMARA Dedicated Network API, vwip - Network Profiles API Operations
     And the response property "$.message" contains a user friendly text
 
   @dedicated_network_profiles_readNetworkProfiles_401.02_expired_access_token
-  Scenario: Error response for expired access token
+  Scenario: Read network profiles with expired access token
     Given the header "Authorization" is set to an expired access token
     When the request "readNetworkProfiles" is sent
     Then the response status code is 401
@@ -137,7 +137,7 @@ Feature: CAMARA Dedicated Network API, vwip - Network Profiles API Operations
     And the response property "$.message" contains a user friendly text
 
   @dedicated_network_profiles_readNetworkProfiles_401.03_invalid_access_token
-  Scenario: Error response for invalid access token
+  Scenario: Read network profiles with invalid access token
     Given the header "Authorization" is set to an invalid access token
     When the request "readNetworkProfiles" is sent
     Then the response status code is 401
@@ -150,7 +150,7 @@ Feature: CAMARA Dedicated Network API, vwip - Network Profiles API Operations
   # Generic 403 errors
 
   @dedicated_network_profiles_readNetworkProfiles_403.01_missing_access_token_scope
-  Scenario: Missing access token scope
+  Scenario: Read network profiles with missing access token scope
     Given the header "Authorization" is set to an access token that does not include scope "dedicated-network-profiles:profiles:read"
     When the request "readNetworkProfiles" is sent
     Then the response status code is 403
@@ -164,7 +164,7 @@ Feature: CAMARA Dedicated Network API, vwip - Network Profiles API Operations
   # Syntax Error scenarios
 
   @dedicated_network_profiles_readNetworkProfile_400.06_invalid_x-correlator
-  Scenario: Invalid x-correlator header
+  Scenario: Read network profile with invalid x-correlator header
     Given the header "x-correlator" does not comply with the schema at "#/components/schemas/XCorrelator"
     When the request "readNetworkProfile" is sent
     Then the response status code is 400
@@ -179,7 +179,7 @@ Feature: CAMARA Dedicated Network API, vwip - Network Profiles API Operations
     # Generic 401 errors
 
   @dedicated_network_profiles_readNetworkProfile_401.01_no_authorization_header
-  Scenario: Error response for no header "Authorization"
+  Scenario: Read network profile without "Authorization" header
     Given the header "Authorization" is not sent
     When the request "readNetworkProfile" is sent
     Then the response status code is 401
@@ -190,7 +190,7 @@ Feature: CAMARA Dedicated Network API, vwip - Network Profiles API Operations
     And the response property "$.message" contains a user friendly text
 
   @dedicated_network_profiles_readNetworkProfile_401.02_expired_access_token
-  Scenario: Error response for expired access token
+  Scenario: Read network profile with expired access token
     Given the header "Authorization" is set to an expired access token
     When the request "readNetworkProfile" is sent
     Then the response status code is 401
@@ -201,7 +201,7 @@ Feature: CAMARA Dedicated Network API, vwip - Network Profiles API Operations
     And the response property "$.message" contains a user friendly text
 
   @dedicated_network_profiles_readNetworkProfile_401.03_invalid_access_token
-  Scenario: Error response for invalid access token
+  Scenario: Read network profile with invalid access token
     Given the header "Authorization" is set to an invalid access token
     When the request "readNetworkProfile" is sent
     Then the response status code is 401
@@ -214,7 +214,7 @@ Feature: CAMARA Dedicated Network API, vwip - Network Profiles API Operations
   # Generic 403 errors
 
   @dedicated_network_profiles_readNetworkProfile_403.01_missing_access_token_scope
-  Scenario: Missing access token scope
+  Scenario: Read network profile with missing access token scope
     Given the header "Authorization" is set to an access token that does not include scope "dedicated-network-profiles:profiles:read"
     When the request "readNetworkProfile" is sent
     Then the response status code is 403
