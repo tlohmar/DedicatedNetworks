@@ -64,7 +64,6 @@ Changes documented below are compared to version 0.1.0.
 
 ### Fixed
 
-* Sync common files from Commonalities r4.3 by @camara-release-automation[bot] in https://github.com/camaraproject/DedicatedNetworks/pull/115
 * Fixing `Schema must declare a type or combiner` (S-016), `Write operation must be security-restricted` (S-303) and `Operation must document a 401 response` (S-307) validation errors by @hubertp-ericsson in https://github.com/camaraproject/DedicatedNetworks/pull/118
 * Replacing the CloudEvent object definition with a reference (fixing `CloudEvent should be $ref, not inline` (P-020)). Correcting the CloudEvent type (fixing `CloudEvent type format is wrong` (P-015)) by @jimfengjinhua in https://github.com/camaraproject/DedicatedNetworks/pull/120 Replacing local common data type definitions with direct $ref to CAMARA_common.yaml. Remove all unused local definitions. In dedicated-network-areas.yaml, Circle.radius has been changed from type integer (with maximum as 200000) to type number (without max limitation) by @jimfengjinhua in https://github.com/camaraproject/DedicatedNetworks/pull/123
 * Addressing the "missing description" warnings (S-009, S-011, S-014, S-031, S-215) and the "Component may be unused" hints by @hubertp-ericsson in https://github.com/camaraproject/DedicatedNetworks/pull/124
@@ -115,7 +114,6 @@ Changes documented below are compared to version 0.1.0.
 
 ### Fixed
 
-* Sync common files from Commonalities r4.3 by @camara-release-automation[bot] in https://github.com/camaraproject/DedicatedNetworks/pull/115
 * Correcting global tags for dedicted network areas and profiles by @jordijoangimenez in https://github.com/camaraproject/DedicatedNetworks/pull/117
 * Replacing local common data type definitions with direct $ref to CAMARA_common.yaml. Remove all unused local definitions. In dedicated-network-areas.yaml, Circle.radius has been changed from type integer (with maximum as 200000) to type number (without max limitation) by @jimfengjinhua in https://github.com/camaraproject/DedicatedNetworks/pull/123
 * Addressing the "missing description" warnings (S-009, S-011, S-014, S-031, S-215) and the "Component may be unused" hints by @hubertp-ericsson in https://github.com/camaraproject/DedicatedNetworks/pull/124
@@ -166,7 +164,6 @@ Changes documented below are compared to version 0.1.0.
 
 ### Fixed
 
-* Sync common files from Commonalities r4.3 by @camara-release-automation[bot] in https://github.com/camaraproject/DedicatedNetworks/pull/115
 * Fixing `Schema must declare a type or combiner` (S-016), `Write operation must be security-restricted` (S-303) and `Operation must document a 401 response` (S-307) validation errors by @hubertp-ericsson in https://github.com/camaraproject/DedicatedNetworks/pull/118
 * Replacing the CloudEvent object definition with a reference (fixing `CloudEvent should be $ref, not inline` (P-020)). Correcting the CloudEvent type (fixing `CloudEvent type format is wrong` (P-015)) by @jimfengjinhua in https://github.com/camaraproject/DedicatedNetworks/pull/120
 * Replacing local common data type definitions with direct $ref to CAMARA_common.yaml. Remove all unused local definitions. In dedicated-network-areas.yaml, Circle.radius has been changed from type integer (with maximum as 200000) to type number (without max limitation) by @jimfengjinhua in https://github.com/camaraproject/DedicatedNetworks/pull/123
@@ -202,7 +199,6 @@ Changes documented below are compared to version 0.1.0.
 * Implementing range limits for integer, array and string datatypes, as needed by Commonalities r4.3 by @tlohmar in https://github.com/camaraproject/DedicatedNetworks/pull/95
 * Correcting URL in API test definition file by @tlohmar in https://github.com/camaraproject/DedicatedNetworks/pull/127
 * Adding the missing mandatory template elements into the info.description section by @tlohmar in https://github.com/camaraproject/DedicatedNetworks/pull/121
-* Sync common files from Commonalities r4.3 by @camara-release-automation[bot] in https://github.com/camaraproject/DedicatedNetworks/pull/115
 * Fix global tags for dedicted network areas and profiles by @jordijoangimenez in https://github.com/camaraproject/DedicatedNetworks/pull/117
 * Fixing `Schema must declare a type or combiner` (S-016), `Write operation must be security-restricted` (S-303) and `Operation must document a 401 response` (S-307) validation errors by @hubertp-ericsson in https://github.com/camaraproject/DedicatedNetworks/pull/118
 * Replacing local common data type definitions with direct $ref to CAMARA_common.yaml. Remove all unused local definitions. In dedicated-network-areas.yaml, Circle.radius has been changed from type integer (with maximum as 200000) to type number (without max limitation) by @jimfengjinhua in https://github.com/camaraproject/DedicatedNetworks/pull/123
