@@ -257,21 +257,7 @@ Feature: CAMARA Dedicated Network API, vwip - Network Accesses API, Multiple-Dev
     And the response property "$.code" is "PERMISSION_DENIED"
     And the response property "$.message" contains a user friendly text
 
-  @dedicated_network_accesses_listAccessDevices_403.02_api_client_token_mismatch
-  Scenario: List devices of an access not created by the API client given in the access token
-    # To test this, a token has to be obtained for a different client
-    Given the resource "/dedicated-network-accesses/vwip/accesses/{accessId}/devices"
-    And the path parameter "accessId" is set to the ID of an existing access
-    And the header "Authorization" is set to a valid access token emitted to an API client which did not have rights to access/manage the "{accessId}"
-    When the request "listAccessDevices" is sent
-    Then the response status code is 403
-    And the response header "x-correlator" has same value as the request header "x-correlator"
-    And the response header "Content-Type" is "application/json"
-    And the response property "$.status" is 403
-    And the response property "$.code" is "PERMISSION_DENIED"
-    And the response property "$.message" contains a user friendly text
-
-  @dedicated_network_accesses_listAccessDevices_403.03_three_legged_token_not_supported
+  @dedicated_network_accesses_listAccessDevices_403.02_three_legged_token_not_supported
   Scenario: List access devices with a three-legged access token
     # This operation only supports two-legged access tokens. A three-legged access token
     # does not carry the required scope, so authorization fails
@@ -292,6 +278,20 @@ Feature: CAMARA Dedicated Network API, vwip - Network Accesses API, Multiple-Dev
   Scenario: List devices of a non-existing access
     Given the resource "/dedicated-network-accesses/vwip/accesses/{accessId}/devices"
     And the path parameter "accessId" is set to a random access ID
+    When the request "listAccessDevices" is sent
+    Then the response status code is 404
+    And the response header "x-correlator" has same value as the request header "x-correlator"
+    And the response header "Content-Type" is "application/json"
+    And the response property "$.status" is 404
+    And the response property "$.code" is "NOT_FOUND"
+    And the response property "$.message" contains a user friendly text
+
+  @dedicated_network_accesses_listAccessDevices_404.02_api_client_token_mismatch
+  Scenario: List devices of an access not created by the API client given in the access token
+    # To test this, a token has to be obtained for a different client
+    Given the resource "/dedicated-network-accesses/vwip/accesses/{accessId}/devices"
+    And the path parameter "accessId" is set to the ID of an existing access
+    And the header "Authorization" is set to a valid access token emitted to an API client which did not have rights to access/manage the "{accessId}"
     When the request "listAccessDevices" is sent
     Then the response status code is 404
     And the response header "x-correlator" has same value as the request header "x-correlator"
@@ -382,23 +382,7 @@ Feature: CAMARA Dedicated Network API, vwip - Network Accesses API, Multiple-Dev
     And the response property "$.code" is "PERMISSION_DENIED"
     And the response property "$.message" contains a user friendly text
 
-  @dedicated_network_accesses_addDevicesToAccess_403.02_api_client_token_mismatch
-  Scenario: Add devices to an access not created by the API client given in the access token
-    # To test this, a token has to be obtained for a different client
-    Given the resource "/dedicated-network-accesses/vwip/accesses/{accessId}/devices/add"
-    And the path parameter "accessId" is set to the ID of an existing access
-    And the header "Content-Type" is set to "application/json"
-    And the request body is set to a request body compliant with the schema at "/components/schemas/AddDevicesRequest"
-    And the header "Authorization" is set to a valid access token emitted to an API client which did not have rights to access/manage the "{accessId}"
-    When the request "addDevicesToAccess" is sent
-    Then the response status code is 403
-    And the response header "x-correlator" has same value as the request header "x-correlator"
-    And the response header "Content-Type" is "application/json"
-    And the response property "$.status" is 403
-    And the response property "$.code" is "PERMISSION_DENIED"
-    And the response property "$.message" contains a user friendly text
-
-  @dedicated_network_accesses_addDevicesToAccess_403.03_three_legged_token_not_supported
+  @dedicated_network_accesses_addDevicesToAccess_403.02_three_legged_token_not_supported
   Scenario: Add devices to access with a three-legged access token
     # This operation only supports two-legged access tokens. A three-legged access token
     # does not carry the required scope, so authorization fails
@@ -423,6 +407,22 @@ Feature: CAMARA Dedicated Network API, vwip - Network Accesses API, Multiple-Dev
     And the path parameter "accessId" is set to a random access ID
     And the header "Content-Type" is set to "application/json"
     And the request body is set to a request body compliant with the schema at "/components/schemas/AddDevicesRequest"
+    When the request "addDevicesToAccess" is sent
+    Then the response status code is 404
+    And the response header "x-correlator" has same value as the request header "x-correlator"
+    And the response header "Content-Type" is "application/json"
+    And the response property "$.status" is 404
+    And the response property "$.code" is "NOT_FOUND"
+    And the response property "$.message" contains a user friendly text
+
+  @dedicated_network_accesses_addDevicesToAccess_404.02_api_client_token_mismatch
+  Scenario: Add devices to an access not created by the API client given in the access token
+    # To test this, a token has to be obtained for a different client
+    Given the resource "/dedicated-network-accesses/vwip/accesses/{accessId}/devices/add"
+    And the path parameter "accessId" is set to the ID of an existing access
+    And the header "Content-Type" is set to "application/json"
+    And the request body is set to a request body compliant with the schema at "/components/schemas/AddDevicesRequest"
+    And the header "Authorization" is set to a valid access token emitted to an API client which did not have rights to access/manage the "{accessId}"
     When the request "addDevicesToAccess" is sent
     Then the response status code is 404
     And the response header "x-correlator" has same value as the request header "x-correlator"
@@ -567,23 +567,7 @@ Feature: CAMARA Dedicated Network API, vwip - Network Accesses API, Multiple-Dev
     And the response property "$.code" is "PERMISSION_DENIED"
     And the response property "$.message" contains a user friendly text
 
-  @dedicated_network_accesses_removeDevicesFromAccess_403.02_api_client_token_mismatch
-  Scenario: Remove devices from an access not created by the API client given in the access token
-    # To test this, a token has to be obtained for a different client
-    Given the resource "/dedicated-network-accesses/vwip/accesses/{accessId}/devices/remove"
-    And the path parameter "accessId" is set to the ID of an existing access
-    And the header "Content-Type" is set to "application/json"
-    And the request body is set to a request body compliant with the schema at "/components/schemas/RemoveDevicesRequest"
-    And the header "Authorization" is set to a valid access token emitted to an API client which did not have rights to access/manage the "{accessId}"
-    When the request "removeDevicesFromAccess" is sent
-    Then the response status code is 403
-    And the response header "x-correlator" has same value as the request header "x-correlator"
-    And the response header "Content-Type" is "application/json"
-    And the response property "$.status" is 403
-    And the response property "$.code" is "PERMISSION_DENIED"
-    And the response property "$.message" contains a user friendly text
-
-  @dedicated_network_accesses_removeDevicesFromAccess_403.03_three_legged_token_not_supported
+  @dedicated_network_accesses_removeDevicesFromAccess_403.02_three_legged_token_not_supported
   Scenario: Remove devices from access with a three-legged access token
     # This operation only supports two-legged access tokens. A three-legged access token
     # does not carry the required scope, so authorization fails
@@ -608,6 +592,22 @@ Feature: CAMARA Dedicated Network API, vwip - Network Accesses API, Multiple-Dev
     And the path parameter "accessId" is set to a random access ID
     And the header "Content-Type" is set to "application/json"
     And the request body is set to a request body compliant with the schema at "/components/schemas/RemoveDevicesRequest"
+    When the request "removeDevicesFromAccess" is sent
+    Then the response status code is 404
+    And the response header "x-correlator" has same value as the request header "x-correlator"
+    And the response header "Content-Type" is "application/json"
+    And the response property "$.status" is 404
+    And the response property "$.code" is "NOT_FOUND"
+    And the response property "$.message" contains a user friendly text
+
+  @dedicated_network_accesses_removeDevicesFromAccess_404.02_api_client_token_mismatch
+  Scenario: Remove devices from an access not created by the API client given in the access token
+    # To test this, a token has to be obtained for a different client
+    Given the resource "/dedicated-network-accesses/vwip/accesses/{accessId}/devices/remove"
+    And the path parameter "accessId" is set to the ID of an existing access
+    And the header "Content-Type" is set to "application/json"
+    And the request body is set to a request body compliant with the schema at "/components/schemas/RemoveDevicesRequest"
+    And the header "Authorization" is set to a valid access token emitted to an API client which did not have rights to access/manage the "{accessId}"
     When the request "removeDevicesFromAccess" is sent
     Then the response status code is 404
     And the response header "x-correlator" has same value as the request header "x-correlator"

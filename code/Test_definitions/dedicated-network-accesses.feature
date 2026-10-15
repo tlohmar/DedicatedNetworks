@@ -567,21 +567,7 @@ Feature: CAMARA Dedicated Network API, vwip - Network Accesses API Operations
     And the response property "$.code" is "PERMISSION_DENIED"
     And the response property "$.message" contains a user friendly text
 
-  @dedicated_network_accesses_readAccess_403.02_api_client_token_mismatch
-  Scenario: Read access not created by the API client given in the access token
-    # To test this, a token has to be obtained for a different client
-    Given the resource "/dedicated-network-accesses/vwip/accesses/{accessId}"
-    And the path parameter "accessId" is set to the ID of an existing access
-    And the header "Authorization" is set to a valid access token emitted to an API client which did not have rights to access/manage the "{accessId}"
-    When the request "readAccess" is sent
-    Then the response status code is 403
-    And the response header "x-correlator" has same value as the request header "x-correlator"
-    And the response header "Content-Type" is "application/json"
-    And the response property "$.status" is 403
-    And the response property "$.code" is "PERMISSION_DENIED"
-    And the response property "$.message" contains a user friendly text
-
-  @dedicated_network_accesses_readAccess_403.03_three_legged_token_not_supported
+  @dedicated_network_accesses_readAccess_403.02_three_legged_token_not_supported
   Scenario: Read access with a three-legged access token
     # This operation only supports two-legged access tokens. A three-legged access token
     # does not carry the required scope, so authorization fails
@@ -602,6 +588,20 @@ Feature: CAMARA Dedicated Network API, vwip - Network Accesses API Operations
   Scenario: Read access with non-existing accessId
     Given the resource "/dedicated-network-accesses/vwip/accesses/{accessId}"
     And the path parameter "accessId" is set to a random access ID
+    When the request "readAccess" is sent
+    Then the response status code is 404
+    And the response header "x-correlator" has same value as the request header "x-correlator"
+    And the response header "Content-Type" is "application/json"
+    And the response property "$.status" is 404
+    And the response property "$.code" is "NOT_FOUND"
+    And the response property "$.message" contains a user friendly text
+
+  @dedicated_network_accesses_readAccess_404.02_api_client_token_mismatch
+  Scenario: Read access not created by the API client given in the access token
+    # To test this, a token has to be obtained for a different client
+    Given the resource "/dedicated-network-accesses/vwip/accesses/{accessId}"
+    And the path parameter "accessId" is set to the ID of an existing access
+    And the header "Authorization" is set to a valid access token emitted to an API client which did not have rights to access/manage the "{accessId}"
     When the request "readAccess" is sent
     Then the response status code is 404
     And the response header "x-correlator" has same value as the request header "x-correlator"
@@ -665,21 +665,7 @@ Feature: CAMARA Dedicated Network API, vwip - Network Accesses API Operations
     And the response property "$.code" is "PERMISSION_DENIED"
     And the response property "$.message" contains a user friendly text
 
-  @dedicated_network_accesses_deleteAccess_403.02_api_client_token_mismatch
-  Scenario: Delete access not created by the API client given in the access token
-    # To test this, a token has to be obtained for a different client
-    Given the resource "/dedicated-network-accesses/vwip/accesses/{accessId}"
-    And the path parameter "accessId" is set to the ID of an existing access
-    And the header "Authorization" is set to a valid access token emitted to an API client which did not have rights to access/manage the "{accessId}"
-    When the request "deleteAccess" is sent
-    Then the response status code is 403
-    And the response header "x-correlator" has same value as the request header "x-correlator"
-    And the response header "Content-Type" is "application/json"
-    And the response property "$.status" is 403
-    And the response property "$.code" is "PERMISSION_DENIED"
-    And the response property "$.message" contains a user friendly text
-
-  @dedicated_network_accesses_deleteAccess_403.03_three_legged_token_not_supported
+  @dedicated_network_accesses_deleteAccess_403.02_three_legged_token_not_supported
   Scenario: Delete access with a three-legged access token
     # This operation only supports two-legged access tokens. A three-legged access token
     # does not carry the required scope, so authorization fails
@@ -700,6 +686,20 @@ Feature: CAMARA Dedicated Network API, vwip - Network Accesses API Operations
   Scenario: Delete access with non-existing accessId
     Given the resource "/dedicated-network-accesses/vwip/accesses/{accessId}"
     And the path parameter "accessId" is set to a random access ID
+    When the request "deleteAccess" is sent
+    Then the response status code is 404
+    And the response header "x-correlator" has same value as the request header "x-correlator"
+    And the response header "Content-Type" is "application/json"
+    And the response property "$.status" is 404
+    And the response property "$.code" is "NOT_FOUND"
+    And the response property "$.message" contains a user friendly text
+
+  @dedicated_network_accesses_deleteAccess_404.02_api_client_token_mismatch
+  Scenario: Delete access not created by the API client given in the access token
+    # To test this, a token has to be obtained for a different client
+    Given the resource "/dedicated-network-accesses/vwip/accesses/{accessId}"
+    And the path parameter "accessId" is set to the ID of an existing access
+    And the header "Authorization" is set to a valid access token emitted to an API client which did not have rights to access/manage the "{accessId}"
     When the request "deleteAccess" is sent
     Then the response status code is 404
     And the response header "x-correlator" has same value as the request header "x-correlator"
