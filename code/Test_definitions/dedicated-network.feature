@@ -536,24 +536,24 @@ Feature: CAMARA Dedicated Network API, vwip - Networks API Operations
     And the response property "$.code" is "PERMISSION_DENIED"
     And the response property "$.message" contains a user friendly text
 
-  @dedicated_network_readNetwork_403.02_api_client_token_mismatch
-  Scenario: Read network not created by the API client given in the access token
-    # To test this, a token has to be obtained for a different client
-    Given the header "Authorization" is set to a valid access token emitted to an API client which did not have rights to access/manage the "{networkId}"
-    When the request "readNetwork" is sent
-    Then the response status code is 403
-    And the response header "x-correlator" has same value as the request header "x-correlator"
-    And the response header "Content-Type" is "application/json"
-    And the response property "$.status" is 403
-    And the response property "$.code" is "PERMISSION_DENIED"
-    And the response property "$.message" contains a user friendly text
-
   # Generic 404 Errors
 
   @dedicated_network_readNetwork_404.01_not_found
   Scenario: Read network with non-existing networkId
     Given the resource "/dedicated-network/vwip/networks/{networkId}"
     And the path parameter "networkId" is set to a random network ID
+    When the request "readNetwork" is sent
+    Then the response status code is 404
+    And the response header "x-correlator" has same value as the request header "x-correlator"
+    And the response header "Content-Type" is "application/json"
+    And the response property "$.status" is 404
+    And the response property "$.code" is "NOT_FOUND"
+    And the response property "$.message" contains a user friendly text
+
+  @dedicated_network_readNetwork_404.02_api_client_token_mismatch
+  Scenario: Read network not created by the API client given in the access token
+    # To test this, a token has to be obtained for a different client
+    Given the header "Authorization" is set to a valid access token emitted to an API client which did not have rights to access/manage the "{networkId}"
     When the request "readNetwork" is sent
     Then the response status code is 404
     And the response header "x-correlator" has same value as the request header "x-correlator"
@@ -625,24 +625,24 @@ Feature: CAMARA Dedicated Network API, vwip - Networks API Operations
     And the response property "$.code" is "PERMISSION_DENIED"
     And the response property "$.message" contains a user friendly text
 
-  @dedicated_network_deleteNetwork_403.02_api_client_token_mismatch
-  Scenario: Delete network not created by the API client given in the access token
-    # To test this, a token has to be obtained for a different client
-    Given the header "Authorization" is set to a valid access token emitted to an API client which did not have rights to access/manage the "{networkId}"
-    When the request "deleteNetwork" is sent
-    Then the response status code is 403
-    And the response header "x-correlator" has same value as the request header "x-correlator"
-    And the response header "Content-Type" is "application/json"
-    And the response property "$.status" is 403
-    And the response property "$.code" is "PERMISSION_DENIED"
-    And the response property "$.message" contains a user friendly text
-
   # Generic 404 Errors
 
   @dedicated_network_deleteNetwork_404.01_not_found
   Scenario: Delete network with non-existing networkId
     Given the resource "/dedicated-network/vwip/networks/{networkId}"
     And the path parameter "networkId" is set to a random network ID
+    When the request "deleteNetwork" is sent
+    Then the response status code is 404
+    And the response header "x-correlator" has same value as the request header "x-correlator"
+    And the response header "Content-Type" is "application/json"
+    And the response property "$.status" is 404
+    And the response property "$.code" is "NOT_FOUND"
+    And the response property "$.message" contains a user friendly text
+
+  @dedicated_network_deleteNetwork_404.02_api_client_token_mismatch
+  Scenario: Delete network not created by the API client given in the access token
+    # To test this, a token has to be obtained for a different client
+    Given the header "Authorization" is set to a valid access token emitted to an API client which did not have rights to access/manage the "{networkId}"
     When the request "deleteNetwork" is sent
     Then the response status code is 404
     And the response header "x-correlator" has same value as the request header "x-correlator"
