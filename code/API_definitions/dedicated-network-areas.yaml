@@ -44,7 +44,7 @@ info:
 
     # Querying one or more Areas
 
-    All available network service areas of the API consumer can be queried by performing a `POST` operation on the `/retrieve-service-areas` endpoint.
+    All network service areas available to the API consumer can be queried by performing a `POST` operation on the `/retrieve-service-areas` endpoint.
 
     The API Consumer may provide the following input parameters as search criteria which must be matched for the network service area to be returned:
 
@@ -60,7 +60,7 @@ info:
 
     - `byQosProfileName` - to return the network service areas which support the input QoS profile name
 
-    A specific network service area of the API consumer can be queried by performing a `GET` operation on the `/areas/{areaId}` endpoint.
+    The API consumer can get the details about a specific network service area by performing a `GET` operation on the `/areas/{areaId}` endpoint.
 
     <!-- CAMARA:MANDATORY:additional-error-responses:BEGIN -->
 

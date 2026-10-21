@@ -5,7 +5,7 @@ info:
 
     # Introduction
 
-    This API allows for discovering available network profiles, which are offered by the network provider to be used in conjunction of the Dedicated Network API. Network profiles describe the capabilities and performance targets of a dedicated network.
+    This API allows for discovering available network profiles, which are offered by the network provider to be used in conjunction with the Dedicated Network API. Network profiles describe the capabilities and performance targets of a dedicated network.
 
     For more information about the Dedicated Network APIs, see the _GeneralDescription_ document in the Dedicated Networks [repository](https://github.com/camaraproject/DedicatedNetworks/).
 
@@ -13,13 +13,13 @@ info:
 
     A Network Profile represents a predefined set of network capabilities and performance characteristics that can be applied when creating a Network. It enables API Consumers to understand the capabilities they can expect when using the reserved network connectivity resources. A Network Profile is a validated, supported configuration that has been pre-approved between the API Provider and API Consumer.
 
-    A Network Profile contains information about the maximum number of devices allowed, the aggregated throughput to be provided, and a set of allowed QoS Profiles (including a default QoS Profile) that devices can use when having access to the Dedicated Network. The concept of named QoS Profiles is re-used from the [QualityOnDemand](https://github.com/camaraproject/QualityOnDemand) API family. An API provider may offer the QualityOnDemand `qos-profiles` API for resolving a QoS Profile name into characteristics of a specific QoS profile.
+    A Network Profile contains information about the maximum number of devices allowed, the aggregated throughput to be provided, and a set of allowed QoS Profiles (including a default QoS Profile) that devices can use when having access to the Dedicated Network. The concept of named QoS Profiles is re-used from the [QualityOnDemand](https://github.com/camaraproject/QualityOnDemand) API. An API provider may offer the QualityOnDemand `qos-profiles` API for resolving a QoS Profile name into characteristics of a specific QoS profile.
 
     A Network Profile is designed to be flexible to support use-cases which may require different `qos-profile` combinations.
 
-    Devices are not necessarily using connectivity continuously. The value of the `maxNumberOfDevices` parameter should be set _generous_, considering that not all devices using connectivity simultaneously and/or continuously.
+    Devices are not necessarily using connectivity continuously. The value of the `maxNumberOfDevices` parameter should be set _generously_, considering that not all devices use connectivity simultaneously and/or continuously.
 
-    The parameters `aggregatedUlThroughput` and `aggregatedDlThroughput` define the (hard) limits of simultaneous connectivity usage, i.e. sum of all traffic pertaining all devices using the available QoS profiles.
+    The parameters `aggregatedUlThroughput` and `aggregatedDlThroughput` define the (hard) limits of simultaneous connectivity usage, i.e. sum of all traffic pertaining to all devices using the available QoS profiles.
 
     A detailed description of the individual parameters may be included within the _terms and conditions_ (outside of scope for the API).
 
