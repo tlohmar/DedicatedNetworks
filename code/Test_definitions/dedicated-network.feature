@@ -83,7 +83,7 @@ Feature: CAMARA Dedicated Network API, vwip - Networks API Operations
     And the response header "Location" exists and contains a URL with the created network ID
     And the response body complies with the OAS schema at "/components/schemas/NetworkInfo"
     And the response property "$.id" exists and is a valid UUID
-    And the response property "$.status" is "REQUESTED" or "RESERVED"
+    And the response property "$.status" is "REQUESTED"
 
   @dedicated_network_createNetwork_02_success_echo
   Scenario: Create a dedicated network (response echoes request fields)
@@ -124,7 +124,7 @@ Feature: CAMARA Dedicated Network API, vwip - Networks API Operations
     And the response body complies with the OAS schema at "/components/schemas/NetworkInfo"
     And the response property "$.id" exists and is a valid UUID
     And the response property "$.qosProfileName" has the same value as in the request body
-    And the response property "$.status" is "REQUESTED" or "RESERVED"
+    And the response property "$.status" is "REQUESTED"
 
   @dedicated_network_createNetwork_04_success_with_name
   Scenario: Create a dedicated network with the optional name property
@@ -156,6 +156,19 @@ Feature: CAMARA Dedicated Network API, vwip - Networks API Operations
     And the response header "x-correlator" has the same value as the request header "x-correlator"
     And the response body complies with the OAS schema at "/components/schemas/NetworkInfo"
     And the response property "$.id" is equal to the path parameter "networkId"
+
+  @dedicated_network_readNetwork_02_success_created_network
+  Scenario: Read a dedicated network after its creation
+    Given a dedicated network created by operation "createNetwork"
+    And the resource "/dedicated-network/vwip/networks/{networkId}"
+    And the path parameter "networkId" is set to the value of the response property "$.id" of the "createNetwork" operation
+    When the request "readNetwork" is sent
+    Then the response status code is 200
+    And the response header "Content-Type" is "application/json"
+    And the response header "x-correlator" has the same value as the request header "x-correlator"
+    And the response body complies with the OAS schema at "/components/schemas/NetworkInfo"
+    And the response property "$.id" is equal to the path parameter "networkId"
+    And the response properties "$.networkProfileId", "$.serviceTime" and "$.serviceAreaId" have the same values as in the request body of the "createNetwork" operation
 
   # Success scenarios for DELETE /networks/{networkId}
 
@@ -291,7 +304,10 @@ Feature: CAMARA Dedicated Network API, vwip - Networks API Operations
 
   @dedicated_network_createNetwork_400.04_empty_property
   Scenario Outline: Error response for empty property in request body
-    Given the request body property "<required_property>" is set to {}
+    Given the resource "/dedicated-network/vwip/networks"
+    And the header "Content-Type" is set to "application/json"
+    And the request body is set to a request body compliant with the schema at "/components/schemas/CreateNetwork"
+    And the request body property "<required_property>" is set to {}
     When the request "createNetwork" is sent
     Then the response status code is 400
     And the response header "x-correlator" has same value as the request header "x-correlator"
@@ -306,7 +322,10 @@ Feature: CAMARA Dedicated Network API, vwip - Networks API Operations
 
   @dedicated_network_createNetwork_400.05_missing_required_property
   Scenario Outline: Error response for missing required property in request body
-    Given the request body property "<required_property>" is not included
+    Given the resource "/dedicated-network/vwip/networks"
+    And the header "Content-Type" is set to "application/json"
+    And the request body is set to a request body compliant with the schema at "/components/schemas/CreateNetwork"
+    And the request body property "<required_property>" is not included
     When the request "createNetwork" is sent
     Then the response status code is 400
     And the response header "x-correlator" has same value as the request header "x-correlator"
@@ -316,10 +335,10 @@ Feature: CAMARA Dedicated Network API, vwip - Networks API Operations
     And the response property "$.message" contains a user friendly text
 
     Examples:
-      | required_property |
-      | $.serviceTime |
-      | $.serviceAreaId |
-      | oneOf networkProfileId or qosProfileName |
+      | required_property                       |
+      | $.serviceTime                           |
+      | $.serviceAreaId                         |
+      | $.networkProfileId and $.qosProfileName |
 
   @dedicated_network_createNetwork_400.06_invalid_x-correlator
   Scenario: Create network with invalid x-correlator header
@@ -332,7 +351,10 @@ Feature: CAMARA Dedicated Network API, vwip - Networks API Operations
 
   @dedicated_network_createNetwork_400.07_invalid_sink_credential
   Scenario Outline: Invalid credential
-    Given the request body property "$.sinkCredential.credentialType" is set to "<unsupported_credential_type>"
+    Given the resource "/dedicated-network/vwip/networks"
+    And the header "Content-Type" is set to "application/json"
+    And the request body is set to a request body compliant with the schema at "/components/schemas/CreateNetwork"
+    And the request body property "$.sinkCredential.credentialType" is set to "<unsupported_credential_type>"
     When the request "createNetwork" is sent
     Then the response status code is 400
     And the response header "x-correlator" has same value as the request header "x-correlator"
@@ -348,13 +370,30 @@ Feature: CAMARA Dedicated Network API, vwip - Networks API Operations
 
   @dedicated_network_createNetwork_400.08_sink_credential_invalid_token
   Scenario: Invalid token
-    Given the request body property "$.sinkCredential.accessTokenType" is set to a value other than "bearer"
+    Given the resource "/dedicated-network/vwip/networks"
+    And the header "Content-Type" is set to "application/json"
+    And the request body is set to a request body compliant with the schema at "/components/schemas/CreateNetwork"
+    And the request body property "$.sinkCredential.accessTokenType" is set to a value other than "bearer"
     When the request "createNetwork" is sent
     Then the response status code is 400
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response header "Content-Type" is "application/json"
     And the response property "$.status" is 400
     And the response property "$.code" is "INVALID_TOKEN" OR "INVALID_ARGUMENT"
+    And the response property "$.message" contains a user friendly text
+
+  @dedicated_network_createNetwork_400.09_invalid_sink
+  Scenario: Create network with a sink not valid for the specified protocol
+    Given the resource "/dedicated-network/vwip/networks"
+    And the header "Content-Type" is set to "application/json"
+    And the request body is set to a request body compliant with the schema at "/components/schemas/CreateNetwork"
+    And the request body property "$.sink" is set to a URL that is not valid for the specified protocol (e.g. a URL not using HTTPS)
+    When the request "createNetwork" is sent
+    Then the response status code is 400
+    And the response header "x-correlator" has same value as the request header "x-correlator"
+    And the response header "Content-Type" is "application/json"
+    And the response property "$.status" is 400
+    And the response property "$.code" is "INVALID_SINK"
     And the response property "$.message" contains a user friendly text
 
   # Service Error scenarios
@@ -554,6 +593,19 @@ Feature: CAMARA Dedicated Network API, vwip - Networks API Operations
   Scenario: Read network not created by the API client given in the access token
     # To test this, a token has to be obtained for a different client
     Given the header "Authorization" is set to a valid access token emitted to an API client which did not have rights to access/manage the "{networkId}"
+    When the request "readNetwork" is sent
+    Then the response status code is 404
+    And the response header "x-correlator" has same value as the request header "x-correlator"
+    And the response header "Content-Type" is "application/json"
+    And the response property "$.status" is 404
+    And the response property "$.code" is "NOT_FOUND"
+    And the response property "$.message" contains a user friendly text
+
+  @dedicated_network_readNetwork_404.03_deleted_network
+  Scenario: Read a dedicated network after its deletion
+    Given a dedicated network deleted by operation "deleteNetwork"
+    And the resource "/dedicated-network/vwip/networks/{networkId}"
+    And the path parameter "networkId" is set to the ID of the deleted network
     When the request "readNetwork" is sent
     Then the response status code is 404
     And the response header "x-correlator" has same value as the request header "x-correlator"
