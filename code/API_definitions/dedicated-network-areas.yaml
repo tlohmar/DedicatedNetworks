@@ -145,7 +145,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ServiceAreasPage'
         '400':
-          $ref: "../common/CAMARA_common.yaml#/components/responses/BadRequestWithRange400"
+          $ref: "../common/CAMARA_common.yaml#/components/responses/BadRequest400"
         "401":
           $ref: "../common/CAMARA_common.yaml#/components/responses/Unauthenticated401"
         "403":

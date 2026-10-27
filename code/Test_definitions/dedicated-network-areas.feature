@@ -214,12 +214,16 @@ Feature: CAMARA Dedicated Network API, vwip - Areas API Operations
     Given the resource "/dedicated-network-areas/vwip/retrieve-service-areas"
     And the header "Content-Type" is set to "application/json"
     And the request body is set to a request body compliant with the schema at "#/components/schemas/RetrieveServiceAreasRequest"
-    And the request body property "$.atLocation.latitude" is set to "999"
-    And the request body property "$.atLocation.longitude" is set to "7.10066"
+    # The latitude is outside the range defined in the schema (-90 to 90)
+    And the request body property "$.atLocation.latitude" is set to 999
+    And the request body property "$.atLocation.longitude" is set to 7.10066
     When the request "retrieveNetworkServiceAreas" is sent
     Then the response status code is 400
     And the response header "x-correlator" has same value as the request header "x-correlator"
-    And the response property "$.code" is "OUT_OF_RANGE"
+    And the response header "Content-Type" is "application/json"
+    And the response property "$.status" is 400
+    And the response property "$.code" is "INVALID_ARGUMENT"
+    And the response property "$.message" contains a user friendly text
 
   @dedicated_network_areas_retrieveNetworkServiceAreas_400.08_invalid_pagination
   Scenario Outline: Error response for invalid pagination parameters
