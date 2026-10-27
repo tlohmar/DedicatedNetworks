@@ -220,7 +220,7 @@ The devices in an access are managed with either multiple-device operations, whi
 
 | **Operation** | **Endpoint** | **Access token** |
 | ---- | ------- | ---- |
-| Create an access with a list of devices | `POST /accesses` | two-legged |
+| Create an access optionally with a list of devices | `POST /accesses` | two-legged |
 | Add a list of devices | `POST /accesses/{accessId}/devices/add` | two-legged |
 | Remove a list of devices | `POST /accesses/{accessId}/devices/remove` | two-legged |
 | List the devices of an access | `GET /accesses/{accessId}/devices` | two-legged |
