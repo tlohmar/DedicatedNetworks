@@ -160,7 +160,7 @@ paths:
               summary: "Network status notifications callback"
               description: |
                 Important: this endpoint is to be implemented by the API consumer.
-                It will be called upon change of the network request status.
+                It will be called upon change of the network status.
                 Currently only NETWORK_STATUS_CHANGED event is defined.
               operationId: postNotification
               parameters:
