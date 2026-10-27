@@ -264,7 +264,7 @@ paths:
               summary: "Device access status notifications callback"
               description: |
                 Important: this endpoint is to be implemented by the API consumer.
-                It will be called upon change of a device's access status.
+                It will be called when the status of one or more access devices changes.
                 Currently only DEVICE_STATUS_CHANGED event is defined.
               operationId: postNotification
               parameters:
