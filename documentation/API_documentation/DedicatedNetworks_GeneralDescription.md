@@ -24,7 +24,7 @@ Detailed characteristics, behaviors and costs pertaining to Dedicated Networks a
 
 An API Provider realizes Dedicated Networks based on the physical network resources managed by a Network Provider. An API Provider can be the Network Provider.
 
-The present set of [Usage Scenarios](../SupportingDocuments/UsageScenarios.md) focuses on B2B use-cases, where the owner of the devices / device subscriptions is also acting as API invoker for the Networks and the Accesses APIs. This constellation allows using using the MSISDN as device identifier with a two-legged access tokens, since no additional consent needs to be obtained.
+The present set of [Usage Scenarios](../SupportingDocuments/UsageScenarios.md) focuses on B2B use-cases, where the owner of the devices / device subscriptions is also acting as API invoker for the Networks and the Accesses APIs. This constellation allows using the MSISDN as device identifier with a two-legged access token, since no additional consent needs to be obtained. In addition, the single-device operations of the Accesses API support three-legged access tokens, in which case the device is identified from the subject of the access token (see [Managing devices in an access](#managing-devices-in-an-access)).
 
 
 **Key roles**
@@ -105,7 +105,7 @@ The diagram below attempts to depict the complete flow including API endpoint, r
 sequenceDiagram
     participant App as API Consumer (Application)
     participant P as Profiles API
-    participant A as Areas API
+    participant AR as Areas API
     participant N as Networks API
     participant A as Accesses API
     participant Network as Physical Network
@@ -120,8 +120,8 @@ sequenceDiagram
 
     rect rgba(51, 49, 49, 0.6)
         note right of App: 2: Discovering Areas
-        App->>P: POST /retrieve-service-areas
-        P->>App: 200 OK (Service areas [areaId, ...])
+        App->>AR: POST /retrieve-service-areas
+        AR->>App: 200 OK (Service areas [areaId, ...])
     end
 
     rect rgba(51, 49, 49, 0.6)
@@ -138,24 +138,24 @@ sequenceDiagram
         end
     end
     rect rgba(51, 49, 49, 0.6)
-        note right of App: 3: Managing Access for Devices
+        note right of App: 4: Managing Access for Devices
         loop Create Access resource to give one or more devices access to the given network
             App->>A: POST /accesses (networkId, devices)
             A->>App: 201 Created (accessId, device(s), each device with status=REQUESTED)
         end
         alt Callback enabled
-            N-->>App: Optional callback(s): (accessId, device(s), each device with status=GRANTED)
+            A-->>App: Optional callback(s): (accessId, device(s), each device with status=GRANTED)
         else Polling
-            App->>N: GET /accesses/{accessId}/devices
-            N-->>App: 200 OK (device(s), each device with status=GRANTED)
+            App->>A: GET /accesses/{accessId}/devices
+            A-->>App: 200 OK (device(s), each device with status=GRANTED)
         end
         A <<-->> Network: Provisioning / configuration as needed<br> Managed by API Provider and Network Provider<br>  Outside scope of the Dedicated Network APIs
         loop Delete a previously created Access resource
-            App->>A: DELETE /accesses (accessId)
+            App->>A: DELETE /accesses/{accessId}
             A->>App: 204 No Content
         end
     end
-    Note over App,D: 4: Dedicated Network in ACTIVATED state
+    Note over App,D: 5: Dedicated Network in ACTIVATED state
     loop One or more devices in GRANTED state
         D-->>Network: Connect to network
         Network-->>D: Connection established / denied
@@ -214,14 +214,27 @@ Explanations
 
 - A network in TERMINATED state cannot be modified anymore and should be deleted. If not deleted by the API Consumer, the representing HTTP resource (URL) may be removed by the API Provider.
 
+## Managing devices in an access
+
+The devices in an access are managed with either multiple-device operations, which target a list of devices, or single-device operations, which target one device:
+
+| **Operation** | **Endpoint** | **Access token** |
+| ---- | ------- | ---- |
+| Create an access optionally with a list of devices | `POST /accesses` | two-legged |
+| Add a list of devices | `POST /accesses/{accessId}/devices/add` | two-legged |
+| Remove a list of devices | `POST /accesses/{accessId}/devices/remove` | two-legged |
+| List the devices of an access | `GET /accesses/{accessId}/devices` | two-legged |
+| Add a single device | `POST /accesses/{accessId}/devices` | two-legged or three-legged |
+| Read a single device | `GET /accesses/{accessId}/devices/{accessDeviceId}` | two-legged or three-legged |
+| Delete a single device | `DELETE /accesses/{accessId}/devices/{accessDeviceId}` | two-legged or three-legged |
+
+Each device added to an access is identified by an `accessDeviceId` returned by the API. The `accessDeviceId` is the same across all the accesses in which the device is included. It is used to read or delete a single device, and to identify the devices to be removed with the multiple-device remove operation.
+
+When a two-legged access token is used, the device is identified by a `device` object (when adding a device) or by its `accessDeviceId` (when reading, deleting or removing a device). When a three-legged access token is used with a single-device operation, the device is identified from the subject of the access token, and the `device` object must not be provided. The error handling is described in the Accesses API specification.
+
 ## States of device's access to the network
 
-The Access resource is created with a POST on the /accesses API including one or more devices.
-
-Once the access is created devices can be:
-- added to the access, by issuing a POST on the /accesses/{accessId}/devices/add endpoint
-- removed from the access, by issuing a POST on the /accesses/{accessId}/devices/remove endpoint
-- queried, by issuing a GET on the /accesses/{accessId}/devices collection endpoint
+The Access resource is created with a POST on the /accesses API including one or more devices. Devices can then be added to, removed from and queried in the access, see [Managing devices in an access](#managing-devices-in-an-access).
 
 In the context of the access each device has a state to describe its own access to the dedicated network. The device's access states are: REQUESTED, GRANTED, and DENIED.
 
